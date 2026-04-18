@@ -1,0 +1,102 @@
+backend:
+  name: github
+  repo: alexandernevsky/cv-nevsky-me
+  branch: main
+  base_url: https://decap.nevsky.me
+  auth_endpoint: /auth
+
+local_backend: true
+media_folder: public/uploads
+public_folder: /uploads
+
+site_url: https://cv.nevsky.me
+display_url: https://cv.nevsky.me
+logo_url: /favicon.svg
+
+collections:
+  - name: pages
+    label: Pages
+    files:
+      - name: cv
+        label: CV
+        file: content/pages/cv.md
+        fields:
+          - { label: ID, name: id, widget: string, default: cv }
+          - label: English
+            name: en
+            widget: object
+            collapsed: false
+            fields:
+              - { label: Slug, name: slug, widget: string }
+              - { label: Title, name: title, widget: string }
+              - { label: Excerpt, name: excerpt, widget: text, required: false }
+          - { label: Content EN, name: body_en, widget: markdown }
+          - label: Russian
+            name: ru
+            widget: object
+            collapsed: false
+            fields:
+              - { label: Slug, name: slug, widget: string }
+              - { label: Title, name: title, widget: string }
+              - { label: Excerpt, name: excerpt, widget: text, required: false }
+          - { label: Content RU, name: body_ru, widget: markdown }
+
+      - name: about
+        label: About
+        file: content/pages/about.md
+        fields:
+          - { label: ID, name: id, widget: string, default: about }
+          - label: English
+            name: en
+            widget: object
+            collapsed: false
+            fields:
+              - { label: Slug, name: slug, widget: string }
+              - { label: Title, name: title, widget: string }
+              - { label: Excerpt, name: excerpt, widget: text, required: false }
+          - { label: Content EN, name: body_en, widget: markdown }
+          - label: Russian
+            name: ru
+            widget: object
+            collapsed: false
+            fields:
+              - { label: Slug, name: slug, widget: string }
+              - { label: Title, name: title, widget: string }
+              - { label: Excerpt, name: excerpt, widget: text, required: false }
+          - { label: Content RU, name: body_ru, widget: markdown }
+
+  - name: projects
+    label: Projects
+    label_singular: Project
+    folder: content/projects
+    create: true
+    slug: "{{fields.id}}"
+    identifier_field: en.title
+    summary: "{{en.title}} / {{ru.title}}"
+    fields:
+      - { label: ID, name: id, widget: string, hint: "Stable file id, for example fundmates-ai-app-cv." }
+      - { label: Date, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false }
+      - { label: Feature image URL, name: feature_image, widget: string, required: false }
+      - label: Tags
+        name: tags
+        widget: list
+        default: [design]
+        field: { label: Tag, name: tag, widget: string }
+      - label: English
+        name: en
+        widget: object
+        collapsed: false
+        fields:
+          - { label: Slug EN, name: slug, widget: string }
+          - { label: Title EN, name: title, widget: string }
+          - { label: Excerpt EN, name: excerpt, widget: text, required: false }
+      - { label: Content EN, name: body_en, widget: markdown }
+      - label: Russian
+        name: ru
+        widget: object
+        collapsed: false
+        fields:
+          - { label: Slug RU, name: slug, widget: string }
+          - { label: Title RU, name: title, widget: string }
+          - { label: Excerpt RU, name: excerpt, widget: text, required: false }
+      - { label: Content RU, name: body_ru, widget: markdown }

@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cv-nevsky-me-decap-oauth",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-04-18",
+  "routes": [
+    {
+      "pattern": "decap.nevsky.me",
+      "zone_name": "nevsky.me",
+      "custom_domain": true
+    }
+  ],
+  "workers_dev": true,
+  "vars": {
+    "GITHUB_REPO_PRIVATE": "0"
+  }
+}

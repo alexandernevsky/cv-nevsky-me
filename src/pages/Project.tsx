@@ -24,7 +24,7 @@ export function Project() {
       {/* Back */}
       <Link
         to="/"
-        className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors mb-10 group"
+        className="mb-10 inline-flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground group font-nevsky-body"
       >
         <ArrowLeft size={13} className="group-hover:-translate-x-0.5 transition-transform" />
         {t('All work', 'Все работы')}
@@ -45,7 +45,7 @@ export function Project() {
       <header className="mb-10">
         <div className="flex items-center gap-3 mb-4">
           {year && (
-            <span className="font-mono text-xs text-muted-foreground">{year}</span>
+            <span className="font-mono text-xs text-muted-foreground font-nevsky-mono">{year}</span>
           )}
           <div className="flex flex-wrap gap-1.5">
             {project.tags.map(tag => (
@@ -53,7 +53,7 @@ export function Project() {
             ))}
           </div>
         </div>
-        <h1 className="text-3xl font-semibold tracking-tight leading-tight">{title}</h1>
+        <h1 className="text-nevsky-l font-nevsky-heading">{title}</h1>
       </header>
 
       {/* Content */}

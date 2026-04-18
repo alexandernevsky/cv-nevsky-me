@@ -17,15 +17,15 @@ export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Link
       to={`/work/${slug}`}
-      className="group flex flex-col gap-3 rounded-lg border border-border bg-card p-4 hover:border-muted-foreground transition-all duration-200"
+      className="group flex flex-col gap-3 transition-opacity duration-200 hover:opacity-85"
     >
       {/* Feature image */}
       {project.featureImage && (
-        <div className="aspect-[16/9] overflow-hidden rounded-md bg-muted">
+        <div className="overflow-hidden rounded-md bg-muted">
           <img
             src={project.featureImage}
             alt={title}
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+            className="h-auto w-full"
             loading="lazy"
           />
         </div>
@@ -34,7 +34,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       {/* Meta */}
       <div className="flex items-center justify-between">
         {year && (
-          <span className="font-mono text-xs text-muted-foreground">{year}</span>
+          <span className="font-mono text-xs text-muted-foreground font-nevsky-mono">{year}</span>
         )}
         <div className="flex flex-wrap gap-1 ml-auto">
           {project.tags.slice(0, 2).map(tag => (
@@ -44,13 +44,13 @@ export function ProjectCard({ project }: ProjectCardProps) {
       </div>
 
       {/* Title */}
-      <h3 className="text-sm font-medium leading-snug text-foreground group-hover:text-foreground transition-colors line-clamp-2">
+      <h3 className="text-base leading-snug text-foreground transition-colors line-clamp-2 font-nevsky-heading">
         {title}
       </h3>
 
       {/* Excerpt */}
       {excerpt && (
-        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
+        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 font-nevsky-body">
           {excerpt}
         </p>
       )}

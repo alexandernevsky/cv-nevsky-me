@@ -9,13 +9,13 @@ export function Home() {
     <main className="mx-auto max-w-5xl px-6 py-16">
       {/* Hero */}
       <section className="mb-16">
-        <p className="font-mono text-xs text-muted-foreground mb-3 tracking-widest uppercase">
+        <p className="mb-3 font-mono text-xs uppercase text-muted-foreground font-nevsky-mono">
           {t('Senior Product Designer · Dubai, UAE', 'Старший продуктовый дизайнер · Дубай, ОАЭ')}
         </p>
-        <h1 className="text-5xl font-semibold tracking-tight mb-5 leading-tight">
+        <h1 className="mb-5 text-nevsky-xl font-nevsky-heading-strong">
           Alexander Nevsky
         </h1>
-        <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl">
+        <p className="max-w-2xl text-nevsky-xs font-nevsky-body text-muted-foreground">
           {t(
             '15+ years designing complex digital systems — fintech, proptech, SaaS and AI-enabled products. From early discovery to production.',
             '15+ лет проектирую сложные цифровые системы — fintech, proptech, SaaS и AI-продукты. От раннего discovery до продакшна.'
@@ -25,7 +25,7 @@ export function Home() {
 
       {/* Projects grid */}
       <section>
-        <h2 className="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-8 font-mono">
+        <h2 className="mb-8 font-mono text-xs uppercase text-muted-foreground font-nevsky-mono">
           {t('Selected Work', 'Избранные работы')}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

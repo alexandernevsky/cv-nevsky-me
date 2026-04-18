@@ -8,10 +8,10 @@ export function About() {
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-16">
-      <p className="font-mono text-xs text-muted-foreground mb-3 tracking-widest uppercase">
+      <p className="mb-3 font-mono text-xs uppercase text-muted-foreground font-nevsky-mono">
         {lang === 'en' ? 'About' : 'Обо мне'}
       </p>
-      <h1 className="text-4xl font-semibold tracking-tight mb-12">{page.title}</h1>
+      <h1 className="mb-12 text-nevsky-l font-nevsky-heading">{page.title}</h1>
       <div className="prose">
         <ReactMarkdown>{page.content}</ReactMarkdown>
       </div>

@@ -10,23 +10,24 @@ export function Header() {
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     cn(
-      'text-sm transition-colors',
+      'text-xs transition-colors font-nevsky-body sm:text-sm',
       isActive ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
     )
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-sm transition-theme">
-      <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
+      <div className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-3 px-4 sm:px-6">
         {/* Logo */}
         <Link
           to="/"
-          className="font-semibold tracking-tight text-foreground hover:opacity-80 transition-opacity text-sm"
+          className="shrink-0 text-sm text-foreground transition-opacity hover:opacity-80 font-nevsky-heading"
         >
-          Alexander Nevsky
+          <span className="hidden min-[430px]:inline">Alexander Nevsky</span>
+          <span className="min-[430px]:hidden">Nevsky</span>
         </Link>
 
         {/* Nav */}
-        <nav className="flex items-center gap-6">
+        <nav className="flex items-center gap-4 sm:gap-6">
           <NavLink to="/" end className={navLinkClass}>
             {t('Work', 'Работы')}
           </NavLink>
@@ -39,11 +40,11 @@ export function Header() {
         </nav>
 
         {/* Controls */}
-        <div className="flex items-center gap-3">
+        <div className="flex shrink-0 items-center gap-1 sm:gap-3">
           {/* Lang toggle */}
           <button
             onClick={toggleLang}
-            className="flex items-center gap-1 rounded px-2 py-1 text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors border border-transparent hover:border-border"
+            className="flex items-center gap-1 rounded border border-transparent px-1.5 py-1 text-xs text-muted-foreground transition-colors hover:border-border hover:bg-muted hover:text-foreground font-nevsky-strong sm:px-2"
             aria-label="Toggle language"
           >
             <span className={lang === 'en' ? 'text-foreground' : ''}>EN</span>
