@@ -42,6 +42,7 @@
   * {
     @apply border-border;
     box-sizing: border-box;
+    font-style: normal !important;
   }
 
   html {
@@ -74,10 +75,11 @@
   .prose ol { @apply mb-4 ml-5 list-decimal space-y-1; }
   .prose li { @apply text-[15px] leading-[1.75]; }
   .prose strong { @apply font-semibold text-foreground; }
-  .prose em { @apply italic; }
+  .prose em { font-style: normal; }
   .prose a  { @apply text-[hsl(var(--accent))] underline underline-offset-2 hover:opacity-80 transition-opacity; }
   .prose blockquote {
-    @apply border-l-2 border-border pl-4 my-6 text-muted-foreground italic;
+    @apply border-l-2 border-border pl-4 my-6 text-muted-foreground;
+    font-style: normal;
   }
   .prose img {
     @apply w-full rounded-lg my-6 object-cover;
