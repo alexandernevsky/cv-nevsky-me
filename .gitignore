@@ -1,0 +1,9 @@
+node_modules
+dist
+.env
+.env.local
+*.tgz
+_data_tmp.json
+graphify-out/
+posts_md/
+alieksandr-nievskii.ghost.2026-04-18-09-16-15.json
