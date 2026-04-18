@@ -2,15 +2,17 @@
 id: about
 en:
   slug: about-me-as-designer-en
-  title: I am a designer [archive]
+  title: I am a designer
   excerpt: I am Alexander Nevsky, I used to be a designer of a new generation,
     living and creating in the rhythm of Dubai. But now I am already a real
     estate broker at the SPI Dubai agency
 body_en: >-
-  # I am a designer
-
-
-  My life is a balance between high-load interfaces and the high mission of fatherhood. In the morning I build marketing strategies, relaunch visual communications and look for non-standard moves. During the day, I pick up the kids from school, discuss with my son why UX is about empathy, and in the evening I return to my studio **D2Q (Design to Quantum)** to design the future.
+  My life is a balance between high-load interfaces and the high mission of
+  fatherhood. In the morning I build marketing strategies, relaunch visual
+  communications and look for non-standard moves. During the day, I pick up the
+  kids from school, discuss with my son why UX is about empathy, and in the
+  evening I return to my studio **D2Q (Design to Quantum)** to design the
+  future.
 
 
   I don't chase trends - I design them. Neural networks, metaverses, quantum interfaces, AI marketing are buzzwords for some, tools for me.
@@ -28,15 +30,16 @@ body_en: >-
   And it seems I'm just getting started.
 ru:
   slug: about-me-as-designer
-  title: Я — дизайнер [архив]
+  title: Я — дизайнер
   excerpt: Я — Александр Невский, раньше был дизайнером нового поколения, живущий
     и создающий в ритме Дубая. Но сейчас я уже брокер по недвижимости
     в агентстве SPI Dubai
 body_ru: >-
-  # Я — дизайнер
-
-
-  Моя жизнь — это баланс между high-load интерфейсами и высокой миссией отцовства. Утром я выстраиваю маркетинговые стратегии, перезапускаю визуальные коммуникации и ищу нестандартные ходы. Днём — забираю детей из школы, обсуждаю с сыном, почему UX — это про эмпатию, а вечером возвращаюсь к своей студии **D2Q (Design to Quantum)** , чтобы проектировать будущее.
+  Моя жизнь — это баланс между high-load интерфейсами и высокой миссией
+  отцовства. Утром я выстраиваю маркетинговые стратегии, перезапускаю визуальные
+  коммуникации и ищу нестандартные ходы. Днём — забираю детей из школы, обсуждаю
+  с сыном, почему UX — это про эмпатию, а вечером возвращаюсь к своей студии
+  **D2Q (Design to Quantum)** , чтобы проектировать будущее.
 
 
   Я не гонюсь за трендами — я их проектирую. Нейросети, метавселенные, квантовые интерфейсы, AI-маркетинг — для кого-то buzzwords, для меня — инструменты.
