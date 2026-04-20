@@ -3,10 +3,21 @@ import path from 'node:path'
 import matter from 'gray-matter'
 
 const root = process.cwd()
-const postsDir = path.join(root, 'posts_md')
+const postsDirCandidates = [
+  path.join(root, 'posts_md'),
+  path.join(root, 'artifacts/imports/posts/posts_md'),
+]
 const contentDir = path.join(root, 'content')
 const projectsDir = path.join(contentDir, 'projects')
 const pagesDir = path.join(contentDir, 'pages')
+
+const postsDir = postsDirCandidates.find(candidate => fs.existsSync(candidate))
+
+if (!postsDir) {
+  throw new Error(
+    'Source posts directory not found. Expected one of: posts_md or artifacts/imports/posts/posts_md'
+  )
+}
 
 const pagePairs = [
   {
