@@ -1,8 +1,10 @@
 import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import rehypeRaw from 'rehype-raw'
 import { cn } from '@/lib/utils'
 import { getTopic, getTopicChipLabel, getTopicPrompt, getTopicResponse } from '@/data/topics'
 import { projects } from '@/data/projects'
-import { getProfileText } from '@/data/profile'
+import { getProfileText, profileAvatarSrc } from '@/data/profile'
 import { type Message as ChatMessage } from '@/hooks/useChat'
 import { EmbeddedProjectGrid } from './EmbeddedProjectCard'
 import { PromptChip } from './PromptChip'
@@ -39,7 +41,7 @@ function UserMessage({ message, lang }: { message: ChatMessage; lang: Lang }) {
 
   return (
     <div className="flex w-full justify-end">
-      <div className="max-w-[85%] rounded-lg bg-muted/70 px-3.5 py-2.5 text-[14px] leading-relaxed text-foreground">
+      <div className="max-w-[85%] rounded-lg bg-foreground px-3.5 py-2.5 text-[14px] leading-relaxed text-background shadow-sm">
         {text}
       </div>
     </div>
@@ -87,7 +89,7 @@ function SystemMessage({
             <span key={tag}>{tag}</span>
           ))}
         </div>
-        <h2 className="mt-2 text-[22px] leading-[1.2] tracking-tight text-foreground md:text-[26px]">
+        <h2 className="mt-2 font-mono text-[22px] font-[900] leading-[1.2] tracking-tight text-foreground md:text-[26px]">
           {title}
         </h2>
         {project.featureImage && (
@@ -106,7 +108,9 @@ function SystemMessage({
             'prose-chat'
           )}
         >
-          <ReactMarkdown>{content}</ReactMarkdown>
+          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+            {content}
+          </ReactMarkdown>
         </div>
         <SuggestionChips lang={lang} ids={message.suggestions ?? []} onSelect={onChipSelect} />
       </div>
@@ -125,7 +129,9 @@ function SystemMessage({
           'prose-chat'
         )}
       >
-        <ReactMarkdown>{getTopicResponse(topic, lang)}</ReactMarkdown>
+        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+          {getTopicResponse(topic, lang)}
+        </ReactMarkdown>
       </div>
       {topic.relatedProjectIds && topic.relatedProjectIds.length > 0 && (
         <EmbeddedProjectGrid
@@ -141,12 +147,21 @@ function SystemMessage({
 
 function MessageMeta({ lang }: { lang: Lang }) {
   return (
-    <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-      <span
-        className="h-1.5 w-1.5 rounded-full bg-foreground/70"
-        aria-hidden="true"
+    <div className="flex items-center gap-2.5">
+      <img
+        src={profileAvatarSrc}
+        alt={getProfileText('name', lang)}
+        className="h-7 w-7 shrink-0 rounded-full object-cover ring-1 ring-border"
+        loading="lazy"
       />
-      <span>{getProfileText('name', lang)}</span>
+      <div className="min-w-0">
+        <div className="truncate font-mono text-[11px] font-[900] uppercase tracking-wider text-foreground">
+          {getProfileText('name', lang)}
+        </div>
+        <div className="truncate text-[11px] leading-tight text-muted-foreground">
+          {getProfileText('answerTitle', lang)}
+        </div>
+      </div>
     </div>
   )
 }

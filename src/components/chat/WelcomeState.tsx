@@ -16,7 +16,7 @@ export function WelcomeState({ lang, onSelect }: WelcomeStateProps) {
       <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
         {getProfileText('role', lang)} · {getProfileText('location', lang)}
       </div>
-      <h1 className="mt-3 text-[40px] leading-[1.05] tracking-tight text-foreground md:text-[56px]">
+      <h1 className="mt-3 font-mono text-[40px] font-[900] leading-[1.05] tracking-tight text-foreground md:text-[56px]">
         {getProfileText('name', lang)}.
       </h1>
       <p className="mt-4 max-w-[560px] text-[16px] leading-relaxed text-muted-foreground md:text-[17px]">

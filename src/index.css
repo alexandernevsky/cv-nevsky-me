@@ -1,24 +1,72 @@
-/* Geist font */
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  @font-face {
+    font-family: 'Geist';
+    src: url('/assets/fonts/geist-latin-wght-normal.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: 'Geist';
+    src: url('/assets/fonts/geist-latin-ext-wght-normal.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  @font-face {
+    font-family: 'Geist';
+    src: url('/assets/fonts/geist-cyrillic-wght-normal.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+0400-04FF, U+0500-052F, U+2DE0-2DFF, U+A640-A69F;
+  }
+
+  @font-face {
+    font-family: 'Geist Mono';
+    src: url('/assets/fonts/geist-mono-latin-wght-normal.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: 'Geist Mono';
+    src: url('/assets/fonts/geist-mono-latin-ext-wght-normal.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  @font-face {
+    font-family: 'Geist Mono';
+    src: url('/assets/fonts/geist-mono-cyrillic-wght-normal.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+0400-04FF, U+0500-052F, U+2DE0-2DFF, U+A640-A69F;
+  }
+
   :root {
     color-scheme: dark;
 
-    --background: 0 0% 0%;
-    --foreground: 0 0% 93%;
-    --card: 0 0% 6.7%;
-    --card-foreground: 0 0% 93%;
-    --border: 0 0% 14%;
-    --muted: 0 0% 9%;
-    --muted-foreground: 0 0% 55%;
-    --primary: 0 0% 93%;
-    --primary-foreground: 0 0% 0%;
-    --accent: 213 100% 55%;
+    /* Adapted from nevsky.me palette to Vercel-style semantic tokens */
+    --background: 34 37% 4%;
+    --foreground: 43 59% 90%;
+    --card: 38 51% 7%;
+    --card-foreground: 43 59% 90%;
+    --border: 43 59% 90% / 0.14;
+    --muted: 34 43% 10%;
+    --muted-foreground: 43 42% 72%;
+    --primary: 16 100% 60%;
+    --primary-foreground: 34 37% 4%;
+    --accent: 16 100% 60%;
     --accent-foreground: 0 0% 100%;
     --radius: 0.5rem;
   }
@@ -26,16 +74,16 @@
   [data-theme='light'] {
     color-scheme: light;
 
-    --background: 0 0% 100%;
-    --foreground: 0 0% 10%;
-    --card: 0 0% 98%;
-    --card-foreground: 0 0% 10%;
-    --border: 0 0% 88%;
-    --muted: 0 0% 95%;
-    --muted-foreground: 0 0% 40%;
-    --primary: 0 0% 10%;
-    --primary-foreground: 0 0% 100%;
-    --accent: 213 100% 45%;
+    --background: 43 59% 90%;
+    --foreground: 34 37% 4%;
+    --card: 43 71% 95%;
+    --card-foreground: 34 37% 4%;
+    --border: 34 37% 4% / 0.16;
+    --muted: 42 44% 84%;
+    --muted-foreground: 34 20% 30%;
+    --primary: 34 37% 4%;
+    --primary-foreground: 43 59% 90%;
+    --accent: 16 100% 60%;
     --accent-foreground: 0 0% 100%;
   }
 
@@ -129,6 +177,49 @@
   }
   .prose-chat h4 {
     @apply mt-5 mb-1.5 text-[14px] font-medium tracking-tight text-foreground;
+  }
+  .prose-chat h1,
+  .prose-chat h2 {
+    font-family: 'Geist Mono', monospace;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    @apply mt-6 mb-3 leading-tight text-foreground;
+  }
+  .prose-chat h1 {
+    @apply text-[30px] md:text-[36px];
+  }
+  .prose-chat h2 {
+    @apply text-[24px] md:text-[30px];
+  }
+  .prose-chat p img,
+  .prose-chat > img {
+    width: 100%;
+    display: block;
+    margin: 0;
+    border-radius: 0.5rem;
+  }
+  .prose-chat .image-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin: 1rem 0;
+  }
+  .prose-chat .image-grid-3 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin: 0;
+  }
+  @media (max-width: 900px) {
+    .prose-chat .image-grid-3 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 640px) {
+    .prose-chat .image-grid-3 {
+      grid-template-columns: 1fr;
+    }
   }
   .prose-chat ul {
     @apply my-3 ml-0 flex flex-col gap-2;

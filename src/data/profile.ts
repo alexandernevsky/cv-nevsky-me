@@ -13,6 +13,10 @@ export const profile = {
     en: 'AI Product Orchestrator',
     ru: 'AI Product Orchestrator',
   },
+  answerTitle: {
+    en: 'Senior Product Designer · AI Product Orchestrator',
+    ru: 'Старший продуктовый дизайнер · AI Product Orchestrator',
+  },
   location: {
     en: 'Dubai, UAE',
     ru: 'Дубай, ОАЭ',
@@ -43,3 +47,5 @@ export type Profile = typeof profile
 export function getProfileText(field: keyof Omit<Profile, 'links'>, lang: Lang): string {
   return profile[field][lang]
 }
+
+export const profileAvatarSrc = '/assets/avatar/alexander-nevsky.png'
