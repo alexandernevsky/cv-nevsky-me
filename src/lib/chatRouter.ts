@@ -1,4 +1,4 @@
-import { topics, type Topic } from '@/data/topics'
+import { getTopicAllLabels, getTopicKeywords, topics, type Topic } from '@/data/topics'
 
 const STOPWORDS = new Set([
   'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'can', 'do', 'does', 'for',
@@ -33,8 +33,8 @@ export function matchTopic(query: string, threshold = 1.5): Topic | null {
 
   const matches: Match[] = topics.map(topic => {
     let score = 0
-    const keywords = topic.keywords ?? []
-    for (const raw of keywords) {
+    const localizedKeywords = [...getTopicKeywords(topic, 'en'), ...getTopicKeywords(topic, 'ru')]
+    for (const raw of localizedKeywords) {
       const kw = raw.toLowerCase()
       if (kw.includes(' ')) {
         if (normalized.includes(kw)) score += 3
@@ -43,7 +43,9 @@ export function matchTopic(query: string, threshold = 1.5): Topic | null {
       }
     }
     // Label match — a direct ask like "fundmates" or "contact"
-    if (normalized.includes(topic.label.toLowerCase())) score += 2
+    for (const label of getTopicAllLabels(topic)) {
+      if (normalized.includes(label.toLowerCase())) score += 2
+    }
     if (normalized.includes(topic.id.replace(/-/g, ' '))) score += 2
     return { topic, score }
   })

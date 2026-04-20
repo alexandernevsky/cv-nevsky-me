@@ -1,32 +1,42 @@
 import ReactMarkdown from 'react-markdown'
 import { cn } from '@/lib/utils'
-import { getTopic } from '@/data/topics'
+import { getTopic, getTopicChipLabel, getTopicPrompt, getTopicResponse } from '@/data/topics'
 import { projects } from '@/data/projects'
-import { profile } from '@/data/profile'
+import { getProfileText } from '@/data/profile'
 import { type Message as ChatMessage } from '@/hooks/useChat'
 import { EmbeddedProjectGrid } from './EmbeddedProjectCard'
 import { PromptChip } from './PromptChip'
+import { type Lang } from '@/lib/i18n'
 
 interface MessageProps {
   message: ChatMessage
+  lang: Lang
   onChipSelect: (topicId: string) => void
   onProjectSelect: (projectId: string) => void
 }
 
-export function Message({ message, onChipSelect, onProjectSelect }: MessageProps) {
+export function Message({ message, lang, onChipSelect, onProjectSelect }: MessageProps) {
   if (message.role === 'user') {
-    return <UserMessage text={message.text ?? ''} />
+    return <UserMessage message={message} lang={lang} />
   }
   return (
     <SystemMessage
       message={message}
+      lang={lang}
       onChipSelect={onChipSelect}
       onProjectSelect={onProjectSelect}
     />
   )
 }
 
-function UserMessage({ text }: { text: string }) {
+function UserMessage({ message, lang }: { message: ChatMessage; lang: Lang }) {
+  const topic = message.topicId ? getTopic(message.topicId) : undefined
+  const project = message.projectId ? projects.find(p => p.id === message.projectId) : undefined
+
+  let text = message.text ?? ''
+  if (topic) text = getTopicPrompt(topic, lang)
+  if (project) text = lang === 'ru' ? `Расскажи про «${project.titleRu}».` : `Tell me about "${project.titleEn}".`
+
   return (
     <div className="flex w-full justify-end">
       <div className="max-w-[85%] rounded-lg bg-muted/70 px-3.5 py-2.5 text-[14px] leading-relaxed text-foreground">
@@ -38,23 +48,25 @@ function UserMessage({ text }: { text: string }) {
 
 function SystemMessage({
   message,
+  lang,
   onChipSelect,
   onProjectSelect,
 }: {
   message: ChatMessage
+  lang: Lang
   onChipSelect: (topicId: string) => void
   onProjectSelect: (projectId: string) => void
 }) {
   if (message.kind === 'off-topic') {
     return (
       <div className="w-full">
-        <MessageMeta />
+        <MessageMeta lang={lang} />
         <div className="mt-2 text-[14.5px] leading-relaxed text-muted-foreground">
-          This interface is scoped to Alexander Nevsky — his work, projects,
-          process, and contact. Your question sits outside that scope. Try one
-          of these instead:
+          {lang === 'ru'
+            ? 'Этот интерфейс ограничен темами об Александре Невском: работа, проекты, процесс и контакты. Ваш вопрос вне этого контекста. Попробуйте одну из тем ниже:'
+            : 'This interface is scoped to Alexander Nevsky — his work, projects, process, and contact. Your question sits outside that scope. Try one of these instead:'}
         </div>
-        <SuggestionChips ids={message.suggestions ?? []} onSelect={onChipSelect} />
+        <SuggestionChips lang={lang} ids={message.suggestions ?? []} onSelect={onChipSelect} />
       </div>
     )
   }
@@ -63,9 +75,11 @@ function SystemMessage({
     const project = projects.find(p => p.id === message.projectId)
     if (!project) return null
     const year = project.date ? project.date.slice(0, 4) : ''
+    const title = lang === 'ru' ? project.titleRu : project.titleEn
+    const content = lang === 'ru' ? project.contentRu : project.contentEn
     return (
       <div className="w-full">
-        <MessageMeta />
+        <MessageMeta lang={lang} />
         <div className="mt-3 flex flex-wrap items-center gap-2 font-mono text-[10.5px] uppercase tracking-wider text-muted-foreground">
           {year && <span>{year}</span>}
           {year && project.tags.length > 0 && <span>·</span>}
@@ -74,13 +88,13 @@ function SystemMessage({
           ))}
         </div>
         <h2 className="mt-2 text-[22px] leading-[1.2] tracking-tight text-foreground md:text-[26px]">
-          {project.titleEn}
+          {title}
         </h2>
         {project.featureImage && (
           <div className="mt-4 overflow-hidden rounded-md border border-border bg-muted">
             <img
               src={project.featureImage}
-              alt={project.titleEn}
+              alt={title}
               className="h-auto w-full object-cover"
               loading="lazy"
             />
@@ -92,9 +106,9 @@ function SystemMessage({
             'prose-chat'
           )}
         >
-          <ReactMarkdown>{project.contentEn}</ReactMarkdown>
+          <ReactMarkdown>{content}</ReactMarkdown>
         </div>
-        <SuggestionChips ids={message.suggestions ?? []} onSelect={onChipSelect} />
+        <SuggestionChips lang={lang} ids={message.suggestions ?? []} onSelect={onChipSelect} />
       </div>
     )
   }
@@ -104,42 +118,45 @@ function SystemMessage({
 
   return (
     <div className="w-full">
-      <MessageMeta />
+      <MessageMeta lang={lang} />
       <div
         className={cn(
           'mt-2 text-[15px] leading-[1.65] text-foreground',
           'prose-chat'
         )}
       >
-        <ReactMarkdown>{topic.response}</ReactMarkdown>
+        <ReactMarkdown>{getTopicResponse(topic, lang)}</ReactMarkdown>
       </div>
       {topic.relatedProjectIds && topic.relatedProjectIds.length > 0 && (
         <EmbeddedProjectGrid
           projectIds={topic.relatedProjectIds}
+          lang={lang}
           onSelect={onProjectSelect}
         />
       )}
-      <SuggestionChips ids={message.suggestions ?? []} onSelect={onChipSelect} />
+      <SuggestionChips lang={lang} ids={message.suggestions ?? []} onSelect={onChipSelect} />
     </div>
   )
 }
 
-function MessageMeta() {
+function MessageMeta({ lang }: { lang: Lang }) {
   return (
     <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
       <span
         className="h-1.5 w-1.5 rounded-full bg-foreground/70"
         aria-hidden="true"
       />
-      <span>{profile.name}</span>
+      <span>{getProfileText('name', lang)}</span>
     </div>
   )
 }
 
 function SuggestionChips({
+  lang,
   ids,
   onSelect,
 }: {
+  lang: Lang
   ids: string[]
   onSelect: (id: string) => void
 }) {
@@ -149,7 +166,7 @@ function SuggestionChips({
       {ids.map(id => {
         const topic = getTopic(id)
         if (!topic) return null
-        const label = topic.chipLabel ?? topic.label
+        const label = getTopicChipLabel(topic, lang)
         return (
           <PromptChip key={id} onClick={() => onSelect(id)}>
             {label}
@@ -160,14 +177,17 @@ function SuggestionChips({
   )
 }
 
-export function TypingIndicator() {
+export function TypingIndicator({ lang }: { lang: Lang }) {
   return (
     <div className="w-full">
-      <MessageMeta />
+      <MessageMeta lang={lang} />
       <div className="mt-2 flex items-center gap-1.5">
         <span className="typing-dot" />
         <span className="typing-dot" style={{ animationDelay: '120ms' }} />
         <span className="typing-dot" style={{ animationDelay: '240ms' }} />
+      </div>
+      <div className="mt-2 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+        {lang === 'ru' ? 'Формирую ответ…' : 'Thinking…'}
       </div>
     </div>
   )

@@ -1,17 +1,22 @@
 import { projects, type Project } from '@/data/projects'
 import { cn } from '@/lib/utils'
+import { type Lang } from '@/lib/i18n'
 
 interface EmbeddedProjectCardProps {
   projectId: string
+  lang: Lang
   onSelect?: (projectId: string) => void
 }
 
-export function EmbeddedProjectCard({ projectId, onSelect }: EmbeddedProjectCardProps) {
+export function EmbeddedProjectCard({ projectId, lang, onSelect }: EmbeddedProjectCardProps) {
   const project: Project | undefined = projects.find(p => p.id === projectId)
   if (!project) return null
 
   const year = project.date ? project.date.slice(0, 4) : ''
   const clickable = Boolean(onSelect)
+
+  const title = lang === 'ru' ? project.titleRu : project.titleEn
+  const excerpt = lang === 'ru' ? project.excerptRu : project.excerptEn
 
   return (
     <button
@@ -24,13 +29,13 @@ export function EmbeddedProjectCard({ projectId, onSelect }: EmbeddedProjectCard
           ? 'hover:border-muted-foreground/60 focus:outline-none focus-visible:ring-1 focus-visible:ring-foreground/40 cursor-pointer'
           : 'cursor-default'
       )}
-      aria-label={clickable ? `Open project: ${project.titleEn}` : project.titleEn}
+      aria-label={clickable ? (lang === 'ru' ? `Открыть проект: ${title}` : `Open project: ${title}`) : title}
     >
       {project.featureImage && (
         <div className="aspect-[16/10] w-full overflow-hidden bg-muted">
           <img
             src={project.featureImage}
-            alt={project.titleEn}
+            alt={title}
             className={cn(
               'h-full w-full object-cover transition-transform duration-300',
               clickable && 'group-hover:scale-[1.02]'
@@ -61,11 +66,11 @@ export function EmbeddedProjectCard({ projectId, onSelect }: EmbeddedProjectCard
             clickable && 'transition-colors group-hover:text-foreground'
           )}
         >
-          {project.titleEn}
+          {title}
         </div>
-        {project.excerptEn && (
+        {excerpt && (
           <p className="mt-1 line-clamp-3 text-[12px] leading-relaxed text-muted-foreground">
-            {project.excerptEn}
+            {excerpt}
           </p>
         )}
       </div>
@@ -75,15 +80,16 @@ export function EmbeddedProjectCard({ projectId, onSelect }: EmbeddedProjectCard
 
 interface EmbeddedProjectGridProps {
   projectIds: string[]
+  lang: Lang
   onSelect?: (projectId: string) => void
 }
 
-export function EmbeddedProjectGrid({ projectIds, onSelect }: EmbeddedProjectGridProps) {
+export function EmbeddedProjectGrid({ projectIds, lang, onSelect }: EmbeddedProjectGridProps) {
   if (!projectIds.length) return null
   return (
     <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {projectIds.map(id => (
-        <EmbeddedProjectCard key={id} projectId={id} onSelect={onSelect} />
+        <EmbeddedProjectCard key={id} projectId={id} lang={lang} onSelect={onSelect} />
       ))}
     </div>
   )

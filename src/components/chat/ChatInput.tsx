@@ -1,15 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArrowUp } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { type Lang } from '@/lib/i18n'
+import { getProfileText } from '@/data/profile'
 
 interface ChatInputProps {
+  lang: Lang
   onSend: (text: string) => void
   isBusy: boolean
 }
 
 const MAX_HEIGHT = 180
 
-export function ChatInput({ onSend, isBusy }: ChatInputProps) {
+export function ChatInput({ lang, onSend, isBusy }: ChatInputProps) {
   const [value, setValue] = useState('')
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -58,7 +61,11 @@ export function ChatInput({ onSend, isBusy }: ChatInputProps) {
             value={value}
             onChange={e => setValue(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Ask about projects, background, or current builds…"
+            placeholder={
+              lang === 'ru'
+                ? 'Спросите про проекты, опыт или текущие продукты…'
+                : 'Ask about projects, background, or current builds…'
+            }
             rows={1}
             autoFocus
             className={cn(
@@ -66,7 +73,7 @@ export function ChatInput({ onSend, isBusy }: ChatInputProps) {
               'font-sans'
             )}
             style={{ maxHeight: MAX_HEIGHT }}
-            aria-label="Ask a question"
+            aria-label={lang === 'ru' ? 'Задайте вопрос' : 'Ask a question'}
           />
           <button
             type="submit"
@@ -78,13 +85,15 @@ export function ChatInput({ onSend, isBusy }: ChatInputProps) {
                 ? 'bg-muted text-muted-foreground/60'
                 : 'bg-foreground text-background hover:bg-foreground/90'
             )}
-            aria-label="Send message"
+            aria-label={lang === 'ru' ? 'Отправить сообщение' : 'Send message'}
           >
             <ArrowUp size={15} strokeWidth={2.4} />
           </button>
         </div>
         <div className="mt-2 px-1 font-mono text-[10.5px] uppercase tracking-wider text-muted-foreground">
-          Scope: Alexander Nevsky · work, projects, process, contact
+          {lang === 'ru'
+            ? `Контекст: ${getProfileText('name', lang)} · работа, проекты, процесс, контакты`
+            : `Scope: ${getProfileText('name', lang)} · work, projects, process, contact`}
         </div>
       </form>
     </div>

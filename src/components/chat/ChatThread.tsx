@@ -1,9 +1,11 @@
 import { useEffect, useRef } from 'react'
 import { Message, TypingIndicator } from './Message'
 import { type Message as ChatMessage } from '@/hooks/useChat'
+import { type Lang } from '@/lib/i18n'
 
 interface ChatThreadProps {
   messages: ChatMessage[]
+  lang: Lang
   isAnswering: boolean
   onChipSelect: (topicId: string) => void
   onProjectSelect: (projectId: string) => void
@@ -11,6 +13,7 @@ interface ChatThreadProps {
 
 export function ChatThread({
   messages,
+  lang,
   isAnswering,
   onChipSelect,
   onProjectSelect,
@@ -27,11 +30,12 @@ export function ChatThread({
         <Message
           key={message.id}
           message={message}
+          lang={lang}
           onChipSelect={onChipSelect}
           onProjectSelect={onProjectSelect}
         />
       ))}
-      {isAnswering && <TypingIndicator />}
+      {isAnswering && <TypingIndicator lang={lang} />}
       <div ref={endRef} />
     </div>
   )

@@ -1,7 +1,8 @@
 import { useCallback, useRef, useState } from 'react'
-import { getTopic, type Topic } from '@/data/topics'
+import { getTopic, getTopicPrompt, type Topic } from '@/data/topics'
 import { projects } from '@/data/projects'
 import { matchTopic, offTopicSuggestions } from '@/lib/chatRouter'
+import { type Lang } from '@/lib/i18n'
 
 export type MessageRole = 'user' | 'system'
 
@@ -45,7 +46,7 @@ export interface UseChat {
   reset: () => void
 }
 
-export function useChat(): UseChat {
+export function useChat(lang: Lang): UseChat {
   const [messages, setMessages] = useState<Message[]>([])
   const [isAnswering, setIsAnswering] = useState(false)
   const pendingTimer = useRef<number | null>(null)
@@ -84,13 +85,14 @@ export function useChat(): UseChat {
           id: uid(),
           role: 'user',
           kind: 'user',
-          text: topic.promptText,
+          topicId: topic.id,
+          text: getTopicPrompt(topic, lang),
           createdAt: Date.now(),
         },
       ])
       scheduleAnswer(() => appendSystemFromTopic(topic, 'topic'))
     },
-    [appendSystemFromTopic, scheduleAnswer]
+    [appendSystemFromTopic, lang, scheduleAnswer]
   )
 
   const sendFreeText = useCallback(
@@ -139,7 +141,8 @@ export function useChat(): UseChat {
           id: uid(),
           role: 'user',
           kind: 'user',
-          text: `Tell me about "${project.titleEn}".`,
+          projectId: project.id,
+          text: lang === 'ru' ? `Расскажи про «${project.titleRu}».` : `Tell me about "${project.titleEn}".`,
           createdAt: Date.now(),
         },
       ])
@@ -157,7 +160,7 @@ export function useChat(): UseChat {
         ])
       })
     },
-    [scheduleAnswer]
+    [lang, scheduleAnswer]
   )
 
   const reset = useCallback(() => {

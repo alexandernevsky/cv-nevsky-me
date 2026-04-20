@@ -34,6 +34,11 @@ export interface Topic {
   relatedProjectIds?: string[]
   /** Topic IDs suggested as follow-ups */
   followUps?: string[]
+  labelRu?: string
+  promptTextRu?: string
+  responseRu?: string
+  chipLabelRu?: string
+  keywordsRu?: string[]
 }
 
 export const topics: Topic[] = [
@@ -350,6 +355,162 @@ If you are hiring or have a specific product in mind, email is best — include 
   },
 ]
 
+interface TopicLocale {
+  label: string
+  chipLabel?: string
+  promptText: string
+  response: string
+  keywords: string[]
+}
+
+const topicsRu: Record<string, TopicLocale> = {
+  who: {
+    label: 'Кто вы?',
+    chipLabel: 'Кто вы?',
+    promptText: 'Кто вы?',
+    response: `Я — Александр Невский, Senior Product Designer, сейчас в роли AI Product Orchestrator.
+
+Более 15 лет я проектирую сложные цифровые продукты: fintech, neobank, B2B-инструменты, healthcare, proptech, SaaS и AI-native сервисы.
+
+Базируюсь в Дубае, запускаю рабочие MVP небольшими сфокусированными командами.`,
+    keywords: ['кто', 'представьтесь', 'о себе', 'био', 'кратко о вас'],
+  },
+  'what-is-this': {
+    label: 'Что это за интерфейс?',
+    chipLabel: 'Что это?',
+    promptText: 'Что это за интерфейс?',
+    response: `Это разговорный интерфейс моего портфолио, резюме и архива проектов.
+
+Слева — готовые темы. Ниже можно писать свободные вопросы, но в рамках контекста: мой опыт, проекты, процесс и контакты.`,
+    keywords: ['что это', 'как работает', 'интерфейс', 'сайт', 'что за сайт'],
+  },
+  background: {
+    label: 'Бэкграунд',
+    chipLabel: 'Бэкграунд',
+    promptText: 'Расскажите про ваш бэкграунд.',
+    response: `Коротко по этапам:
+
+- 2010–2012: editorial web (Известия, РИА Новости)
+- 2012–2017: EMIAS, design director, системный дизайн на уровне города
+- 2018: VTB/Luxoft, корпоративный банковский портал
+- 2018–2019: Wallarm, cybersecurity UX + design system
+- 2020–2022: m2, лид команды product-дизайна
+- 2023–2024: Keytom и Yango Pay в Дубае
+- 2025: Fundmates и The Driven Podcast
+
+Параллельно строю свои продукты с AI-assisted workflow.`,
+    keywords: ['опыт', 'история', 'карьера', 'бэкграунд', 'путь'],
+  },
+  'design-philosophy': {
+    label: 'Дизайн-философия',
+    chipLabel: 'Философия',
+    promptText: 'Какая у вас дизайн-философия?',
+    response: `Мои базовые принципы:
+
+- Дизайн — это дисциплина, а не декор
+- Системы важнее отдельных экранов
+- Скорость релиза — часть качества
+- Ясность важнее «умности»
+- AI — рабочий соавтор, а не витрина`,
+    keywords: ['философия', 'подход', 'принципы', 'стиль'],
+  },
+  'selected-work': {
+    label: 'Избранные кейсы',
+    chipLabel: 'Кейсы',
+    promptText: 'Покажите избранные кейсы.',
+    response: 'Ниже — репрезентативные проекты в fintech, AI, media и platform design.',
+    keywords: ['кейсы', 'проекты', 'портфолио', 'работы', 'примеры'],
+  },
+  fundmates: {
+    label: 'Fundmates',
+    chipLabel: 'Fundmates',
+    promptText: 'Расскажите про Fundmates.',
+    response: `Fundmates — стартап, который финансирует YouTube-креаторов.
+
+Я проектировал investor-facing AI chat и MVP Sell One Video: от разговорной логики до экранов оффера, подписания и дашборда.`,
+    keywords: ['fundmates', 'ютуб', 'креаторы', 'финансирование'],
+  },
+  'driven-podcast': {
+    label: 'The Driven Podcast',
+    chipLabel: 'The Driven Podcast',
+    promptText: 'Расскажите про The Driven Podcast.',
+    response: `Для The Driven Podcast я делал бренд и продуктовый слой: айдентику, визуальную систему и веб-поверхность для выпусков и гостей.`,
+    keywords: ['driven', 'подкаст', 'брендинг', 'медиа'],
+  },
+  keytom: {
+    label: 'Keytom neobank',
+    promptText: 'Расскажите про Keytom.',
+    response: `Keytom — необанк из Дубая. Я проектировал MVP «fiat + crypto», ключевые сценарии и первую рабочую версию продукта.`,
+    keywords: ['keytom', 'необанк', 'фиат', 'крипто'],
+  },
+  'yango-pay': {
+    label: 'Yango Pay',
+    promptText: 'Расскажите про Yango Pay.',
+    response: `Yango Pay — мобильный кошелек внутри приложения Yango Taxi. Я делал top-up/payment сценарии и UX-архитектуру wallet-секции.`,
+    keywords: ['yango', 'pay', 'кошелек', 'платежи'],
+  },
+  cv: {
+    label: 'Резюме / CV',
+    chipLabel: 'Резюме',
+    promptText: 'Можно посмотреть ваше резюме?',
+    response: `Senior Product Designer с 15+ годами опыта в fintech, proptech, SaaS и AI-продуктах.
+
+Сильные стороны: продуктовое мышление, дизайн-системы, кросс-функциональное лидерство, быстрые MVP.
+
+Локация: Дубай, ОАЭ. Формат: onsite / hybrid / remote.`,
+    keywords: ['резюме', 'cv', 'опыт работы', 'нанять'],
+  },
+  'current-builds': {
+    label: 'Что я сейчас строю',
+    chipLabel: 'Текущие билды',
+    promptText: 'Что вы сейчас делаете?',
+    response: `Сейчас у меня 3 live-направления:
+
+1) Real-estate CRM для агентского workflow  
+2) iOS live call assistant (on-device)  
+3) Family productivity app для семейной координации`,
+    keywords: ['сейчас делаете', 'текущие проекты', 'что строите', 'mvp'],
+  },
+  'ai-orchestrator': {
+    label: 'AI Product Orchestrator',
+    chipLabel: 'AI orchestrator',
+    promptText: 'Что вы имеете в виду под AI Product Orchestrator?',
+    response: `Это мой рабочий формат: я оркестрирую цепочку от discovery до working prototype с AI в контуре, но сохраняю продуктовую ответственность, вкус и контроль качества.`,
+    keywords: ['ai orchestrator', 'ai подход', 'оркестратор', 'agentic workflow'],
+  },
+  toolchain: {
+    label: 'Инструменты',
+    promptText: 'Какие инструменты вы используете?',
+    response: `Основной стек:
+
+- Мыслить/писать: Claude, ChatGPT, Gemini
+- Код/продукт: Cursor, Codex, Claude
+- Визуал: Midjourney, Sora, Recraft
+- Интерфейсы: Figma, Framer, Webflow
+- Платформа: Cloudflare`,
+    keywords: ['инструменты', 'стек', 'toolchain', 'что используете'],
+  },
+  dubai: {
+    label: 'Жизнь в Дубае',
+    chipLabel: 'Жизнь в Дубае',
+    promptText: 'Какая у вас жизнь в Дубае?',
+    response: `Живу в Дубае с 2022 года с семьей. Нравится темп рынка и практичность задач: меньше церемоний, больше реальной поставки.`,
+    keywords: ['дубай', 'жизнь в дубае', 'оаэ', 'переезд'],
+  },
+  contact: {
+    label: 'Связаться',
+    chipLabel: 'Связаться',
+    promptText: 'Как с вами связаться?',
+    response: `Быстрее всего:
+
+- Email — [hi@nevsky.me](mailto:hi@nevsky.me)
+- Telegram — [@alexander_nevsky](https://t.me/alexander_nevsky)
+- WhatsApp — [+971 50 503 1984](https://wa.me/971505031984)
+- LinkedIn — [/in/nevskyalexander](https://linkedin.com/in/nevskyalexander)`,
+    keywords: ['контакт', 'связаться', 'телеграм', 'почта', 'ватсап'],
+  },
+}
+
 // ─── Lookup helpers ────────────────────────────────────────────────
 
 export const topicsById: Record<string, Topic> = Object.fromEntries(
@@ -360,15 +521,43 @@ export function getTopic(id: string): Topic | undefined {
   return topicsById[id]
 }
 
+export function getTopicLabel(topic: Topic, lang: 'en' | 'ru'): string {
+  return lang === 'ru' ? topicsRu[topic.id]?.label ?? topic.label : topic.label
+}
+
+export function getTopicChipLabel(topic: Topic, lang: 'en' | 'ru'): string {
+  if (lang === 'ru') return topicsRu[topic.id]?.chipLabel ?? topicsRu[topic.id]?.label ?? topic.chipLabel ?? topic.label
+  return topic.chipLabel ?? topic.label
+}
+
+export function getTopicPrompt(topic: Topic, lang: 'en' | 'ru'): string {
+  return lang === 'ru' ? topicsRu[topic.id]?.promptText ?? topic.promptText : topic.promptText
+}
+
+export function getTopicResponse(topic: Topic, lang: 'en' | 'ru'): string {
+  return lang === 'ru' ? topicsRu[topic.id]?.response ?? topic.response : topic.response
+}
+
+export function getTopicKeywords(topic: Topic, lang: 'en' | 'ru'): string[] {
+  if (lang === 'ru') return topicsRu[topic.id]?.keywords ?? []
+  return topic.keywords ?? []
+}
+
+export function getTopicAllLabels(topic: Topic): string[] {
+  const ruLabel = topicsRu[topic.id]?.label
+  return ruLabel ? [topic.label, ruLabel] : [topic.label]
+}
+
 export const sidebarCategories: {
   id: TopicCategory
   label: string
+  labelRu: string
 }[] = [
-  { id: 'start', label: 'Start here' },
-  { id: 'about', label: 'About' },
-  { id: 'work', label: 'Work' },
-  { id: 'builds', label: 'Current builds' },
-  { id: 'ai', label: 'AI approach' },
-  { id: 'life', label: 'Life' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'start', label: 'Start here', labelRu: 'Старт' },
+  { id: 'about', label: 'About', labelRu: 'Обо мне' },
+  { id: 'work', label: 'Work', labelRu: 'Работы' },
+  { id: 'builds', label: 'Current builds', labelRu: 'Сейчас делаю' },
+  { id: 'ai', label: 'AI approach', labelRu: 'Подход к AI' },
+  { id: 'life', label: 'Life', labelRu: 'Жизнь' },
+  { id: 'contact', label: 'Contact', labelRu: 'Контакты' },
 ]
