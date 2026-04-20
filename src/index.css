@@ -167,16 +167,16 @@
     @apply my-3 text-[15px] leading-[1.65];
   }
   .prose-chat strong {
-    @apply font-semibold text-foreground;
+    @apply font-bold text-foreground;
   }
   .prose-chat em {
     font-style: normal;
   }
   .prose-chat h3 {
-    @apply mt-6 mb-2 text-[15px] font-medium tracking-tight text-foreground;
+    @apply mt-6 mb-2 text-[19px] font-bold tracking-tight text-foreground;
   }
   .prose-chat h4 {
-    @apply mt-5 mb-1.5 text-[14px] font-medium tracking-tight text-foreground;
+    @apply mt-5 mb-1.5 text-[16px] font-bold tracking-tight text-foreground;
   }
   .prose-chat h1,
   .prose-chat h2 {
@@ -191,8 +191,21 @@
   .prose-chat h2 {
     @apply text-[24px] md:text-[30px];
   }
+  .prose-chat figure {
+    margin: 1.25rem 0;
+  }
+  .prose-chat figcaption {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: hsl(var(--muted-foreground));
+    margin-top: 0.4rem;
+    line-height: 1.5;
+  }
   .prose-chat p img,
-  .prose-chat > img {
+  .prose-chat > img,
+  .prose-chat figure img {
     width: 100%;
     display: block;
     margin: 0;
