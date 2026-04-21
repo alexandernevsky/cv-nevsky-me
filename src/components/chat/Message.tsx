@@ -3,6 +3,7 @@ import { getTopic, getTopicChipLabel, getTopicPrompt, getTopicResponse } from '@
 import { projects } from '@/data/projects'
 import { getProfileText, profileAvatarSrc } from '@/data/profile'
 import { type Message as ChatMessage } from '@/hooks/useChat'
+import { ContactActions } from './ContactActions'
 import { EmbeddedProjectGrid } from './EmbeddedProjectCard'
 import { PromptChip } from './PromptChip'
 import { type Lang } from '@/lib/i18n'
@@ -167,6 +168,7 @@ function SystemMessage({
           </MarkdownContent>
         </Suspense>
       </div>
+      {topic.id === 'contact' && <ContactActions lang={lang} />}
       {topic.relatedProjectIds && topic.relatedProjectIds.length > 0 && (
         <EmbeddedProjectGrid
           projectIds={topic.relatedProjectIds}

@@ -22,18 +22,7 @@ en:
     - "get in touch"
     - "linkedin"
   response: |-
-    The fastest channels:
-
-    - **Email** — [hi@nevsky.me](mailto:hi@nevsky.me)
-    - **Telegram** — [@alexander_nevsky](https://t.me/alexander_nevsky)
-    - **WhatsApp** — [+971 50 503 1984](https://wa.me/971505031984)
-    - **LinkedIn** — [/in/nevskyalexander](https://linkedin.com/in/nevskyalexander)
-
-    Also:
-    - Portfolio → [nevskii.me](https://nevskii.me)
-    - Blog → [nevsky.me](https://nevsky.me)
-
-    If you are hiring or have a specific product in mind, email is best — include the shape of the problem and the rough timeline.
+    Email is the best channel for hiring or product work. Telegram and WhatsApp are faster for short context.
 ru:
   label: "Связаться"
   chip_label: "Связаться"
@@ -45,10 +34,5 @@ ru:
     - "почта"
     - "ватсап"
   response: |-
-    Быстрее всего:
-
-    - Email — [hi@nevsky.me](mailto:hi@nevsky.me)
-    - Telegram — [@alexander_nevsky](https://t.me/alexander_nevsky)
-    - WhatsApp — [+971 50 503 1984](https://wa.me/971505031984)
-    - LinkedIn — [/in/nevskyalexander](https://linkedin.com/in/nevskyalexander)
+    Для найма или продуктовой задачи лучше писать на email. Telegram и WhatsApp быстрее для короткого контекста.
 ---

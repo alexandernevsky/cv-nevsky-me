@@ -21,7 +21,7 @@ collections:
         label: CV
         file: content/pages/cv.md
         fields:
-          - { label: ID, name: id, widget: string, default: cv }
+          - { label: ID, name: id, widget: string, default: cv, pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase kebab-case.'] }
           - label: English
             name: en
             widget: object
@@ -45,7 +45,7 @@ collections:
         label: About
         file: content/pages/about.md
         fields:
-          - { label: ID, name: id, widget: string, default: about }
+          - { label: ID, name: id, widget: string, default: about, pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase kebab-case.'] }
           - label: English
             name: en
             widget: object
@@ -144,7 +144,7 @@ collections:
     editor:
       preview: false
     fields:
-      - { label: Topic ID, name: id, widget: string, hint: "Stable id used in links and follow-ups, for example current-builds." }
+      - { label: Topic ID, name: id, widget: string, hint: "Stable id used in links and follow-ups, for example current-builds.", pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase kebab-case, for example current-builds.'] }
       - { label: Sidebar order, name: order, widget: number, value_type: int, default: 100, hint: "Lower numbers appear earlier." }
       - label: Category
         name: category
@@ -161,18 +161,26 @@ collections:
       - { label: Show in sidebar, name: visible_in_sidebar, widget: boolean, default: true, hint: "Turn off for topics used only as follow-ups or free-text matches." }
       - label: Related project IDs
         name: related_project_ids
-        widget: list
-        collapsed: true
+        widget: relation
+        collection: projects
+        search_fields: [id, en.title, ru.title]
+        value_field: id
+        display_fields: [en.title, ru.title, id]
+        multiple: true
+        options_length: 100
         hint: "Project cards rendered under the answer. Use project IDs from content/projects."
         required: false
-        field: { label: Project ID, name: project_id, widget: string }
       - label: Follow-up topic IDs
         name: follow_ups
-        widget: list
-        collapsed: true
+        widget: relation
+        collection: topics
+        search_fields: [id, en.label, ru.label]
+        value_field: id
+        display_fields: [en.label, ru.label, id]
+        multiple: true
+        options_length: 100
         hint: "Chips shown below the answer. Use topic IDs from this collection."
         required: false
-        field: { label: Topic ID, name: topic_id, widget: string }
       - label: English
         name: en
         widget: object
@@ -217,7 +225,7 @@ collections:
     identifier_field: en.title
     summary: "{{en.title}} / {{ru.title}}"
     fields:
-      - { label: ID, name: id, widget: string, hint: "Stable file id, for example fundmates-ai-app-cv." }
+      - { label: ID, name: id, widget: string, hint: "Stable file id, for example fundmates-ai-app-cv.", pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase kebab-case.'] }
       - { label: Date, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false }
       - { label: Feature image URL, name: feature_image, widget: string, required: false }
       - label: Tags

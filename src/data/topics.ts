@@ -516,7 +516,7 @@ export const topics: Topic[] = [
     "label": "Get in touch",
     "chipLabel": "Get in touch",
     "promptText": "How can I get in touch?",
-    "response": "The fastest channels:\n\n- **Email** — [hi@nevsky.me](mailto:hi@nevsky.me)\n- **Telegram** — [@alexander_nevsky](https://t.me/alexander_nevsky)\n- **WhatsApp** — [+971 50 503 1984](https://wa.me/971505031984)\n- **LinkedIn** — [/in/nevskyalexander](https://linkedin.com/in/nevskyalexander)\n\nAlso:\n- Portfolio → [nevskii.me](https://nevskii.me)\n- Blog → [nevsky.me](https://nevsky.me)\n\nIf you are hiring or have a specific product in mind, email is best — include the shape of the problem and the rough timeline.",
+    "response": "Email is the best channel for hiring or product work. Telegram and WhatsApp are faster for short context.",
     "keywords": [
       "contact",
       "reach",
@@ -537,7 +537,7 @@ export const topics: Topic[] = [
     "labelRu": "Связаться",
     "chipLabelRu": "Связаться",
     "promptTextRu": "Как с вами связаться?",
-    "responseRu": "Быстрее всего:\n\n- Email — [hi@nevsky.me](mailto:hi@nevsky.me)\n- Telegram — [@alexander_nevsky](https://t.me/alexander_nevsky)\n- WhatsApp — [+971 50 503 1984](https://wa.me/971505031984)\n- LinkedIn — [/in/nevskyalexander](https://linkedin.com/in/nevskyalexander)",
+    "responseRu": "Для найма или продуктовой задачи лучше писать на email. Telegram и WhatsApp быстрее для короткого контекста.",
     "keywordsRu": [
       "контакт",
       "связаться",
