@@ -129,6 +129,68 @@ collections:
               - { label: Email address, name: emailAddress, widget: string }
               - { label: Phone number, name: phoneNumber, widget: string, required: false }
 
+  - name: topics
+    label: Chat topics
+    label_singular: Chat topic
+    folder: content/topics
+    create: true
+    slug: "{{fields.id}}"
+    identifier_field: en.label
+    summary: "{{order}} · {{en.label}} / {{ru.label}}"
+    fields:
+      - { label: ID, name: id, widget: string, hint: "Stable id used in links, for example current-builds." }
+      - { label: Order, name: order, widget: number, value_type: int, default: 100 }
+      - label: Category
+        name: category
+        widget: select
+        options:
+          - { label: Start, value: start }
+          - { label: About, value: about }
+          - { label: Work, value: work }
+          - { label: Current builds, value: builds }
+          - { label: AI, value: ai }
+          - { label: Life, value: life }
+          - { label: Contact, value: contact }
+      - { label: Visible in sidebar, name: visible_in_sidebar, widget: boolean, default: true }
+      - label: Related project IDs
+        name: related_project_ids
+        widget: list
+        required: false
+        field: { label: Project ID, name: project_id, widget: string }
+      - label: Follow-up topic IDs
+        name: follow_ups
+        widget: list
+        required: false
+        field: { label: Topic ID, name: topic_id, widget: string }
+      - label: English
+        name: en
+        widget: object
+        collapsed: false
+        fields:
+          - { label: Label, name: label, widget: string }
+          - { label: Chip label, name: chip_label, widget: string, required: false }
+          - { label: Prompt text, name: prompt, widget: string }
+          - label: Keywords
+            name: keywords
+            widget: list
+            required: false
+            field: { label: Keyword, name: keyword, widget: string }
+      - { label: Response EN, name: body_en, widget: markdown }
+      - label: Russian
+        name: ru
+        widget: object
+        collapsed: false
+        fields:
+          - { label: Label RU, name: label, widget: string }
+          - { label: Chip label RU, name: chip_label, widget: string, required: false }
+          - { label: Prompt text RU, name: prompt, widget: string }
+          - label: Keywords RU
+            name: keywords
+            widget: list
+            required: false
+            field: { label: Keyword, name: keyword, widget: string }
+      - { label: Response RU, name: body_ru, widget: markdown }
+
   - name: projects
     label: Projects
     label_singular: Project

@@ -1,9 +1,4 @@
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import rehypeRaw from 'rehype-raw'
-import rehypeSanitize, { defaultSchema } from 'rehype-sanitize'
-import { type PluggableList } from 'unified'
-import { cn } from '@/lib/utils'
+import { lazy, Suspense } from 'react'
 import { getTopic, getTopicChipLabel, getTopicPrompt, getTopicResponse } from '@/data/topics'
 import { projects } from '@/data/projects'
 import { getProfileText, profileAvatarSrc } from '@/data/profile'
@@ -19,18 +14,9 @@ interface MessageProps {
   onProjectSelect: (projectId: string) => void
 }
 
-const markdownSanitizeSchema = {
-  ...defaultSchema,
-  tagNames: [...(defaultSchema.tagNames ?? []), 'figure', 'figcaption'],
-  attributes: {
-    ...defaultSchema.attributes,
-    a: [...(defaultSchema.attributes?.a ?? []), 'target', 'rel'],
-    figure: ['className'],
-    img: [...(defaultSchema.attributes?.img ?? []), 'loading'],
-  },
-}
-
-const rehypePlugins: PluggableList = [rehypeRaw, [rehypeSanitize, markdownSanitizeSchema]]
+const MarkdownContent = lazy(() =>
+  import('./MarkdownContent').then(module => ({ default: module.MarkdownContent }))
+)
 
 export function Message({ message, lang, onChipSelect, onProjectSelect }: MessageProps) {
   if (message.role === 'user') {
@@ -153,15 +139,12 @@ function SystemMessage({
           </div>
         )}
 
-        <div
-          className={cn(
-            'mt-6 text-[15px] leading-[1.65] text-foreground',
-            'prose-chat prose-chat-wide'
-          )}
-        >
-          <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={rehypePlugins}>
-            {content}
-          </ReactMarkdown>
+        <div className="mt-6">
+          <Suspense fallback={<MarkdownFallback />}>
+            <MarkdownContent wide>
+              {content}
+            </MarkdownContent>
+          </Suspense>
         </div>
 
         <div className="mx-auto w-full max-w-[720px]">
@@ -177,15 +160,12 @@ function SystemMessage({
   return (
     <div className="mx-auto w-full max-w-[720px]">
       <MessageMeta lang={lang} />
-      <div
-        className={cn(
-          'mt-2 text-[15px] leading-[1.65] text-foreground',
-          'prose-chat'
-        )}
-      >
-        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={rehypePlugins}>
-          {getTopicResponse(topic, lang)}
-        </ReactMarkdown>
+      <div className="mt-2">
+        <Suspense fallback={<MarkdownFallback />}>
+          <MarkdownContent>
+            {getTopicResponse(topic, lang)}
+          </MarkdownContent>
+        </Suspense>
       </div>
       {topic.relatedProjectIds && topic.relatedProjectIds.length > 0 && (
         <EmbeddedProjectGrid
@@ -197,6 +177,10 @@ function SystemMessage({
       <SuggestionChips lang={lang} ids={message.suggestions ?? []} onSelect={onChipSelect} />
     </div>
   )
+}
+
+function MarkdownFallback() {
+  return <div className="h-12 animate-pulse rounded-md bg-muted/60" />
 }
 
 function MessageMeta({ lang }: { lang: Lang }) {
