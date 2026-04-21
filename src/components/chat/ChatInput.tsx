@@ -41,9 +41,9 @@ export function ChatInput({ lang, onSend, isBusy }: ChatInputProps) {
   const disabled = isBusy || !value.trim()
 
   return (
-    <div className="w-full border-t border-border bg-background pt-4 pb-5">
+    <div className="w-full min-w-0 overflow-x-hidden border-t border-border bg-background pt-4 pb-5">
       <form
-        className="mx-auto w-full max-w-[720px] px-5 md:px-6"
+        className="mx-auto w-full max-w-[720px] min-w-0 px-5 md:px-6"
         onSubmit={e => {
           e.preventDefault()
           submit()
@@ -90,7 +90,7 @@ export function ChatInput({ lang, onSend, isBusy }: ChatInputProps) {
             <ArrowUp size={15} strokeWidth={2.4} />
           </button>
         </div>
-        <div className="mt-2 px-1 font-mono text-[10.5px] uppercase tracking-wider text-muted-foreground">
+        <div className="mt-2 min-w-0 break-words px-1 font-mono text-[10.5px] uppercase tracking-wider text-muted-foreground">
           {lang === 'ru'
             ? `Контекст: ${getProfileText('name', lang)} · работа, проекты, процесс, контакты`
             : `Scope: ${getProfileText('name', lang)} · work, projects, process, contact`}

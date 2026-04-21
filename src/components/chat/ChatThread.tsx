@@ -25,7 +25,7 @@ export function ChatThread({
   }, [messages.length, isAnswering])
 
   return (
-    <div className="mx-auto flex w-full max-w-[960px] flex-col gap-8 px-5 pt-10 pb-12 md:px-6">
+    <div className="mx-auto flex w-full max-w-[960px] min-w-0 flex-col gap-8 overflow-x-hidden px-5 pt-10 pb-12 md:px-6">
       {messages.map(message => (
         <Message
           key={message.id}

@@ -24,15 +24,15 @@ export function EmbeddedProjectCard({ projectId, lang, onSelect }: EmbeddedProje
       disabled={!clickable}
       onClick={clickable ? () => onSelect!(project.id) : undefined}
       className={cn(
-        'group flex flex-col gap-2 rounded-md border border-border bg-background overflow-hidden text-left transition-colors',
+        'group block w-full overflow-hidden rounded-md bg-transparent text-left transition-colors',
         clickable
-          ? 'hover:border-muted-foreground/60 focus:outline-none focus-visible:ring-1 focus-visible:ring-foreground/40 cursor-pointer'
+          ? 'cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-foreground/40'
           : 'cursor-default'
       )}
       aria-label={clickable ? (lang === 'ru' ? `Открыть проект: ${title}` : `Open project: ${title}`) : title}
     >
       {project.featureImage && (
-        <div className="w-full overflow-hidden bg-muted">
+        <div className="w-full overflow-hidden rounded-md bg-muted">
           <img
             src={project.featureImage}
             alt={title}
@@ -44,7 +44,7 @@ export function EmbeddedProjectCard({ projectId, lang, onSelect }: EmbeddedProje
           />
         </div>
       )}
-      <div className="flex items-center justify-between gap-2 px-3 pt-2">
+      <div className="mt-2 flex items-center justify-between gap-2">
         {year && (
           <span className="font-mono text-[11px] text-muted-foreground">{year}</span>
         )}
@@ -52,18 +52,18 @@ export function EmbeddedProjectCard({ projectId, lang, onSelect }: EmbeddedProje
           {project.tags.slice(0, 2).map(tag => (
             <span
               key={tag}
-              className="rounded-sm border border-border bg-muted px-1.5 py-px font-mono text-[10px] uppercase tracking-wider text-muted-foreground"
+              className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground"
             >
               {tag}
             </span>
           ))}
         </div>
       </div>
-      <div className="px-3 pb-3">
+      <div className="mt-1">
         <div
           className={cn(
             'text-[13px] leading-snug text-foreground',
-            clickable && 'transition-colors group-hover:text-foreground'
+            clickable && 'transition-colors group-hover:text-muted-foreground'
           )}
         >
           {title}
@@ -87,7 +87,7 @@ interface EmbeddedProjectGridProps {
 export function EmbeddedProjectGrid({ projectIds, lang, onSelect }: EmbeddedProjectGridProps) {
   if (!projectIds.length) return null
   return (
-    <div className="mt-5 columns-1 gap-3 sm:columns-2 lg:columns-3 [&>*]:mb-3 [&>*]:break-inside-avoid">
+    <div className="mt-5 columns-1 gap-4 sm:columns-2 lg:columns-3 [&>*]:mb-5 [&>*]:break-inside-avoid">
       {projectIds.map(id => (
         <EmbeddedProjectCard key={id} projectId={id} lang={lang} onSelect={onSelect} />
       ))}

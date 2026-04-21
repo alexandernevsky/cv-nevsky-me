@@ -5,7 +5,9 @@ import matter from 'gray-matter'
 const root = process.cwd()
 const projectsDir = path.join(root, 'content/projects')
 const pagesDir = path.join(root, 'content/pages')
+const settingsDir = path.join(root, 'content/settings')
 const outputFile = path.join(root, 'src/data/projects.ts')
+const profileOutputFile = path.join(root, 'src/data/profile.ts')
 
 function normalizeDate(value) {
   if (value instanceof Date) {
@@ -32,6 +34,13 @@ function localized(data, lang) {
     title: String(data[lang]?.title ?? ''),
     excerpt: String(data[lang]?.excerpt ?? ''),
     body: String(data[`body_${lang}`] ?? ''),
+  }
+}
+
+function localizedText(data, field) {
+  return {
+    en: String(data[field]?.en ?? ''),
+    ru: String(data[field]?.ru ?? ''),
   }
 }
 
@@ -69,6 +78,43 @@ const projects = fs
   })
   .sort((a, b) => a.date.localeCompare(b.date))
 
+const profileData = readContentFile(path.join(settingsDir, 'profile.md'))
+const profile = {
+  name: localizedText(profileData, 'name'),
+  role: localizedText(profileData, 'role'),
+  subRole: localizedText(profileData, 'subRole'),
+  answerTitle: localizedText(profileData, 'answerTitle'),
+  location: localizedText(profileData, 'location'),
+  availability: localizedText(profileData, 'availability'),
+  summary: localizedText(profileData, 'summary'),
+  links: {
+    portfolio: String(profileData.links?.portfolio ?? ''),
+    blog: String(profileData.links?.blog ?? ''),
+    linkedin: String(profileData.links?.linkedin ?? ''),
+    telegram: String(profileData.links?.telegram ?? ''),
+    whatsapp: String(profileData.links?.whatsapp ?? ''),
+    email: String(profileData.links?.email ?? ''),
+    phone: String(profileData.links?.phone ?? ''),
+    emailAddress: String(profileData.links?.emailAddress ?? ''),
+    phoneNumber: String(profileData.links?.phoneNumber ?? ''),
+  },
+}
+
+const profileDataSource = `// AUTO-GENERATED from content/settings/profile.md - do not edit manually
+
+import { type Lang } from '@/lib/i18n'
+
+export const profile = ${JSON.stringify(profile, null, 2)} as const
+
+export type Profile = typeof profile
+
+export function getProfileText(field: keyof Omit<Profile, 'links'>, lang: Lang): string {
+  return profile[field][lang]
+}
+
+export const profileAvatarSrc = ${JSON.stringify(String(profileData.avatar ?? '/assets/avatar/alexander-nevsky.png'))}
+`
+
 const data = `// AUTO-GENERATED from content/ - do not edit manually
 
 export interface Project {
@@ -98,4 +144,6 @@ export const cvRu = ${JSON.stringify(readPage('cv.md', 'ru'), null, 2)}
 `
 
 fs.writeFileSync(outputFile, data)
+fs.writeFileSync(profileOutputFile, profileDataSource)
 console.log(`Generated ${path.relative(root, outputFile)} from ${projects.length} unified projects.`)
+console.log(`Generated ${path.relative(root, profileOutputFile)} from profile settings.`)

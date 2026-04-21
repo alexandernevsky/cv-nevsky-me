@@ -267,6 +267,7 @@ Senior product designer with 15+ years of experience across fintech, proptech, S
 **3. Family productivity app.** A private app for family schedules, tasks, and gamified rewards — remote coordination for parents, kids, and extended family. Designed around the way my own family actually runs.
 
 Each is small, specific, and meant to be *used*, not demoed.`,
+    relatedProjectIds: ['dubai-crm', 'callcoach', 'family-app'],
     followUps: ['ai-orchestrator', 'toolchain', 'design-philosophy'],
   },
 
@@ -279,20 +280,35 @@ Each is small, specific, and meant to be *used*, not demoed.`,
     promptText: 'What do you mean by AI Product Orchestrator?',
     visibleInSidebar: true,
     keywords: ['ai', 'orchestrator', 'ai-assisted', 'ai product', 'agentic', 'workflow'],
-    response: `"AI Product Orchestrator" is how I describe my current working mode. It is a practical role, not a title.
+    response: `I've spent 15+ years designing digital products — fintech, proptech, neobanks, B2B platforms. I know how to turn a messy problem into a clear interface. But somewhere in the last two years, something shifted.
 
-A single product-minded person can now run discovery, architecture, interface design, prototype, copy, and front-end scaffolding in a pipeline where language and vision models do most of the translation work. My job is to sequence that pipeline: set the problem correctly, route the right sub-task to the right tool, review every hand-off, and keep taste and accountability at the center.
+I stopped handing off Figma files. I started shipping products.
 
-Concretely, that looks like:
+The term that fits best right now: **AI Product Orchestrator**. I don't write every line of code — I design the system, specify intent, and coordinate AI agents (Claude Code, Codex, Cursor) to build, test, and iterate. The result isn't a prototype in a deck. It's a working, clickable, deployable product — built in days, not months.
 
-- Product strategy and positioning drafted and stress-tested with LLMs
-- UX architecture and flow mapping iterated in structured prompts
-- Visual direction explored with Midjourney / Sora / Recraft, then refined in Figma
-- Interface produced in Figma and Framer, then handed off via structured specs
-- Copy drafted with models, edited by hand
-- MVP scaffolding and small backends generated with Cursor / Claude / Codex, then owned and refined
+This is what Andrej Karpathy called the shift from coder to conductor to orchestrator. For a product designer with 15 years of UX architecture, system thinking, and product taste — it's not a threat. It's leverage.
 
-The result is that a small surface can go from concept to working prototype in days, not quarters — with a real product sensibility behind every decision.`,
+### What I bring to this new role
+
+- Product thinking and UX architecture honed on complex financial products (Yango Pay, Keytom, m2.ru, Wallarm)
+- Art direction and visual taste to keep AI output from looking like AI output
+- The ability to write clear specs and prompts that AI agents actually execute correctly
+- End-to-end delivery: from discovery and UX flow to live MVP — without a dev team
+
+### My current stack
+
+- **Claude Code** (Terminal) — agentic coding and architecture validation
+- **OpenAI Codex** — greenfield builds and rapid iteration
+- **Cursor IDE** — spec-driven development and fast implementation cycles
+- **ChatGPT** — UX copy, product narrative, and research synthesis
+- **Gemini** — fast concept drafts and multimodal exploration
+- **Midjourney + Sora** — visual ideation
+- **Recraft** — production-ready vector output
+- **Figma + Framer** — design systems and high-fidelity prototypes
+
+I'm based in Dubai. I work with international teams and startups. I build things that work — not decks that explain how they might.
+
+**Open to:** contract product design, AI-assisted MVP builds, product consulting.`,
     followUps: ['toolchain', 'current-builds', 'design-philosophy'],
   },
   {
@@ -475,7 +491,35 @@ const topicsRu: Record<string, TopicLocale> = {
     label: 'AI Product Orchestrator',
     chipLabel: 'AI orchestrator',
     promptText: 'Что вы имеете в виду под AI Product Orchestrator?',
-    response: `Это мой рабочий формат: я оркестрирую цепочку от discovery до working prototype с AI в контуре, но сохраняю продуктовую ответственность, вкус и контроль качества.`,
+    response: `Больше 15 лет я проектирую цифровые продукты — fintech, proptech, необанки, B2B-платформы. Я умею превращать запутанную задачу в ясный интерфейс. Но последние два года что-то сместилось.
+
+Я перестал сдавать Figma-файлы. Я начал шипить продукты.
+
+Термин, который сейчас точнее всего описывает мою роль — **AI Product Orchestrator**. Я не пишу каждую строку кода — я проектирую систему, формулирую намерение и координирую AI-агентов (Claude Code, Codex, Cursor), которые собирают, тестируют и итерируют. На выходе — не прототип в презентации, а рабочий, кликабельный, задеплоенный продукт, собранный за дни, а не за месяцы.
+
+Это тот самый сдвиг, который Andrej Karpathy назвал переходом от coder к conductor и дальше — к orchestrator. Для продуктового дизайнера с 15 годами UX-архитектуры, системного мышления и продуктового вкуса это не угроза. Это рычаг.
+
+### Что я приношу в эту роль
+
+- Продуктовое мышление и UX-архитектуру, закалённые на сложных финтех-продуктах (Yango Pay, Keytom, m2.ru, Wallarm)
+- Арт-дирекшн и вкус, чтобы AI-вывод не выглядел как AI-вывод
+- Умение писать чёткие спеки и промпты, которые AI-агенты реально исполняют корректно
+- Доставка end-to-end: от discovery и UX-флоу до живого MVP — без dev-команды
+
+### Текущий стек
+
+- **Claude Code** (Terminal) — agentic coding и валидация архитектуры
+- **OpenAI Codex** — greenfield-сборки и быстрая итерация
+- **Cursor IDE** — spec-driven разработка и быстрые циклы реализации
+- **ChatGPT** — UX-копирайтинг, продуктовый нарратив, синтез ресёрча
+- **Gemini** — быстрые концепт-драфты и мультимодальное исследование
+- **Midjourney + Sora** — визуальные идеи
+- **Recraft** — векторные ассеты в прод
+- **Figma + Framer** — дизайн-системы и high-fidelity прототипы
+
+Я в Дубае, работаю с международными командами и стартапами. Я делаю вещи, которые работают, — не слайды о том, как они могли бы работать.
+
+**Открыт к:** контрактному продуктовому дизайну, AI-assisted MVP-сборкам, продуктовому консалтингу.`,
     keywords: ['ai orchestrator', 'ai подход', 'оркестратор', 'agentic workflow'],
   },
   toolchain: {

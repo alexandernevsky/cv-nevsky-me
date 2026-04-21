@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Dubai real-estate CRM placeholder">
+  <defs>
+    <linearGradient id="rc-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#123945"/>
+      <stop offset="1" stop-color="#0a1d24"/>
+    </linearGradient>
+    <linearGradient id="rc-accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff5b2e"/>
+      <stop offset="1" stop-color="#ff8a3d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1200" fill="url(#rc-bg)"/>
+  <g stroke="#ffffff" stroke-opacity="0.05" stroke-width="1">
+    <path d="M0 300 L1600 300 M0 600 L1600 600 M0 900 L1600 900"/>
+    <path d="M400 0 L400 1200 M800 0 L800 1200 M1200 0 L1200 1200"/>
+  </g>
+  <g transform="translate(120 140)" font-family="'Geist Mono', ui-monospace, monospace" fill="#e8e4da">
+    <text font-size="22" opacity="0.5">PIPELINE · Q4 2026</text>
+    <text y="70" font-size="56" font-weight="800" letter-spacing="-1.5">AED 184.2M</text>
+    <text y="110" font-size="20" opacity="0.5">+24.8% vs prev month</text>
+  </g>
+  <g transform="translate(120 360)">
+    <rect x="0" y="0" width="320" height="180" rx="6" fill="#ffffff" fill-opacity="0.04"/>
+    <text x="20" y="36" font-family="'Geist Mono', monospace" font-size="14" fill="#e8e4da" opacity="0.5">COLD CALLS</text>
+    <text x="20" y="90" font-family="'Geist Mono', monospace" font-size="52" fill="#e8e4da" font-weight="800">427</text>
+    <text x="20" y="140" font-family="'Geist Mono', monospace" font-size="14" fill="#ff8a3d">→ 38 qualified</text>
+
+    <rect x="352" y="0" width="320" height="180" rx="6" fill="#ffffff" fill-opacity="0.04"/>
+    <text x="372" y="36" font-family="'Geist Mono', monospace" font-size="14" fill="#e8e4da" opacity="0.5">WHATSAPP FOLLOW-UPS</text>
+    <text x="372" y="90" font-family="'Geist Mono', monospace" font-size="52" fill="#e8e4da" font-weight="800">162</text>
+    <text x="372" y="140" font-family="'Geist Mono', monospace" font-size="14" fill="#ff8a3d">→ 22 active leads</text>
+
+    <rect x="704" y="0" width="320" height="180" rx="6" fill="url(#rc-accent)" fill-opacity="0.18"/>
+    <text x="724" y="36" font-family="'Geist Mono', monospace" font-size="14" fill="#ff8a3d" opacity="0.9">BENCHMARK REPORTS</text>
+    <text x="724" y="90" font-family="'Geist Mono', monospace" font-size="52" fill="#ff8a3d" font-weight="800">18</text>
+    <text x="724" y="140" font-family="'Geist Mono', monospace" font-size="14" fill="#ff8a3d" opacity="0.9">PDF auto-generated</text>
+  </g>
+  <g transform="translate(120 720)">
+    <polyline fill="none" stroke="url(#rc-accent)" stroke-width="3"
+      points="0,240 120,220 240,180 360,190 480,140 600,120 720,80 840,90 960,60 1080,50 1200,30 1320,40 1360,20"/>
+    <g stroke="#ffffff" stroke-opacity="0.05" stroke-width="1">
+      <line x1="0" y1="0" x2="1360" y2="0"/>
+      <line x1="0" y1="80" x2="1360" y2="80"/>
+      <line x1="0" y1="160" x2="1360" y2="160"/>
+      <line x1="0" y1="240" x2="1360" y2="240"/>
+    </g>
+  </g>
+  <text x="120" y="1140" font-family="'Geist Mono', ui-monospace, monospace" font-size="18" fill="#e8e4da" opacity="0.45">DUBAI BROKER CRM · SOLO BUILD · AI IN THE LOOP</text>
+</svg>

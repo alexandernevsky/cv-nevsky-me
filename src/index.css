@@ -341,6 +341,10 @@
 }
 
 @layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
   .typing-dot {
     display: inline-block;
     width: 5px;

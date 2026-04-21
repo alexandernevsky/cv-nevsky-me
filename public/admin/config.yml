@@ -65,6 +65,70 @@ collections:
               - { label: Excerpt, name: excerpt, widget: text, required: false }
           - { label: Content RU, name: body_ru, widget: markdown }
 
+  - name: settings
+    label: Settings
+    files:
+      - name: profile
+        label: Profile and contacts
+        file: content/settings/profile.md
+        fields:
+          - label: Name
+            name: name
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Russian, name: ru, widget: string }
+          - label: Role
+            name: role
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Russian, name: ru, widget: string }
+          - label: Sub role
+            name: subRole
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Russian, name: ru, widget: string }
+          - label: Assistant title
+            name: answerTitle
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Russian, name: ru, widget: string }
+          - label: Location
+            name: location
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Russian, name: ru, widget: string }
+          - label: Availability
+            name: availability
+            widget: object
+            fields:
+              - { label: English, name: en, widget: string }
+              - { label: Russian, name: ru, widget: string }
+          - label: Summary
+            name: summary
+            widget: object
+            fields:
+              - { label: English, name: en, widget: text }
+              - { label: Russian, name: ru, widget: text }
+          - { label: Avatar path, name: avatar, widget: string }
+          - label: Links
+            name: links
+            widget: object
+            fields:
+              - { label: Portfolio, name: portfolio, widget: string, hint: "Framer portfolio, for example https://nevskii.me" }
+              - { label: Blog, name: blog, widget: string, hint: "Blog, for example https://nevsky.me" }
+              - { label: LinkedIn, name: linkedin, widget: string, required: false }
+              - { label: Telegram, name: telegram, widget: string, required: false }
+              - { label: WhatsApp, name: whatsapp, widget: string, required: false }
+              - { label: Email link, name: email, widget: string }
+              - { label: Phone link, name: phone, widget: string, required: false }
+              - { label: Email address, name: emailAddress, widget: string }
+              - { label: Phone number, name: phoneNumber, widget: string, required: false }
+
   - name: projects
     label: Projects
     label_singular: Project
