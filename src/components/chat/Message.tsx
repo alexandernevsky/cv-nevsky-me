@@ -31,6 +31,34 @@ export function Message({ message, lang, onChipSelect, onProjectSelect }: Messag
   )
 }
 
+/**
+ * Converts lines like `![](url)caption` into semantic <figure>+<figcaption>.
+ * Works because a block-level raw HTML element stops Markdown from wrapping
+ * the result in <p>. Empty captions produce <figure> with <img> only.
+ */
+function transformInlineImageCaptions(md: string): string {
+  return md.replace(
+    /^!\[([^\]]*)\]\(([^)]+)\)(.*)$/gm,
+    (_full, alt: string, src: string, captionRaw: string) => {
+      const caption = captionRaw.trim()
+      const safeAlt = alt.replace(/"/g, '&quot;')
+      const imgTag = `<img src="${src}" alt="${safeAlt}" loading="lazy" />`
+      if (caption) {
+        return `<figure class="chat-media"><a href="${src}" target="_blank" rel="noopener noreferrer">${imgTag}</a><figcaption>${caption}</figcaption></figure>`
+      }
+      return `<figure class="chat-media"><a href="${src}" target="_blank" rel="noopener noreferrer">${imgTag}</a></figure>`
+    }
+  )
+}
+
+/**
+ * Strips a leading `# Title` from markdown since the component renders the
+ * title separately in its own styled <h2>.
+ */
+function stripLeadingH1(md: string): string {
+  return md.replace(/^\s*#\s+[^\n]+\n+/, '')
+}
+
 function UserMessage({ message, lang }: { message: ChatMessage; lang: Lang }) {
   const topic = message.topicId ? getTopic(message.topicId) : undefined
   const project = message.projectId ? projects.find(p => p.id === message.projectId) : undefined
@@ -40,9 +68,11 @@ function UserMessage({ message, lang }: { message: ChatMessage; lang: Lang }) {
   if (project) text = lang === 'ru' ? `Расскажи про «${project.titleRu}».` : `Tell me about "${project.titleEn}".`
 
   return (
-    <div className="flex w-full justify-end">
-      <div className="max-w-[85%] rounded-lg bg-foreground px-3.5 py-2.5 text-[14px] leading-relaxed text-background shadow-sm">
-        {text}
+    <div className="mx-auto w-full max-w-[720px]">
+      <div className="flex w-full justify-end">
+        <div className="max-w-[85%] rounded-lg bg-foreground px-3.5 py-2.5 text-[14px] leading-relaxed text-background shadow-sm">
+          {text}
+        </div>
       </div>
     </div>
   )
@@ -61,7 +91,7 @@ function SystemMessage({
 }) {
   if (message.kind === 'off-topic') {
     return (
-      <div className="w-full">
+      <div className="mx-auto w-full max-w-[720px]">
         <MessageMeta lang={lang} />
         <div className="mt-2 text-[14.5px] leading-relaxed text-muted-foreground">
           {lang === 'ru'
@@ -78,41 +108,50 @@ function SystemMessage({
     if (!project) return null
     const year = project.date ? project.date.slice(0, 4) : ''
     const title = lang === 'ru' ? project.titleRu : project.titleEn
-    const content = lang === 'ru' ? project.contentRu : project.contentEn
+    const rawContent = lang === 'ru' ? project.contentRu : project.contentEn
+    const content = transformInlineImageCaptions(stripLeadingH1(rawContent))
+
     return (
       <div className="w-full">
-        <MessageMeta lang={lang} />
-        <div className="mt-3 flex flex-wrap items-center gap-2 font-mono text-[10.5px] uppercase tracking-wider text-muted-foreground">
-          {year && <span>{year}</span>}
-          {year && project.tags.length > 0 && <span>·</span>}
-          {project.tags.slice(0, 3).map(tag => (
-            <span key={tag}>{tag}</span>
-          ))}
+        <div className="mx-auto w-full max-w-[720px]">
+          <MessageMeta lang={lang} />
+          <div className="mt-4 flex flex-wrap items-center gap-2 font-mono text-[10.5px] uppercase tracking-wider text-muted-foreground">
+            {year && <span>{year}</span>}
+            {year && project.tags.length > 0 && <span>·</span>}
+            {project.tags.slice(0, 3).map(tag => (
+              <span key={tag}>{tag}</span>
+            ))}
+          </div>
+          <h2 className="mt-2 font-mono text-[24px] font-[900] leading-[1.18] tracking-tight text-foreground md:text-[32px]">
+            {title}
+          </h2>
         </div>
-        <h2 className="mt-2 font-mono text-[22px] font-[900] leading-[1.2] tracking-tight text-foreground md:text-[26px]">
-          {title}
-        </h2>
+
         {project.featureImage && (
-          <div className="mt-4 overflow-hidden rounded-md border border-border bg-muted">
+          <div className="mt-5 overflow-hidden rounded-md border border-border bg-muted">
             <img
               src={project.featureImage}
               alt={title}
-              className="h-auto w-full object-cover"
+              className="block h-auto w-full"
               loading="lazy"
             />
           </div>
         )}
+
         <div
           className={cn(
-            'mt-4 text-[15px] leading-[1.65] text-foreground',
-            'prose-chat'
+            'mt-6 text-[15px] leading-[1.65] text-foreground',
+            'prose-chat prose-chat-wide'
           )}
         >
           <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
             {content}
           </ReactMarkdown>
         </div>
-        <SuggestionChips lang={lang} ids={message.suggestions ?? []} onSelect={onChipSelect} />
+
+        <div className="mx-auto w-full max-w-[720px]">
+          <SuggestionChips lang={lang} ids={message.suggestions ?? []} onSelect={onChipSelect} />
+        </div>
       </div>
     )
   }
@@ -121,7 +160,7 @@ function SystemMessage({
   if (!topic) return null
 
   return (
-    <div className="w-full">
+    <div className="mx-auto w-full max-w-[720px]">
       <MessageMeta lang={lang} />
       <div
         className={cn(
@@ -194,7 +233,7 @@ function SuggestionChips({
 
 export function TypingIndicator({ lang }: { lang: Lang }) {
   return (
-    <div className="w-full">
+    <div className="mx-auto w-full max-w-[720px]">
       <MessageMeta lang={lang} />
       <div className="mt-2 flex items-center gap-1.5">
         <span className="typing-dot" />

@@ -173,10 +173,18 @@
     font-style: normal;
   }
   .prose-chat h3 {
-    @apply mt-6 mb-2 text-[19px] font-bold tracking-tight text-foreground;
+    @apply mt-7 mb-2.5 text-[22px] font-[800] tracking-tight text-foreground;
+    line-height: 1.25;
   }
   .prose-chat h4 {
-    @apply mt-5 mb-1.5 text-[16px] font-bold tracking-tight text-foreground;
+    @apply mt-6 mb-2 text-[18px] font-[800] tracking-tight text-foreground;
+    line-height: 1.3;
+  }
+  .prose-chat h5 {
+    @apply mt-5 mb-1.5 text-[15px] font-bold uppercase tracking-[0.06em] text-muted-foreground;
+  }
+  .prose-chat h6 {
+    @apply mt-4 mb-1 text-[13px] font-bold uppercase tracking-wider text-muted-foreground;
   }
   .prose-chat h1,
   .prose-chat h2 {
@@ -196,12 +204,13 @@
   }
   .prose-chat figcaption {
     font-family: 'Geist Mono', monospace;
-    font-size: 10.5px;
-    font-weight: 400;
-    letter-spacing: 0.01em;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     color: hsl(var(--muted-foreground));
-    margin-top: 0.4rem;
-    line-height: 1.5;
+    margin-top: 0.5rem;
+    line-height: 1.45;
+    text-align: left;
   }
   .prose-chat p img,
   .prose-chat > img,
@@ -281,6 +290,53 @@
   }
   .prose-chat hr {
     @apply my-6 border-border;
+  }
+
+  /* ── Wide variant for project posts ─────────────────────────────── */
+  /* Text elements are centered at a readable column width, while */
+  /* figures and images span the full wrapper width (edge-to-edge) */
+  .prose-chat-wide > p,
+  .prose-chat-wide > ul,
+  .prose-chat-wide > ol,
+  .prose-chat-wide > blockquote,
+  .prose-chat-wide > h1,
+  .prose-chat-wide > h2,
+  .prose-chat-wide > h3,
+  .prose-chat-wide > h4,
+  .prose-chat-wide > h5,
+  .prose-chat-wide > h6,
+  .prose-chat-wide > hr,
+  .prose-chat-wide > pre,
+  .prose-chat-wide > table {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .prose-chat-wide > figure,
+  .prose-chat-wide > figure.chat-media {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .prose-chat-wide > figure.chat-media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin: 0;
+  }
+  .prose-chat-wide > figure.chat-media a {
+    display: block;
+    text-decoration: none;
+    border-bottom: 0;
+  }
+  .prose-chat-wide > figure.chat-media figcaption {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 

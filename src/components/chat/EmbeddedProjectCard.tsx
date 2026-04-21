@@ -32,12 +32,12 @@ export function EmbeddedProjectCard({ projectId, lang, onSelect }: EmbeddedProje
       aria-label={clickable ? (lang === 'ru' ? `Открыть проект: ${title}` : `Open project: ${title}`) : title}
     >
       {project.featureImage && (
-        <div className="aspect-[16/10] w-full overflow-hidden bg-muted">
+        <div className="w-full overflow-hidden bg-muted">
           <img
             src={project.featureImage}
             alt={title}
             className={cn(
-              'h-full w-full object-cover transition-transform duration-300',
+              'block h-auto w-full transition-transform duration-300',
               clickable && 'group-hover:scale-[1.02]'
             )}
             loading="lazy"
@@ -87,7 +87,7 @@ interface EmbeddedProjectGridProps {
 export function EmbeddedProjectGrid({ projectIds, lang, onSelect }: EmbeddedProjectGridProps) {
   if (!projectIds.length) return null
   return (
-    <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="mt-5 columns-1 gap-3 sm:columns-2 lg:columns-3 [&>*]:mb-3 [&>*]:break-inside-avoid">
       {projectIds.map(id => (
         <EmbeddedProjectCard key={id} projectId={id} lang={lang} onSelect={onSelect} />
       ))}
