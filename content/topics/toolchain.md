@@ -18,16 +18,16 @@ en:
     - "stack"
     - "toolchain"
     - "what do you use"
-body_en: |-
-  Tools are secondary — but since they are asked:
+  response: |-
+    Tools are secondary — but since they are asked:
 
-  **Thinking & writing:** Claude, ChatGPT, Gemini.
-  **Code & product scaffolding:** Cursor, Codex, Claude.
-  **Visual exploration:** Midjourney, Sora, Recraft.
-  **Interface & delivery:** Figma, Framer, Webflow.
-  **Platform:** Cloudflare (Workers, R2, D1, KV).
+    **Thinking & writing:** Claude, ChatGPT, Gemini.
+    **Code & product scaffolding:** Cursor, Codex, Claude.
+    **Visual exploration:** Midjourney, Sora, Recraft.
+    **Interface & delivery:** Figma, Framer, Webflow.
+    **Platform:** Cloudflare (Workers, R2, D1, KV).
 
-  I do not chase new tools. I adopt them when they reliably remove friction from a flow I already understand.
+    I do not chase new tools. I adopt them when they reliably remove friction from a flow I already understand.
 ru:
   label: "Инструменты"
   chip_label: "Инструменты"
@@ -37,12 +37,12 @@ ru:
     - "стек"
     - "toolchain"
     - "что используете"
-body_ru: |-
-  Основной стек:
+  response: |-
+    Основной стек:
 
-  - Мыслить/писать: Claude, ChatGPT, Gemini
-  - Код/продукт: Cursor, Codex, Claude
-  - Визуал: Midjourney, Sora, Recraft
-  - Интерфейсы: Figma, Framer, Webflow
-  - Платформа: Cloudflare
+    - Мыслить/писать: Claude, ChatGPT, Gemini
+    - Код/продукт: Cursor, Codex, Claude
+    - Визуал: Midjourney, Sora, Recraft
+    - Интерфейсы: Figma, Framer, Webflow
+    - Платформа: Cloudflare
 ---

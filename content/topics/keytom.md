@@ -18,10 +18,10 @@ en:
     - "crypto"
     - "fiat"
     - "dubai bank"
-body_en: |-
-  **Keytom** is a Dubai-based neobank. In 2023 I worked as product designer on the MVP — a single product combining fiat and crypto in a clear, modern interface.
+  response: |-
+    **Keytom** is a Dubai-based neobank. In 2023 I worked as product designer on the MVP — a single product combining fiat and crypto in a clear, modern interface.
 
-  I owned the core user flows, worked inside a strict regulated environment, and helped launch the first version. This was my first hands-on fintech in Dubai after moving here.
+    I owned the core user flows, worked inside a strict regulated environment, and helped launch the first version. This was my first hands-on fintech in Dubai after moving here.
 ru:
   label: "Keytom neobank"
   chip_label: "Keytom neobank"
@@ -31,6 +31,6 @@ ru:
     - "необанк"
     - "фиат"
     - "крипто"
-body_ru: |-
-  Keytom — необанк из Дубая. Я проектировал MVP «fiat + crypto», ключевые сценарии и первую рабочую версию продукта.
+  response: |-
+    Keytom — необанк из Дубая. Я проектировал MVP «fiat + crypto», ключевые сценарии и первую рабочую версию продукта.
 ---

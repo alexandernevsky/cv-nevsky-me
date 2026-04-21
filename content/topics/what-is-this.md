@@ -18,12 +18,12 @@ en:
     - "interface"
     - "site"
     - "about site"
-body_en: |-
-  This is a conversational interface to my work — a portfolio, resume, and product archive presented as a chat thread.
+  response: |-
+    This is a conversational interface to my work — a portfolio, resume, and product archive presented as a chat thread.
 
-  Use the left sidebar to jump between curated topics. The input below accepts free-form questions, but the scope is bounded: it answers only about my background, projects, products, process, and contact. Anything outside that gets a polite redirect back to allowed topics.
+    Use the left sidebar to jump between curated topics. The input below accepts free-form questions, but the scope is bounded: it answers only about my background, projects, products, process, and contact. Anything outside that gets a polite redirect back to allowed topics.
 
-  No marketing pages, no hero tropes. Just the work.
+    No marketing pages, no hero tropes. Just the work.
 ru:
   label: "Что это за интерфейс?"
   chip_label: "Что это?"
@@ -34,8 +34,8 @@ ru:
     - "интерфейс"
     - "сайт"
     - "что за сайт"
-body_ru: |-
-  Это разговорный интерфейс моего портфолио, резюме и архива проектов.
+  response: |-
+    Это разговорный интерфейс моего портфолио, резюме и архива проектов.
 
-  Слева — готовые темы. Ниже можно писать свободные вопросы, но в рамках контекста: мой опыт, проекты, процесс и контакты.
+    Слева — готовые темы. Ниже можно писать свободные вопросы, но в рамках контекста: мой опыт, проекты, процесс и контакты.
 ---

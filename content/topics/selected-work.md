@@ -26,8 +26,8 @@ en:
     - "portfolio"
     - "selected"
     - "examples"
-body_en: |-
-  Recent and representative work across fintech, AI, media, and platform design:
+  response: |-
+    Recent and representative work across fintech, AI, media, and platform design:
 ru:
   label: "Избранные кейсы"
   chip_label: "Кейсы"
@@ -38,6 +38,6 @@ ru:
     - "портфолио"
     - "работы"
     - "примеры"
-body_ru: |-
-  Ниже — репрезентативные проекты в fintech, AI, media и platform design.
+  response: |-
+    Ниже — репрезентативные проекты в fintech, AI, media и platform design.
 ---

@@ -21,19 +21,19 @@ en:
     - "hire"
     - "get in touch"
     - "linkedin"
-body_en: |-
-  The fastest channels:
+  response: |-
+    The fastest channels:
 
-  - **Email** — [hi@nevsky.me](mailto:hi@nevsky.me)
-  - **Telegram** — [@alexander_nevsky](https://t.me/alexander_nevsky)
-  - **WhatsApp** — [+971 50 503 1984](https://wa.me/971505031984)
-  - **LinkedIn** — [/in/nevskyalexander](https://linkedin.com/in/nevskyalexander)
+    - **Email** — [hi@nevsky.me](mailto:hi@nevsky.me)
+    - **Telegram** — [@alexander_nevsky](https://t.me/alexander_nevsky)
+    - **WhatsApp** — [+971 50 503 1984](https://wa.me/971505031984)
+    - **LinkedIn** — [/in/nevskyalexander](https://linkedin.com/in/nevskyalexander)
 
-  Also:
-  - Portfolio → [nevskii.me](https://nevskii.me)
-  - Blog → [nevsky.me](https://nevsky.me)
+    Also:
+    - Portfolio → [nevskii.me](https://nevskii.me)
+    - Blog → [nevsky.me](https://nevsky.me)
 
-  If you are hiring or have a specific product in mind, email is best — include the shape of the problem and the rough timeline.
+    If you are hiring or have a specific product in mind, email is best — include the shape of the problem and the rough timeline.
 ru:
   label: "Связаться"
   chip_label: "Связаться"
@@ -44,11 +44,11 @@ ru:
     - "телеграм"
     - "почта"
     - "ватсап"
-body_ru: |-
-  Быстрее всего:
+  response: |-
+    Быстрее всего:
 
-  - Email — [hi@nevsky.me](mailto:hi@nevsky.me)
-  - Telegram — [@alexander_nevsky](https://t.me/alexander_nevsky)
-  - WhatsApp — [+971 50 503 1984](https://wa.me/971505031984)
-  - LinkedIn — [/in/nevskyalexander](https://linkedin.com/in/nevskyalexander)
+    - Email — [hi@nevsky.me](mailto:hi@nevsky.me)
+    - Telegram — [@alexander_nevsky](https://t.me/alexander_nevsky)
+    - WhatsApp — [+971 50 503 1984](https://wa.me/971505031984)
+    - LinkedIn — [/in/nevskyalexander](https://linkedin.com/in/nevskyalexander)
 ---

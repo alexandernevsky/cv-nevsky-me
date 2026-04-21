@@ -18,10 +18,10 @@ en:
     - "wallet"
     - "taxi"
     - "mobile money"
-body_en: |-
-  **Yango Pay** is a mobile wallet built into the Yango Taxi app, letting users instantly top up their balance via mobile money.
+  response: |-
+    **Yango Pay** is a mobile wallet built into the Yango Taxi app, letting users instantly top up their balance via mobile money.
 
-  From June 2023 to November 2024 I worked as Senior Product Designer on a cross-functional team of 16, based in Dubai. I designed the top-up and payment flows, edge states, operator dashboards, and contributed to the wallet's overall UX architecture inside the taxi super-app.
+    From June 2023 to November 2024 I worked as Senior Product Designer on a cross-functional team of 16, based in Dubai. I designed the top-up and payment flows, edge states, operator dashboards, and contributed to the wallet's overall UX architecture inside the taxi super-app.
 ru:
   label: "Yango Pay"
   chip_label: "Yango Pay"
@@ -31,6 +31,6 @@ ru:
     - "pay"
     - "кошелек"
     - "платежи"
-body_ru: |-
-  Yango Pay — мобильный кошелек внутри приложения Yango Taxi. Я делал top-up/payment сценарии и UX-архитектуру wallet-секции.
+  response: |-
+    Yango Pay — мобильный кошелек внутри приложения Yango Taxi. Я делал top-up/payment сценарии и UX-архитектуру wallet-секции.
 ---

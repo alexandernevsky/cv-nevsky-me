@@ -137,12 +137,19 @@ collections:
     slug: "{{fields.id}}"
     identifier_field: en.label
     summary: "{{order}} · {{en.label}} / {{ru.label}}"
+    sortable_fields: [order, category, en.label, ru.label]
+    view_groups:
+      - label: Category
+        field: category
+    editor:
+      preview: false
     fields:
-      - { label: ID, name: id, widget: string, hint: "Stable id used in links, for example current-builds." }
-      - { label: Order, name: order, widget: number, value_type: int, default: 100 }
+      - { label: Topic ID, name: id, widget: string, hint: "Stable id used in links and follow-ups, for example current-builds." }
+      - { label: Sidebar order, name: order, widget: number, value_type: int, default: 100, hint: "Lower numbers appear earlier." }
       - label: Category
         name: category
         widget: select
+        hint: "Controls the sidebar section."
         options:
           - { label: Start, value: start }
           - { label: About, value: about }
@@ -151,45 +158,55 @@ collections:
           - { label: AI, value: ai }
           - { label: Life, value: life }
           - { label: Contact, value: contact }
-      - { label: Visible in sidebar, name: visible_in_sidebar, widget: boolean, default: true }
+      - { label: Show in sidebar, name: visible_in_sidebar, widget: boolean, default: true, hint: "Turn off for topics used only as follow-ups or free-text matches." }
       - label: Related project IDs
         name: related_project_ids
         widget: list
+        collapsed: true
+        hint: "Project cards rendered under the answer. Use project IDs from content/projects."
         required: false
         field: { label: Project ID, name: project_id, widget: string }
       - label: Follow-up topic IDs
         name: follow_ups
         widget: list
+        collapsed: true
+        hint: "Chips shown below the answer. Use topic IDs from this collection."
         required: false
         field: { label: Topic ID, name: topic_id, widget: string }
       - label: English
         name: en
         widget: object
         collapsed: false
+        summary: "{{fields.label}}"
         fields:
-          - { label: Label, name: label, widget: string }
-          - { label: Chip label, name: chip_label, widget: string, required: false }
-          - { label: Prompt text, name: prompt, widget: string }
+          - { label: Sidebar label, name: label, widget: string }
+          - { label: Chip label, name: chip_label, widget: string, required: false, hint: "Shorter text for suggestion chips. Falls back to sidebar label." }
+          - { label: User prompt, name: prompt, widget: string, hint: "Message inserted into the chat when the topic is opened." }
           - label: Keywords
             name: keywords
             widget: list
+            collapsed: true
+            hint: "Free-text matching terms. Multi-word phrases work."
             required: false
             field: { label: Keyword, name: keyword, widget: string }
-      - { label: Response EN, name: body_en, widget: markdown }
+          - { label: Answer, name: response, widget: markdown }
       - label: Russian
         name: ru
         widget: object
-        collapsed: false
+        collapsed: true
+        summary: "{{fields.label}}"
         fields:
-          - { label: Label RU, name: label, widget: string }
-          - { label: Chip label RU, name: chip_label, widget: string, required: false }
-          - { label: Prompt text RU, name: prompt, widget: string }
-          - label: Keywords RU
+          - { label: Sidebar label RU, name: label, widget: string }
+          - { label: Chip label RU, name: chip_label, widget: string, required: false, hint: "Shorter text for suggestion chips. Falls back to sidebar label." }
+          - { label: User prompt RU, name: prompt, widget: string, hint: "Message inserted into the chat when the topic is opened." }
+          - label: Keywords
             name: keywords
             widget: list
+            collapsed: true
+            hint: "Russian free-text matching terms. Multi-word phrases work."
             required: false
             field: { label: Keyword, name: keyword, widget: string }
-      - { label: Response RU, name: body_ru, widget: markdown }
+          - { label: Answer RU, name: response, widget: markdown }
 
   - name: projects
     label: Projects

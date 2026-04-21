@@ -133,7 +133,7 @@ function readTopic(file) {
     label: String(data.en?.label ?? ''),
     chipLabel: String(data.en?.chip_label ?? data.en?.label ?? ''),
     promptText: String(data.en?.prompt ?? ''),
-    response: String(data.body_en ?? ''),
+    response: String(data.en?.response ?? data.body_en ?? ''),
     keywords: readStringList(data.en?.keywords),
     visibleInSidebar: Boolean(data.visible_in_sidebar),
     relatedProjectIds: readStringList(data.related_project_ids),
@@ -141,7 +141,7 @@ function readTopic(file) {
     labelRu: String(data.ru?.label ?? ''),
     chipLabelRu: String(data.ru?.chip_label ?? data.ru?.label ?? ''),
     promptTextRu: String(data.ru?.prompt ?? ''),
-    responseRu: String(data.body_ru ?? ''),
+    responseRu: String(data.ru?.response ?? data.body_ru ?? ''),
     keywordsRu: readStringList(data.ru?.keywords),
   }
 }

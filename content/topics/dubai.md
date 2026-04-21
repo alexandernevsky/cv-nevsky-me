@@ -19,12 +19,12 @@ en:
     - "move"
     - "living"
     - "family"
-body_en: |-
-  I moved to Dubai in 2022. I live here with my family.
+  response: |-
+    I moved to Dubai in 2022. I live here with my family.
 
-  The market is fast, the briefs are concrete, and the people I work with are usually building something for the first time — neobanks, wallets, creator-economy products, regional SaaS. The pace suits me: less ceremony, more shipping.
+    The market is fast, the briefs are concrete, and the people I work with are usually building something for the first time — neobanks, wallets, creator-economy products, regional SaaS. The pace suits me: less ceremony, more shipping.
 
-  Outside of product work, I spend time with the kids, run small side builds, and occasionally manage a small family café remotely. I like living inside the work rather than commuting to it.
+    Outside of product work, I spend time with the kids, run small side builds, and occasionally manage a small family café remotely. I like living inside the work rather than commuting to it.
 ru:
   label: "Жизнь в Дубае"
   chip_label: "Жизнь в Дубае"
@@ -34,6 +34,6 @@ ru:
     - "жизнь в дубае"
     - "оаэ"
     - "переезд"
-body_ru: |-
-  Живу в Дубае с 2022 года с семьей. Нравится темп рынка и практичность задач: меньше церемоний, больше реальной поставки.
+  response: |-
+    Живу в Дубае с 2022 года с семьей. Нравится темп рынка и практичность задач: меньше церемоний, больше реальной поставки.
 ---
