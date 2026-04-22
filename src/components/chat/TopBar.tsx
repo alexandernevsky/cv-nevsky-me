@@ -49,7 +49,7 @@ export function TopBar({
         >
           {theme === 'dark' ? <Sun size={13} /> : <Moon size={13} />}
         </button>
-        <div className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+        <div className="max-w-[150px] truncate text-[12px] font-[800] leading-tight text-foreground">
           {getProfileText('name', lang)}
         </div>
       </div>

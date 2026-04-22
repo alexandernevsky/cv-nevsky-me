@@ -64,14 +64,15 @@ export function Sidebar({
 
       <aside
         className={cn(
-          'fixed inset-y-0 left-0 z-50 flex w-[280px] flex-col border-r border-border bg-background transition-transform duration-200 ease-out',
+          'fixed inset-y-0 left-0 z-50 flex w-[min(300px,86vw)] flex-col border-r border-border bg-background transition-transform duration-200 ease-out',
           'md:static md:z-0 md:translate-x-0 md:shrink-0',
+          'md:w-[280px]',
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
         aria-label={lang === 'ru' ? 'Темы' : 'Topics'}
       >
         {/* Brand block */}
-        <div className="relative border-b border-border px-4 pt-4 pb-4">
+        <div className="relative border-b border-border px-4 pt-5 pb-5">
           <button
             type="button"
             onClick={onClose}
@@ -80,22 +81,19 @@ export function Sidebar({
           >
             <X size={16} />
           </button>
-          <div className="flex min-w-0 flex-col items-start gap-3 pr-10">
+          <div className="flex min-w-0 flex-col items-start gap-4 pr-10">
             <img
               src={profileAvatarSrc}
               alt={getProfileText('name', lang)}
-              className="h-20 w-20 shrink-0 rounded-full object-cover"
+              className="h-24 w-24 shrink-0 rounded-full object-cover shadow-sm md:h-20 md:w-20"
               loading="lazy"
             />
-            <div className="min-w-0">
-              <div className="text-[13px] font-[800] leading-tight text-foreground">
+            <div className="min-w-0 space-y-1">
+              <div className="text-[17px] font-[800] leading-[1.12] text-foreground md:text-[13px] md:leading-tight">
                 {getProfileText('name', lang)}
               </div>
-              <div className="mt-0.5 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
-                {getProfileText('role', lang)}
-              </div>
-              <div className="mt-0.5 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
-                {getProfileText('subRole', lang)}
+              <div className="max-w-[220px] font-mono text-[12px] uppercase tracking-[0.16em] leading-[1.45] text-muted-foreground md:max-w-none md:text-[11px] md:tracking-[0.12em]">
+                {getProfileText('role', lang)} · {getProfileText('subRole', lang)}
               </div>
             </div>
           </div>
