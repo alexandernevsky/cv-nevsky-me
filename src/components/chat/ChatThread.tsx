@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { Message, TypingIndicator } from './Message'
 import { type Message as ChatMessage } from '@/hooks/useChat'
 import { type Lang } from '@/lib/i18n'
@@ -19,6 +19,10 @@ export function ChatThread({
   onProjectSelect,
 }: ChatThreadProps) {
   const endRef = useRef<HTMLDivElement>(null)
+  const latestMessageId = messages[messages.length - 1]?.id
+  const handleTypingFrame = useCallback(() => {
+    endRef.current?.scrollIntoView({ behavior: 'auto', block: 'end' })
+  }, [])
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
@@ -33,6 +37,8 @@ export function ChatThread({
           lang={lang}
           onChipSelect={onChipSelect}
           onProjectSelect={onProjectSelect}
+          animate={message.id === latestMessageId}
+          onTypingFrame={handleTypingFrame}
         />
       ))}
       {isAnswering && <TypingIndicator lang={lang} />}

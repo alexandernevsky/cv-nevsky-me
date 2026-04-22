@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect, useMemo, useState } from 'react'
 import { getTopic, getTopicChipLabel, getTopicPrompt, getTopicResponse } from '@/data/topics'
 import { projects } from '@/data/projects'
 import { getProfileText, profileAvatarSrc } from '@/data/profile'
@@ -13,13 +13,22 @@ interface MessageProps {
   lang: Lang
   onChipSelect: (topicId: string) => void
   onProjectSelect: (projectId: string) => void
+  animate?: boolean
+  onTypingFrame?: () => void
 }
 
 const MarkdownContent = lazy(() =>
   import('./MarkdownContent').then(module => ({ default: module.MarkdownContent }))
 )
 
-export function Message({ message, lang, onChipSelect, onProjectSelect }: MessageProps) {
+export function Message({
+  message,
+  lang,
+  onChipSelect,
+  onProjectSelect,
+  animate,
+  onTypingFrame,
+}: MessageProps) {
   if (message.role === 'user') {
     return <UserMessage message={message} lang={lang} />
   }
@@ -29,6 +38,8 @@ export function Message({ message, lang, onChipSelect, onProjectSelect }: Messag
       lang={lang}
       onChipSelect={onChipSelect}
       onProjectSelect={onProjectSelect}
+      animate={animate}
+      onTypingFrame={onTypingFrame}
     />
   )
 }
@@ -85,22 +96,30 @@ function SystemMessage({
   lang,
   onChipSelect,
   onProjectSelect,
+  animate,
+  onTypingFrame,
 }: {
   message: ChatMessage
   lang: Lang
   onChipSelect: (topicId: string) => void
   onProjectSelect: (projectId: string) => void
+  animate?: boolean
+  onTypingFrame?: () => void
 }) {
   if (message.kind === 'off-topic') {
+    const text =
+      lang === 'ru'
+        ? 'Этот интерфейс ограничен темами об Александре Невском: работа, проекты, процесс и контакты. Ваш вопрос вне этого контекста. Попробуйте одну из тем ниже:'
+        : 'This interface is scoped to Alexander Nevsky — his work, projects, process, and contact. Your question sits outside that scope. Try one of these instead:'
     return (
       <div className="mx-auto w-full max-w-[720px]">
         <MessageMeta lang={lang} />
-        <div className="mt-2 text-[14.5px] leading-relaxed text-muted-foreground">
-          {lang === 'ru'
-            ? 'Этот интерфейс ограничен темами об Александре Невском: работа, проекты, процесс и контакты. Ваш вопрос вне этого контекста. Попробуйте одну из тем ниже:'
-            : 'This interface is scoped to Alexander Nevsky — his work, projects, process, and contact. Your question sits outside that scope. Try one of these instead:'}
+        <div className="mt-2">
+          <TypingMarkdown text={text} animate={animate} onFrame={onTypingFrame} />
         </div>
-        <SuggestionChips lang={lang} ids={message.suggestions ?? []} onSelect={onChipSelect} />
+        <div className="mt-5">
+          <SuggestionChips lang={lang} ids={message.suggestions ?? []} onSelect={onChipSelect} />
+        </div>
       </div>
     )
   }
@@ -157,32 +176,141 @@ function SystemMessage({
 
   const topic = message.topicId ? getTopic(message.topicId) : undefined
   if (!topic) return null
+  const responseText = getTopicResponse(topic, lang)
 
   return (
     <div className="mx-auto w-full max-w-[720px]">
       <MessageMeta lang={lang} />
       <div className="mt-2">
-        <Suspense fallback={<MarkdownFallback />}>
-          <MarkdownContent>
-            {getTopicResponse(topic, lang)}
-          </MarkdownContent>
-        </Suspense>
+        <TypingMarkdown text={responseText} animate={animate} onFrame={onTypingFrame} />
       </div>
-      {topic.id === 'contact' && <ContactActions lang={lang} />}
-      {topic.relatedProjectIds && topic.relatedProjectIds.length > 0 && (
-        <EmbeddedProjectGrid
-          projectIds={topic.relatedProjectIds}
-          lang={lang}
-          onSelect={onProjectSelect}
-        />
-      )}
-      <SuggestionChips lang={lang} ids={message.suggestions ?? []} onSelect={onChipSelect} />
+      <div className="mt-5">
+        {topic.id === 'contact' && <ContactActions lang={lang} />}
+        {topic.relatedProjectIds && topic.relatedProjectIds.length > 0 && (
+          <EmbeddedProjectGrid
+            projectIds={topic.relatedProjectIds}
+            lang={lang}
+            onSelect={onProjectSelect}
+          />
+        )}
+        <SuggestionChips lang={lang} ids={message.suggestions ?? []} onSelect={onChipSelect} />
+      </div>
     </div>
   )
 }
 
+function TypingMarkdown({
+  text,
+  animate,
+  onFrame,
+}: {
+  text: string
+  animate?: boolean
+  onFrame?: () => void
+}) {
+  const plainText = useMemo(() => markdownToPlainText(text), [text])
+  const reducedMotion = usePrefersReducedMotion()
+  const shouldAnimate = Boolean(animate && !reducedMotion && plainText.trim())
+  const typedText = useTypewriterText(plainText, shouldAnimate, onFrame)
+
+  if (!shouldAnimate || typedText === plainText) {
+    return (
+      <Suspense fallback={<MarkdownFallback />}>
+        <MarkdownContent>{text}</MarkdownContent>
+      </Suspense>
+    )
+  }
+
+  return <TypingPreview text={typedText} />
+}
+
 function MarkdownFallback() {
   return <div className="h-12 animate-pulse rounded-md bg-muted/60" />
+}
+
+function TypingPreview({ text }: { text: string }) {
+  return (
+    <div className="prose-chat">
+      <div className="whitespace-pre-wrap break-words text-[15px] leading-[1.65] text-foreground">
+        {text}
+        <span className="typing-cursor" aria-hidden="true" />
+      </div>
+    </div>
+  )
+}
+
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(false)
+
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const update = () => setReduced(media.matches)
+    update()
+    media.addEventListener('change', update)
+    return () => media.removeEventListener('change', update)
+  }, [])
+
+  return reduced
+}
+
+function useTypewriterText(text: string, enabled: boolean, onFrame?: () => void) {
+  const [typed, setTyped] = useState(enabled ? '' : text)
+
+  useEffect(() => {
+    if (!enabled) {
+      setTyped(text)
+      return
+    }
+
+    let raf = 0
+    let start = 0
+    let lastCount = -1
+    const duration = Math.max(900, Math.min(2600, text.length * 12))
+
+    const tick = (time: number) => {
+      if (!start) start = time
+      const elapsed = time - start
+      const progress = Math.min(1, elapsed / duration)
+      const eased = 1 - Math.pow(1 - progress, 3)
+      const nextCount = Math.max(0, Math.floor(eased * text.length))
+
+      if (nextCount !== lastCount) {
+        lastCount = nextCount
+        setTyped(text.slice(0, nextCount))
+        onFrame?.()
+      }
+
+      if (progress < 1) {
+        raf = window.requestAnimationFrame(tick)
+      } else {
+        setTyped(text)
+        onFrame?.()
+      }
+    }
+
+    setTyped('')
+    raf = window.requestAnimationFrame(tick)
+    return () => window.cancelAnimationFrame(raf)
+  }, [enabled, onFrame, text])
+
+  return typed
+}
+
+function markdownToPlainText(md: string): string {
+  return md
+    .replace(/^!\[([^\]]*)\]\(([^)]+)\)(.*)$/gm, (_full, _alt: string, _src: string, captionRaw: string) => {
+      const caption = String(captionRaw ?? '').trim()
+      return caption ? caption : ''
+    })
+    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/^\s*[-*+]\s+/gm, '• ')
+    .replace(/\*\*(.*?)\*\*/g, '$1')
+    .replace(/\*(.*?)\*/g, '$1')
+    .replace(/`([^`]*)`/g, '$1')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1')
+    .replace(/\s+\n/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
 }
 
 function MessageMeta({ lang }: { lang: Lang }) {
