@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useMemo, useState } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import { getTopic, getTopicChipLabel, getTopicPrompt, getTopicResponse } from '@/data/topics'
 import { projects } from '@/data/projects'
 import { getProfileText, profileAvatarSrc } from '@/data/profile'
@@ -6,6 +6,7 @@ import { type Message as ChatMessage } from '@/hooks/useChat'
 import { ContactActions } from './ContactActions'
 import { EmbeddedProjectGrid } from './EmbeddedProjectCard'
 import { PromptChip } from './PromptChip'
+import { cn } from '@/lib/utils'
 import { type Lang } from '@/lib/i18n'
 
 interface MessageProps {
@@ -14,7 +15,6 @@ interface MessageProps {
   onChipSelect: (topicId: string) => void
   onProjectSelect: (projectId: string) => void
   animate?: boolean
-  onTypingFrame?: () => void
 }
 
 const MarkdownContent = lazy(() =>
@@ -26,12 +26,12 @@ export function Message({
   lang,
   onChipSelect,
   onProjectSelect,
-  animate,
-  onTypingFrame,
+  animate = false,
 }: MessageProps) {
   if (message.role === 'user') {
     return <UserMessage message={message} lang={lang} />
   }
+
   return (
     <SystemMessage
       message={message}
@@ -39,7 +39,6 @@ export function Message({
       onChipSelect={onChipSelect}
       onProjectSelect={onProjectSelect}
       animate={animate}
-      onTypingFrame={onTypingFrame}
     />
   )
 }
@@ -97,29 +96,36 @@ function SystemMessage({
   onChipSelect,
   onProjectSelect,
   animate,
-  onTypingFrame,
 }: {
   message: ChatMessage
   lang: Lang
   onChipSelect: (topicId: string) => void
   onProjectSelect: (projectId: string) => void
-  animate?: boolean
-  onTypingFrame?: () => void
+  animate: boolean
 }) {
+  const [bodyComplete, setBodyComplete] = useState(!animate)
+
+  useEffect(() => {
+    setBodyComplete(!animate)
+  }, [animate, message.id])
+
   if (message.kind === 'off-topic') {
     const text =
       lang === 'ru'
         ? 'Этот интерфейс ограничен темами об Александре Невском: работа, проекты, процесс и контакты. Ваш вопрос вне этого контекста. Попробуйте одну из тем ниже:'
         : 'This interface is scoped to Alexander Nevsky — his work, projects, process, and contact. Your question sits outside that scope. Try one of these instead:'
+
     return (
       <div className="mx-auto w-full max-w-[720px]">
         <MessageMeta lang={lang} />
         <div className="mt-2">
-          <TypingMarkdown text={text} animate={animate} onFrame={onTypingFrame} />
+          <SequentialMarkdown text={text} animate={animate} onComplete={() => setBodyComplete(true)} />
         </div>
-        <div className="mt-5">
-          <SuggestionChips lang={lang} ids={message.suggestions ?? []} onSelect={onChipSelect} />
-        </div>
+        {bodyComplete && (
+          <div className="mt-5">
+            <SuggestionChips lang={lang} ids={message.suggestions ?? []} onSelect={onChipSelect} />
+          </div>
+        )}
       </div>
     )
   }
@@ -160,16 +166,19 @@ function SystemMessage({
         )}
 
         <div className="mt-6">
-          <Suspense fallback={<MarkdownFallback />}>
-            <MarkdownContent wide>
-              {content}
-            </MarkdownContent>
-          </Suspense>
+          <SequentialMarkdown
+            text={content}
+            animate={animate}
+            wide
+            onComplete={() => setBodyComplete(true)}
+          />
         </div>
 
-        <div className="mx-auto w-full max-w-[720px]">
-          <SuggestionChips lang={lang} ids={message.suggestions ?? []} onSelect={onChipSelect} />
-        </div>
+        {bodyComplete && (
+          <div className="mx-auto mt-5 w-full max-w-[720px]">
+            <SuggestionChips lang={lang} ids={message.suggestions ?? []} onSelect={onChipSelect} />
+          </div>
+        )}
       </div>
     )
   }
@@ -182,61 +191,135 @@ function SystemMessage({
     <div className="mx-auto w-full max-w-[720px]">
       <MessageMeta lang={lang} />
       <div className="mt-2">
-        <TypingMarkdown text={responseText} animate={animate} onFrame={onTypingFrame} />
+        <SequentialMarkdown
+          text={responseText}
+          animate={animate}
+          onComplete={() => setBodyComplete(true)}
+        />
       </div>
-      <div className="mt-5">
-        {topic.id === 'contact' && <ContactActions lang={lang} />}
-        {topic.relatedProjectIds && topic.relatedProjectIds.length > 0 && (
-          <EmbeddedProjectGrid
-            projectIds={topic.relatedProjectIds}
-            lang={lang}
-            onSelect={onProjectSelect}
-          />
-        )}
-        <SuggestionChips lang={lang} ids={message.suggestions ?? []} onSelect={onChipSelect} />
-      </div>
+      {bodyComplete && (
+        <div className="mt-5">
+          {topic.id === 'contact' && <ContactActions lang={lang} />}
+          {topic.relatedProjectIds && topic.relatedProjectIds.length > 0 && (
+            <EmbeddedProjectGrid
+              projectIds={topic.relatedProjectIds}
+              lang={lang}
+              onSelect={onProjectSelect}
+            />
+          )}
+          <SuggestionChips lang={lang} ids={message.suggestions ?? []} onSelect={onChipSelect} />
+        </div>
+      )}
     </div>
   )
 }
 
-function TypingMarkdown({
+function SequentialMarkdown({
   text,
   animate,
-  onFrame,
+  wide,
+  onComplete,
 }: {
   text: string
   animate?: boolean
-  onFrame?: () => void
+  wide?: boolean
+  onComplete?: () => void
 }) {
-  const plainText = useMemo(() => markdownToPlainText(text), [text])
   const reducedMotion = usePrefersReducedMotion()
-  const shouldAnimate = Boolean(animate && !reducedMotion && plainText.trim())
-  const typedText = useTypewriterText(plainText, shouldAnimate, onFrame)
+  const blocks = useMemo(() => splitMarkdownBlocks(text), [text])
+  const shouldAnimate = Boolean(animate && !reducedMotion && blocks.length > 0)
+  const [visibleCount, setVisibleCount] = useState(shouldAnimate ? 0 : blocks.length)
 
-  if (!shouldAnimate || typedText === plainText) {
+  useEffect(() => {
+    setVisibleCount(shouldAnimate ? 0 : blocks.length)
+  }, [blocks.length, shouldAnimate, text])
+
+  useEffect(() => {
+    if (!shouldAnimate) onComplete?.()
+  }, [onComplete, shouldAnimate])
+
+  const handleBlockDone = useCallback(() => {
+    setVisibleCount(count => {
+      const next = count + 1
+      if (next >= blocks.length) onComplete?.()
+      return next
+    })
+  }, [blocks.length, onComplete])
+
+  if (!shouldAnimate) {
     return (
       <Suspense fallback={<MarkdownFallback />}>
-        <MarkdownContent>{text}</MarkdownContent>
+        <MarkdownContent wide={wide}>{text}</MarkdownContent>
       </Suspense>
     )
   }
 
-  return <TypingPreview text={typedText} />
-}
+  const current = blocks[visibleCount]
 
-function MarkdownFallback() {
-  return <div className="h-12 animate-pulse rounded-md bg-muted/60" />
-}
-
-function TypingPreview({ text }: { text: string }) {
   return (
-    <div className="prose-chat">
+    <div className={cn('prose-chat', wide && 'prose-chat-wide')}>
+      {blocks.slice(0, visibleCount).map((block, index) => (
+        <MarkdownBlock key={`${index}-${block.slice(0, 24)}`} block={block} wide={wide} />
+      ))}
+      {current && <SequentialBlock block={current} onDone={handleBlockDone} wide={wide} />}
+    </div>
+  )
+}
+
+function SequentialBlock({
+  block,
+  onDone,
+  wide,
+}: {
+  block: string
+  onDone: () => void
+  wide?: boolean
+}) {
+  const reducedMotion = usePrefersReducedMotion()
+  const isMedia = /!\[[^\]]*\]\([^)]+\)/.test(block) || /^<figure[\s>]/i.test(block)
+
+  useEffect(() => {
+    if (reducedMotion) return undefined
+    if (isMedia) {
+      const timer = window.setTimeout(onDone, 240)
+      return () => window.clearTimeout(timer)
+    }
+    return undefined
+  }, [isMedia, onDone, reducedMotion])
+
+  if (isMedia || reducedMotion) {
+    return <MarkdownBlock block={block} wide={wide} />
+  }
+
+  return <TypingTextBlock text={block} onDone={onDone} />
+}
+
+function MarkdownBlock({ block, wide }: { block: string; wide?: boolean }) {
+  return (
+    <div className="mb-4 last:mb-0">
+      <Suspense fallback={<MarkdownFallback />}>
+        <MarkdownContent wide={wide}>{block}</MarkdownContent>
+      </Suspense>
+    </div>
+  )
+}
+
+function TypingTextBlock({ text, onDone }: { text: string; onDone: () => void }) {
+  const plainText = useMemo(() => markdownToPlainText(text), [text])
+  const typedText = useTypewriterText(plainText, onDone)
+
+  return (
+    <div className="mb-4 last:mb-0 prose-chat">
       <div className="whitespace-pre-wrap break-words text-[15px] leading-[1.65] text-foreground">
-        {text}
+        {typedText}
         <span className="typing-cursor" aria-hidden="true" />
       </div>
     </div>
   )
+}
+
+function MarkdownFallback() {
+  return <div className="h-12 animate-pulse rounded-md bg-muted/60" />
 }
 
 function usePrefersReducedMotion() {
@@ -253,12 +336,12 @@ function usePrefersReducedMotion() {
   return reduced
 }
 
-function useTypewriterText(text: string, enabled: boolean, onFrame?: () => void) {
-  const [typed, setTyped] = useState(enabled ? '' : text)
+function useTypewriterText(text: string, onDone: () => void) {
+  const [typed, setTyped] = useState('')
 
   useEffect(() => {
-    if (!enabled) {
-      setTyped(text)
+    if (!text) {
+      onDone()
       return
     }
 
@@ -277,23 +360,31 @@ function useTypewriterText(text: string, enabled: boolean, onFrame?: () => void)
       if (nextCount !== lastCount) {
         lastCount = nextCount
         setTyped(text.slice(0, nextCount))
-        onFrame?.()
       }
 
       if (progress < 1) {
         raf = window.requestAnimationFrame(tick)
       } else {
         setTyped(text)
-        onFrame?.()
+        onDone()
       }
     }
 
     setTyped('')
     raf = window.requestAnimationFrame(tick)
     return () => window.cancelAnimationFrame(raf)
-  }, [enabled, onFrame, text])
+  }, [onDone, text])
 
   return typed
+}
+
+function splitMarkdownBlocks(md: string): string[] {
+  return md
+    .replace(/\r\n/g, '\n')
+    .trim()
+    .split(/\n{2,}/)
+    .map(block => block.trim())
+    .filter(Boolean)
 }
 
 function markdownToPlainText(md: string): string {
