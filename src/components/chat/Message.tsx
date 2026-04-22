@@ -149,30 +149,15 @@ function SystemMessage({
               <span key={tag}>{tag}</span>
             ))}
           </div>
-          <h2 className="mt-2 font-mono text-[24px] font-[800] leading-[1.18] text-foreground md:text-[32px]">
-            {title}
-          </h2>
         </div>
 
-        {project.featureImage && (
-          <div className="mt-5 overflow-hidden rounded-md border border-border bg-muted">
-            <img
-              src={project.featureImage}
-              alt={title}
-              className="block h-auto w-full"
-              loading="lazy"
-            />
-          </div>
-        )}
-
-        <div className="mt-6">
-          <SequentialMarkdown
-            text={content}
-            animate={animate}
-            wide
-            onComplete={() => setBodyComplete(true)}
-          />
-        </div>
+        <ProjectSequentialContent
+          title={title}
+          featureImage={project.featureImage}
+          content={content}
+          animate={animate}
+          onComplete={() => setBodyComplete(true)}
+        />
 
         {bodyComplete && (
           <div className="mx-auto mt-5 w-full max-w-[720px]">
@@ -266,6 +251,70 @@ function SequentialMarkdown({
   )
 }
 
+function ProjectSequentialContent({
+  title,
+  featureImage,
+  content,
+  animate,
+  onComplete,
+}: {
+  title: string
+  featureImage: string
+  content: string
+  animate: boolean
+  onComplete: () => void
+}) {
+  const reducedMotion = usePrefersReducedMotion()
+  const shouldAnimate = Boolean(animate && !reducedMotion)
+  const [stage, setStage] = useState(shouldAnimate ? 0 : 2)
+
+  useEffect(() => {
+    setStage(shouldAnimate ? 0 : 2)
+  }, [content, featureImage, shouldAnimate, title])
+
+  useEffect(() => {
+    if (!shouldAnimate) onComplete()
+  }, [onComplete, shouldAnimate])
+
+  useEffect(() => {
+    if (stage !== 1) return undefined
+    const timer = window.setTimeout(() => setStage(2), 220)
+    return () => window.clearTimeout(timer)
+  }, [stage])
+
+  const handleTitleDone = useCallback(() => {
+    setStage(featureImage ? 1 : 2)
+  }, [featureImage])
+
+  return (
+    <div className="mx-auto w-full max-w-[720px]">
+      <TypingLine
+        text={title}
+        animate={shouldAnimate}
+        className="mt-2 font-mono text-[24px] font-[800] leading-[1.18] text-foreground md:text-[32px]"
+        onDone={handleTitleDone}
+      />
+
+      {stage >= 1 && featureImage && (
+        <div className="mt-5 overflow-hidden rounded-md border border-border bg-muted animate-[fade-in_180ms_ease-out]">
+          <img
+            src={featureImage}
+            alt={title}
+            className="block h-auto w-full"
+            loading="lazy"
+          />
+        </div>
+      )}
+
+      {stage >= 2 && (
+        <div className="mt-6">
+          <SequentialMarkdown text={content} animate={shouldAnimate} wide onComplete={onComplete} />
+        </div>
+      )}
+    </div>
+  )
+}
+
 function SequentialBlock({
   block,
   onDone,
@@ -304,9 +353,36 @@ function MarkdownBlock({ block, wide }: { block: string; wide?: boolean }) {
   )
 }
 
+function TypingLine({
+  text,
+  animate,
+  className,
+  onDone,
+}: {
+  text: string
+  animate?: boolean
+  className?: string
+  onDone?: () => void
+}) {
+  const reducedMotion = usePrefersReducedMotion()
+  const shouldAnimate = Boolean(animate && !reducedMotion)
+  const typedText = useTypewriterText(text, shouldAnimate, onDone)
+
+  if (!shouldAnimate) {
+    return <div className={cn('whitespace-pre-wrap break-words', className)}>{text}</div>
+  }
+
+  return (
+    <div className={cn('whitespace-pre-wrap break-words', className)}>
+      {typedText}
+      <span className="typing-cursor" aria-hidden="true" />
+    </div>
+  )
+}
+
 function TypingTextBlock({ text, onDone }: { text: string; onDone: () => void }) {
   const plainText = useMemo(() => markdownToPlainText(text), [text])
-  const typedText = useTypewriterText(plainText, onDone)
+  const typedText = useTypewriterText(plainText, true, onDone)
 
   return (
     <div className="mb-4 last:mb-0 prose-chat">
@@ -336,12 +412,18 @@ function usePrefersReducedMotion() {
   return reduced
 }
 
-function useTypewriterText(text: string, onDone: () => void) {
+function useTypewriterText(text: string, animate: boolean, onDone?: () => void) {
   const [typed, setTyped] = useState('')
 
   useEffect(() => {
+    if (!animate) {
+      setTyped(text)
+      onDone?.()
+      return
+    }
+
     if (!text) {
-      onDone()
+      onDone?.()
       return
     }
 
@@ -366,14 +448,14 @@ function useTypewriterText(text: string, onDone: () => void) {
         raf = window.requestAnimationFrame(tick)
       } else {
         setTyped(text)
-        onDone()
+        onDone?.()
       }
     }
 
     setTyped('')
     raf = window.requestAnimationFrame(tick)
     return () => window.cancelAnimationFrame(raf)
-  }, [onDone, text])
+  }, [animate, onDone, text])
 
   return typed
 }
