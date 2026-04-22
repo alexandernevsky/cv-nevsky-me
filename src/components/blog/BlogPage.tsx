@@ -2,6 +2,7 @@ import { ChevronDown, X } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { SocialLinks } from '@/components/chat/SocialLinks'
 import { blogData, formatBlogDate } from '@/data/blog'
+import { posts as blogFeedPosts, type BlogFeedPost } from '@/data/blog-feed'
 import { profile } from '@/data/profile'
 import { type Lang } from '@/lib/i18n'
 import { cn } from '@/lib/utils'
@@ -12,9 +13,8 @@ interface BlogPageProps {
   onToggleLang: () => void
 }
 
-type BlogPost = (typeof blogData.posts)[number]
-
 const featuredTint = ['#ff7a46', '#57d9ff', '#c8ff00'] as const
+const latestPageSize = 12
 
 const footerColumns = [
   {
@@ -84,9 +84,25 @@ const footerColumns = [
 
 export function BlogPage({ lang, onToggleLang }: BlogPageProps) {
   const [noticeOpen, setNoticeOpen] = useState(true)
+  const [visibleLatestCount, setVisibleLatestCount] = useState(latestPageSize)
 
-  const featuredPosts = useMemo(() => blogData.posts.slice(0, 3), [])
-  const latestPosts = useMemo(() => blogData.posts.slice(3), [])
+  const allPosts = useMemo(
+    () =>
+      blogFeedPosts
+        .filter(post => !post.isVladimir)
+        .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt) || b.id.localeCompare(a.id)),
+    []
+  )
+  const featuredPosts = useMemo(
+    () => allPosts.filter(post => post.featured),
+    [allPosts]
+  )
+  const latestPosts = useMemo(
+    () => allPosts.filter(post => !post.featured),
+    [allPosts]
+  )
+  const visibleLatestPosts = latestPosts.slice(0, visibleLatestCount)
+  const hasMoreLatest = visibleLatestCount < latestPosts.length
 
   const title = blogData.heroCopy[lang].title[lang]
   const summary = blogData.heroCopy[lang].summary[lang]
@@ -213,7 +229,7 @@ export function BlogPage({ lang, onToggleLang }: BlogPageProps) {
 
           <div className="mt-6 grid gap-3 md:grid-cols-3">
             {featuredPosts.map((post, index) => (
-              <FeatureTile key={post.id} post={post} lang={lang} tint={featuredTint[index]} />
+              <FeatureTile key={post.id} post={post} lang={lang} tint={featuredTint[index % featuredTint.length]} />
             ))}
           </div>
         </section>
@@ -225,11 +241,24 @@ export function BlogPage({ lang, onToggleLang }: BlogPageProps) {
             </div>
           </div>
 
-          <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-            {latestPosts.map(post => (
+          <div className="mt-6 grid gap-3 md:grid-cols-3">
+            {visibleLatestPosts.map(post => (
               <LatestTile key={post.id} post={post} lang={lang} />
             ))}
           </div>
+
+          {hasMoreLatest && (
+            <div className="mt-6 flex justify-center">
+              <button
+                type="button"
+                onClick={() => setVisibleLatestCount(count => Math.min(count + latestPageSize, latestPosts.length))}
+                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-3 text-[15px] font-[700] text-[#f5edd8] transition-colors hover:bg-white/10"
+              >
+                <ChevronDown className="h-4 w-4" />
+                {lang === 'ru' ? 'Показать еще' : 'Load more'}
+              </button>
+            </div>
+          )}
         </section>
 
         <section className="border-b border-white/10 py-10 md:py-12">
@@ -290,23 +319,31 @@ function FeatureTile({
   lang,
   tint,
 }: {
-  post: BlogPost
+  post: BlogFeedPost
   lang: Lang
   tint: string
 }) {
   return (
-    <a href={post.href} target="_blank" rel="noreferrer" className="group block">
+    <article className="group block">
       <div className="overflow-hidden bg-black/20">
-        <img
-          src={post.image.src}
-          alt={post.image.alt[lang]}
-          className="aspect-[4/5] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-          loading="lazy"
-        />
+        {post.image.src ? (
+          <img
+            src={post.image.src}
+            alt={post.image.alt[lang]}
+            className="aspect-[4/5] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+            loading="lazy"
+          />
+        ) : (
+          <div className="grid aspect-[4/5] w-full place-items-center bg-[#17120d] px-6 text-center">
+            <div className="max-w-[12ch] font-mono text-[18px] leading-[1.2] text-[#f5edd8]">
+              {post.primaryTag[lang]}
+            </div>
+          </div>
+        )}
       </div>
       <div className="pt-3">
         <div className="font-mono text-[12px] leading-none text-[#8e8678]">
-          {formatBlogDate(post.date, lang)} · {post.stream[lang]}
+          {formatBlogDate(post.date, lang)} · {post.primaryTag[lang]}
         </div>
         <h3 className="mt-2 max-w-[18ch] text-[clamp(1.25rem,1.7vw,1.9rem)] font-[800] leading-[1.04] text-[#f5edd8]">
           {post.title[lang]}
@@ -316,24 +353,32 @@ function FeatureTile({
         </p>
         <div className="mt-3 h-[2px] w-10 rounded-full" style={{ background: tint }} />
       </div>
-    </a>
+    </article>
   )
 }
 
-function LatestTile({ post, lang }: { post: BlogPost; lang: Lang }) {
+function LatestTile({ post, lang }: { post: BlogFeedPost; lang: Lang }) {
   return (
-    <a href={post.href} target="_blank" rel="noreferrer" className="group block">
+    <article className="group block">
       <div className="overflow-hidden bg-black/20">
-        <img
-          src={post.image.src}
-          alt={post.image.alt[lang]}
-          className="aspect-[4/5] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-          loading="lazy"
-        />
+        {post.image.src ? (
+          <img
+            src={post.image.src}
+            alt={post.image.alt[lang]}
+            className="aspect-[4/5] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+            loading="lazy"
+          />
+        ) : (
+          <div className="grid aspect-[4/5] w-full place-items-center bg-[#17120d] px-6 text-center">
+            <div className="max-w-[12ch] font-mono text-[18px] leading-[1.2] text-[#f5edd8]">
+              {post.primaryTag[lang]}
+            </div>
+          </div>
+        )}
       </div>
       <div className="pt-2.5">
         <div className="font-mono text-[11px] leading-none text-[#8e8678]">
-          {formatBlogDate(post.date, lang)} · {post.stream[lang]}
+          {formatBlogDate(post.date, lang)} · {post.primaryTag[lang]}
         </div>
         <h3 className="mt-2 text-[clamp(1.3rem,1.75vw,2.1rem)] font-[800] leading-[1.04] text-[#f5edd8]">
           {post.title[lang]}
@@ -342,7 +387,7 @@ function LatestTile({ post, lang }: { post: BlogPost; lang: Lang }) {
           {post.excerpt[lang]}
         </p>
       </div>
-    </a>
+    </article>
   )
 }
 

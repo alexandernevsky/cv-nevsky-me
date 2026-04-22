@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "generate:content": "node scripts/generate-content.mjs",
+    "generate:blog-feed": "node scripts/generate-blog-feed.mjs",
     "import:ghost-blog": "python3 scripts/import-ghost-blog.py",
     "dev": "vite",
-    "build": "npm run generate:content && tsc -b && vite build",
+    "build": "npm run generate:content && npm run generate:blog-feed && tsc -b && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -1,14 +1,15 @@
-import { useCallback, useEffect, useState, type Dispatch, type SetStateAction } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useState, type Dispatch, type SetStateAction } from 'react'
 import { useChat } from '@/hooks/useChat'
 import { Sidebar } from '@/components/chat/Sidebar'
 import { ChatThread } from '@/components/chat/ChatThread'
 import { ChatInput } from '@/components/chat/ChatInput'
 import { WelcomeState } from '@/components/chat/WelcomeState'
 import { TopBar } from '@/components/chat/TopBar'
-import { BlogPage } from '@/components/blog/BlogPage'
 import { profile } from '@/data/profile'
 import { getStoredLang, setStoredLang, type Lang } from '@/lib/i18n'
 import { getStoredTheme, setStoredTheme, type Theme } from '@/lib/theme'
+
+const BlogPage = lazy(() => import('@/components/blog/BlogPage').then(module => ({ default: module.BlogPage })))
 
 function getInitialRouteLang(pathname: string): Lang | null {
   if (pathname === '/blog/ru' || pathname.startsWith('/blog/ru/')) return 'ru'
@@ -123,10 +124,14 @@ export default function App() {
 
   if (isBlogRoute(pathname)) {
     return (
-      <BlogPage
-        lang={lang}
-        onToggleLang={handleLangToggle}
-      />
+      <Suspense
+        fallback={<div className="min-h-[100dvh] bg-[#0d0a06]" />}
+      >
+        <BlogPage
+          lang={lang}
+          onToggleLang={handleLangToggle}
+        />
+      </Suspense>
     )
   }
 
