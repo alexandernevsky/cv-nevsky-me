@@ -11,7 +11,17 @@ import { getStoredTheme, setStoredTheme, type Theme } from '@/lib/theme'
 
 const BlogPage = lazy(() => import('@/components/blog/BlogPage').then(module => ({ default: module.BlogPage })))
 
-function getInitialRouteLang(pathname: string): Lang | null {
+function isBlogDetailRoute(pathname: string) {
+  return (
+    pathname.startsWith('/blog/post/') ||
+    pathname.startsWith('/blog/tag/') ||
+    pathname.startsWith('/blog/author/')
+  )
+}
+
+function getInitialRouteLang(pathname: string, search: string): Lang | null {
+  const param = new URLSearchParams(search).get('lang')
+  if (param === 'ru' || param === 'en') return param
   if (pathname === '/blog/ru' || pathname.startsWith('/blog/ru/')) return 'ru'
   if (pathname === '/blog' || pathname.startsWith('/blog/')) return 'en'
   return null
@@ -19,10 +29,9 @@ function getInitialRouteLang(pathname: string): Lang | null {
 
 function getInitialLang(): Lang {
   if (typeof window === 'undefined') return getStoredLang()
-  const routeLang = getInitialRouteLang(window.location.pathname)
+  const routeLang = getInitialRouteLang(window.location.pathname, window.location.search)
   if (routeLang) return routeLang
-  const param = new URLSearchParams(window.location.search).get('lang')
-  return param === 'ru' || param === 'en' ? param : getStoredLang()
+  return getStoredLang()
 }
 
 function isBlogRoute(pathname: string) {
@@ -67,13 +76,13 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    const routeLang = getInitialRouteLang(pathname)
+    const routeLang = getInitialRouteLang(pathname, window.location.search)
     if (routeLang && routeLang !== lang) {
       setLang(routeLang)
       return
     }
 
-    if (!routeLang) {
+    if (!routeLang || isBlogDetailRoute(pathname)) {
       const param = new URLSearchParams(window.location.search).get('lang')
       const nextLang = param === 'ru' || param === 'en' ? param : getStoredLang()
       if (nextLang !== lang) setLang(nextLang)
