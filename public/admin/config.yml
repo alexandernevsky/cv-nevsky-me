@@ -260,3 +260,291 @@ collections:
           - { label: Title RU, name: title, widget: string }
           - { label: Excerpt RU, name: excerpt, widget: text, required: false }
       - { label: Content RU, name: body_ru, widget: markdown }
+
+  - name: blog-tags
+    label: Blog tags
+    label_singular: Blog tag
+    folder: content/blog/tags
+    create: true
+    slug: "{{fields.id}}"
+    identifier_field: id
+    summary: "{{ru.name}} / {{en.name}}"
+    editor:
+      preview: false
+    fields:
+      - { label: ID, name: id, widget: string, pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase kebab-case.'] }
+      - label: Source slugs
+        name: source
+        widget: object
+        collapsed: true
+        fields:
+          - { label: Russian slug, name: ru, widget: string, required: false }
+          - { label: English slug, name: en, widget: string, required: false }
+      - label: Russian
+        name: ru
+        widget: object
+        collapsed: false
+        fields:
+          - { label: Slug, name: slug, widget: string, required: false }
+          - { label: Name, name: name, widget: string }
+          - { label: Description, name: description, widget: text, required: false }
+          - { label: Feature image, name: feature_image, widget: string, required: false }
+      - label: English
+        name: en
+        widget: object
+        collapsed: false
+        fields:
+          - { label: Slug, name: slug, widget: string, required: false }
+          - { label: Name, name: name, widget: string }
+          - { label: Description, name: description, widget: text, required: false }
+          - { label: Feature image, name: feature_image, widget: string, required: false }
+
+  - name: blog-posts
+    label: Blog posts
+    label_singular: Blog post
+    folder: content/blog/posts
+    create: true
+    slug: "{{fields.id}}"
+    identifier_field: id
+    summary: "{{date}} · {{ru.title}} / {{en.title}}"
+    sortable_fields: [date, id, ru.title, en.title]
+    editor:
+      preview: false
+    fields:
+      - { label: ID, name: id, widget: string, pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase kebab-case.'] }
+      - { label: Date, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: HH:mm:ss, format: YYYY-MM-DD HH:mm:ss }
+      - label: Source
+        name: source
+        widget: object
+        collapsed: true
+        fields:
+          - { label: Source kind, name: kind, widget: string, required: false }
+          - { label: Russian Ghost ID, name: ru, widget: string, required: false }
+          - { label: English Ghost ID, name: en, widget: string, required: false }
+      - label: Published at
+        name: published_at
+        widget: object
+        collapsed: true
+        fields:
+          - { label: Russian, name: ru, widget: string, required: false }
+          - { label: English, name: en, widget: string, required: false }
+      - label: Created at
+        name: created_at
+        widget: object
+        collapsed: true
+        fields:
+          - { label: Russian, name: ru, widget: string, required: false }
+          - { label: English, name: en, widget: string, required: false }
+      - label: Updated at
+        name: updated_at
+        widget: object
+        collapsed: true
+        fields:
+          - { label: Russian, name: ru, widget: string, required: false }
+          - { label: English, name: en, widget: string, required: false }
+      - { label: Featured, name: featured, widget: boolean, default: false }
+      - label: Tags
+        name: tags
+        widget: relation
+        collection: blog-tags
+        search_fields: [id, ru.name, en.name]
+        value_field: id
+        display_fields: [ru.name, en.name, id]
+        multiple: true
+        options_length: 200
+        required: false
+      - { label: Feature image, name: feature_image, widget: string, required: false }
+      - label: Feature image alt
+        name: feature_image_alt
+        widget: object
+        collapsed: true
+        fields:
+          - { label: Russian, name: ru, widget: string, required: false }
+          - { label: English, name: en, widget: string, required: false }
+      - label: Feature image caption
+        name: feature_image_caption
+        widget: object
+        collapsed: true
+        fields:
+          - { label: Russian, name: ru, widget: text, required: false }
+          - { label: English, name: en, widget: text, required: false }
+      - label: Russian
+        name: ru
+        widget: object
+        collapsed: false
+        fields:
+          - { label: Slug, name: slug, widget: string }
+          - { label: Title, name: title, widget: string }
+          - { label: Excerpt, name: excerpt, widget: text, required: false }
+          - { label: Body, name: body, widget: markdown, required: false }
+      - label: English
+        name: en
+        widget: object
+        collapsed: false
+        fields:
+          - { label: Slug, name: slug, widget: string }
+          - { label: Title, name: title, widget: string }
+          - { label: Excerpt, name: excerpt, widget: text, required: false }
+          - { label: Body, name: body, widget: markdown, required: false }
+      - label: Segments
+        name: segments
+        widget: list
+        collapsed: true
+        hint: "Ordered bilingual content blocks. Keep RU and EN aligned by block."
+        summary: "{{fields.kind}}"
+        fields:
+          - label: Kind
+            name: kind
+            widget: select
+            options:
+              - { label: Text, value: text }
+              - { label: Heading, value: heading }
+              - { label: List, value: list }
+              - { label: Quote, value: quote }
+              - { label: Image, value: image }
+              - { label: Video, value: video }
+              - { label: Embed, value: embed }
+              - { label: Raw, value: raw }
+          - { label: RU, name: ru, widget: markdown, required: false }
+          - { label: EN, name: en, widget: markdown, required: false }
+          - { label: Source URL, name: src, widget: string, required: false }
+          - label: Alt text
+            name: alt
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Russian, name: ru, widget: string, required: false }
+              - { label: English, name: en, widget: string, required: false }
+          - label: Caption
+            name: caption
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Russian, name: ru, widget: text, required: false }
+              - { label: English, name: en, widget: text, required: false }
+          - { label: Poster URL, name: poster, widget: string, required: false }
+
+  - name: blog-pages
+    label: Blog pages
+    label_singular: Blog page
+    folder: content/blog/pages
+    create: true
+    slug: "{{fields.id}}"
+    identifier_field: id
+    summary: "{{date}} · {{ru.title}} / {{en.title}}"
+    sortable_fields: [date, id, ru.title, en.title]
+    editor:
+      preview: false
+    fields:
+      - { label: ID, name: id, widget: string, pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Use lowercase kebab-case.'] }
+      - { label: Date, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: HH:mm:ss, format: YYYY-MM-DD HH:mm:ss }
+      - label: Source
+        name: source
+        widget: object
+        collapsed: true
+        fields:
+          - { label: Source kind, name: kind, widget: string, required: false }
+          - { label: Russian Ghost ID, name: ru, widget: string, required: false }
+          - { label: English Ghost ID, name: en, widget: string, required: false }
+      - label: Published at
+        name: published_at
+        widget: object
+        collapsed: true
+        fields:
+          - { label: Russian, name: ru, widget: string, required: false }
+          - { label: English, name: en, widget: string, required: false }
+      - label: Created at
+        name: created_at
+        widget: object
+        collapsed: true
+        fields:
+          - { label: Russian, name: ru, widget: string, required: false }
+          - { label: English, name: en, widget: string, required: false }
+      - label: Updated at
+        name: updated_at
+        widget: object
+        collapsed: true
+        fields:
+          - { label: Russian, name: ru, widget: string, required: false }
+          - { label: English, name: en, widget: string, required: false }
+      - { label: Featured, name: featured, widget: boolean, default: false }
+      - label: Tags
+        name: tags
+        widget: relation
+        collection: blog-tags
+        search_fields: [id, ru.name, en.name]
+        value_field: id
+        display_fields: [ru.name, en.name, id]
+        multiple: true
+        options_length: 200
+        required: false
+      - { label: Feature image, name: feature_image, widget: string, required: false }
+      - label: Feature image alt
+        name: feature_image_alt
+        widget: object
+        collapsed: true
+        fields:
+          - { label: Russian, name: ru, widget: string, required: false }
+          - { label: English, name: en, widget: string, required: false }
+      - label: Feature image caption
+        name: feature_image_caption
+        widget: object
+        collapsed: true
+        fields:
+          - { label: Russian, name: ru, widget: text, required: false }
+          - { label: English, name: en, widget: text, required: false }
+      - label: Russian
+        name: ru
+        widget: object
+        collapsed: false
+        fields:
+          - { label: Slug, name: slug, widget: string }
+          - { label: Title, name: title, widget: string }
+          - { label: Excerpt, name: excerpt, widget: text, required: false }
+          - { label: Body, name: body, widget: markdown, required: false }
+      - label: English
+        name: en
+        widget: object
+        collapsed: false
+        fields:
+          - { label: Slug, name: slug, widget: string }
+          - { label: Title, name: title, widget: string }
+          - { label: Excerpt, name: excerpt, widget: text, required: false }
+          - { label: Body, name: body, widget: markdown, required: false }
+      - label: Segments
+        name: segments
+        widget: list
+        collapsed: true
+        hint: "Ordered bilingual content blocks. Keep RU and EN aligned by block."
+        summary: "{{fields.kind}}"
+        fields:
+          - label: Kind
+            name: kind
+            widget: select
+            options:
+              - { label: Text, value: text }
+              - { label: Heading, value: heading }
+              - { label: List, value: list }
+              - { label: Quote, value: quote }
+              - { label: Image, value: image }
+              - { label: Video, value: video }
+              - { label: Embed, value: embed }
+              - { label: Raw, value: raw }
+          - { label: RU, name: ru, widget: markdown, required: false }
+          - { label: EN, name: en, widget: markdown, required: false }
+          - { label: Source URL, name: src, widget: string, required: false }
+          - label: Alt text
+            name: alt
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Russian, name: ru, widget: string, required: false }
+              - { label: English, name: en, widget: string, required: false }
+          - label: Caption
+            name: caption
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Russian, name: ru, widget: text, required: false }
+              - { label: English, name: en, widget: text, required: false }
+          - { label: Poster URL, name: poster, widget: string, required: false }

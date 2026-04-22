@@ -3,6 +3,8 @@ dist
 .env
 .env.local
 .claude/
+__pycache__/
+*.pyc
 *.tgz
 artifacts/tmp/
 artifacts/graphify/

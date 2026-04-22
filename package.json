@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "generate:content": "node scripts/generate-content.mjs",
+    "import:ghost-blog": "python3 scripts/import-ghost-blog.py",
     "dev": "vite",
     "build": "npm run generate:content && tsc -b && vite build",
     "preview": "vite preview"
