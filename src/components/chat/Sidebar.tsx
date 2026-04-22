@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Moon, Plus, Sun, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { getProfileText } from '@/data/profile'
+import { getProfileText, profileAvatarSrc } from '@/data/profile'
 import { getTopicLabel, sidebarCategories, topics } from '@/data/topics'
 import { type Lang } from '@/lib/i18n'
 import { type Theme } from '@/lib/theme'
@@ -71,26 +71,34 @@ export function Sidebar({
         aria-label={lang === 'ru' ? 'Темы' : 'Topics'}
       >
         {/* Brand block */}
-        <div className="flex items-start justify-between gap-2 border-b border-border px-4 pt-4 pb-4">
-          <div className="min-w-0">
-            <div className="text-[13px] font-medium tracking-tight text-foreground">
-              {getProfileText('name', lang)}
-            </div>
-            <div className="mt-0.5 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-              {getProfileText('role', lang)}
-            </div>
-            <div className="mt-0.5 font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
-              {getProfileText('subRole', lang)}
-            </div>
-          </div>
+        <div className="relative border-b border-border px-4 pt-4 pb-4">
           <button
             type="button"
             onClick={onClose}
-            className="md:hidden -mt-1 -mr-1 grid h-8 w-8 place-items-center rounded-md text-muted-foreground hover:bg-muted hover:text-foreground focus:outline-none focus-visible:ring-1 focus-visible:ring-foreground/40"
+            className="md:hidden absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-md text-muted-foreground hover:bg-muted hover:text-foreground focus:outline-none focus-visible:ring-1 focus-visible:ring-foreground/40"
             aria-label={lang === 'ru' ? 'Закрыть боковую панель' : 'Close sidebar'}
           >
             <X size={16} />
           </button>
+          <div className="flex min-w-0 flex-col items-start gap-3 pr-10">
+            <img
+              src={profileAvatarSrc}
+              alt={getProfileText('name', lang)}
+              className="h-20 w-20 shrink-0 rounded-full object-cover"
+              loading="lazy"
+            />
+            <div className="min-w-0">
+              <div className="text-[13px] font-[800] leading-tight text-foreground">
+                {getProfileText('name', lang)}
+              </div>
+              <div className="mt-0.5 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+                {getProfileText('role', lang)}
+              </div>
+              <div className="mt-0.5 font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+                {getProfileText('subRole', lang)}
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* New chat */}
@@ -101,7 +109,7 @@ export function Sidebar({
             className="flex w-full items-center gap-2 rounded-md border border-border bg-transparent px-3 py-2 text-sm text-foreground transition-colors hover:bg-muted focus:outline-none focus-visible:ring-1 focus-visible:ring-foreground/40"
           >
             <Plus size={14} />
-            <span>{lang === 'ru' ? 'Сброс' : 'Reset'}</span>
+            <span>{lang === 'ru' ? 'Новый чат' : 'New chat'}</span>
           </button>
           <div className="mt-2 grid grid-cols-2 gap-2">
             <button

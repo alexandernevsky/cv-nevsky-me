@@ -5,6 +5,7 @@ import { ChatThread } from '@/components/chat/ChatThread'
 import { ChatInput } from '@/components/chat/ChatInput'
 import { WelcomeState } from '@/components/chat/WelcomeState'
 import { TopBar } from '@/components/chat/TopBar'
+import { profile } from '@/data/profile'
 import { getStoredLang, setStoredLang, type Lang } from '@/lib/i18n'
 import { getStoredTheme, setStoredTheme, type Theme } from '@/lib/theme'
 
@@ -30,11 +31,17 @@ function clearConversationUrl(lang: Lang) {
   window.history.pushState(null, '', `${window.location.pathname}?lang=${lang}`)
 }
 
+function pickRandomPositioningIndex() {
+  const total = profile.positioning.length
+  return total > 0 ? Math.floor(Math.random() * total) : 0
+}
+
 export default function App() {
   const [lang, setLang] = useState<Lang>(() => getInitialLang())
   const [theme, setTheme] = useState<Theme>(() => getStoredTheme())
   const { messages, isAnswering, sendTopic, sendFreeText, sendProject, reset } = useChat(lang)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [positioningIndex, setPositioningIndex] = useState(() => pickRandomPositioningIndex())
 
   useEffect(() => {
     setStoredLang(lang)
@@ -81,6 +88,7 @@ export default function App() {
 
   const handleReset = useCallback(
     () => {
+      setPositioningIndex(pickRandomPositioningIndex())
       clearConversationUrl(lang)
       reset()
     },
@@ -140,7 +148,16 @@ export default function App() {
               onProjectSelect={handleProjectSelect}
             />
           ) : (
-            <WelcomeState lang={lang} onSelect={handleTopicSelect} />
+            <WelcomeState
+              lang={lang}
+              positioning={
+                profile.positioning[positioningIndex]?.[lang] ??
+                (lang === 'ru'
+                  ? 'Я работаю на стыке дизайна и AI, соединяя продуктовую логику, форму и живые системы.'
+                  : 'I work at the intersection of design and AI, connecting product logic, form, and living systems.')
+              }
+              onSelect={handleTopicSelect}
+            />
           )}
         </div>
         <ChatInput lang={lang} onSend={sendFreeText} isBusy={isAnswering} />

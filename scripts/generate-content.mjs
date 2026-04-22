@@ -50,6 +50,16 @@ function readStringList(value) {
   return Array.isArray(value) ? value.filter(Boolean).map(String) : []
 }
 
+function readPositioningList(value) {
+  if (!Array.isArray(value)) return []
+  return value
+    .map(item => ({
+      en: String(item?.en ?? ''),
+      ru: String(item?.ru ?? ''),
+    }))
+    .filter(item => item.en || item.ru)
+}
+
 function readPage(fileName, lang) {
   const data = readContentFile(path.join(pagesDir, fileName))
   const page = localized(data, lang)
@@ -93,6 +103,7 @@ const profile = {
   location: localizedText(profileData, 'location'),
   availability: localizedText(profileData, 'availability'),
   summary: localizedText(profileData, 'summary'),
+  positioning: readPositioningList(profileData.positioning),
   links: {
     portfolio: String(profileData.links?.portfolio ?? ''),
     blog: String(profileData.links?.blog ?? ''),
@@ -114,7 +125,7 @@ export const profile = ${JSON.stringify(profile, null, 2)} as const
 
 export type Profile = typeof profile
 
-export function getProfileText(field: keyof Omit<Profile, 'links'>, lang: Lang): string {
+export function getProfileText(field: keyof Omit<Profile, 'links' | 'positioning'>, lang: Lang): string {
   return profile[field][lang]
 }
 

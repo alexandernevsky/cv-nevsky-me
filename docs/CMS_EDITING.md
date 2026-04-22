@@ -4,7 +4,7 @@ This site uses Decap CMS. Editing content in `/admin` creates a GitHub commit, t
 
 ## Main Collections
 
-- `Settings -> Profile and contacts` edits the shared name, role, avatar, email, phone, Telegram, WhatsApp, LinkedIn, portfolio, and blog links.
+- `Settings -> Profile and contacts` edits the shared name, role, avatar, positioning statements, email, phone, Telegram, WhatsApp, LinkedIn, portfolio, and blog links.
 - `Chat topics` edits the chat sidebar topics, user prompts, answers, free-text keywords, follow-up chips, and related project cards.
 - `Projects` edits project posts. Each project is one bilingual Markdown file with English and Russian fields.
 - `Pages` keeps older CV/About content available for generated data.
@@ -28,6 +28,8 @@ Do not rename an existing topic ID unless you also update every place that refer
 `Follow-up topic IDs` renders chips below the answer. Select existing chat topics from the relation field.
 
 `Keywords` are used by the local free-text matcher. Add short words and common phrases in both English and Russian.
+
+`Positioning statements` are shown randomly on the home screen above the intro text. Add more variants there if you want the opening message to rotate.
 
 ## Projects
 

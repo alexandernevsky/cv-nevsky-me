@@ -124,7 +124,7 @@ function SystemMessage({
               <span key={tag}>{tag}</span>
             ))}
           </div>
-          <h2 className="mt-2 font-mono text-[24px] font-[900] leading-[1.18] tracking-tight text-foreground md:text-[32px]">
+          <h2 className="mt-2 font-mono text-[24px] font-[800] leading-[1.18] text-foreground md:text-[32px]">
             {title}
           </h2>
         </div>
@@ -191,14 +191,14 @@ function MessageMeta({ lang }: { lang: Lang }) {
       <img
         src={profileAvatarSrc}
         alt={getProfileText('name', lang)}
-        className="h-7 w-7 shrink-0 rounded-full object-cover ring-1 ring-border"
+        className="h-8 w-8 shrink-0 rounded-full object-cover"
         loading="lazy"
       />
       <div className="min-w-0">
-        <div className="truncate font-mono text-[11px] font-[900] uppercase tracking-wider text-foreground">
+        <div className="truncate text-[13px] font-[800] leading-tight text-foreground">
           {getProfileText('name', lang)}
         </div>
-        <div className="truncate text-[11px] leading-tight text-muted-foreground">
+        <div className="truncate font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
           {getProfileText('answerTitle', lang)}
         </div>
       </div>

@@ -114,6 +114,15 @@ collections:
             fields:
               - { label: English, name: en, widget: text }
               - { label: Russian, name: ru, widget: text }
+          - label: Positioning statements
+            name: positioning
+            widget: list
+            collapsed: true
+            hint: "Shown randomly above the intro. Add more when needed."
+            summary: "{{fields.en}}"
+            fields:
+              - { label: English, name: en, widget: text }
+              - { label: Russian, name: ru, widget: text }
           - { label: Avatar path, name: avatar, widget: string }
           - label: Links
             name: links
