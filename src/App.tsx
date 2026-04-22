@@ -82,8 +82,24 @@ export default function App() {
 
   useEffect(() => {
     setStoredTheme(theme)
-    document.documentElement.dataset.theme = theme
-  }, [theme])
+    document.documentElement.dataset.theme = isBlogRoute(pathname) ? 'dark' : theme
+  }, [pathname, theme])
+
+  useEffect(() => {
+    if (isBlogRoute(pathname)) {
+      document.documentElement.dataset.page = 'blog'
+      document.documentElement.dataset.theme = 'dark'
+      document.title =
+        lang === 'ru' ? 'Александр Невский — Блог' : 'Alexander Nevsky — Blog'
+      return
+    }
+
+    delete document.documentElement.dataset.page
+    document.title =
+      lang === 'ru'
+        ? 'Александр Невский — Conversational Portfolio'
+        : 'Alexander Nevsky — Conversational Portfolio'
+  }, [lang, pathname])
 
   const handleLangToggle = useCallback(() => {
     setLang(prev => {
@@ -109,14 +125,7 @@ export default function App() {
     return (
       <BlogPage
         lang={lang}
-        theme={theme}
         onToggleLang={handleLangToggle}
-        onToggleTheme={() => setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))}
-        onGoChat={() => {
-          const nextPath = `/?lang=${lang}`
-          window.history.pushState(null, '', nextPath)
-          setPathname('/')
-        }}
       />
     )
   }
