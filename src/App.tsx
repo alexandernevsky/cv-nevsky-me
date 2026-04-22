@@ -1,18 +1,31 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState, type Dispatch, type SetStateAction } from 'react'
 import { useChat } from '@/hooks/useChat'
 import { Sidebar } from '@/components/chat/Sidebar'
 import { ChatThread } from '@/components/chat/ChatThread'
 import { ChatInput } from '@/components/chat/ChatInput'
 import { WelcomeState } from '@/components/chat/WelcomeState'
 import { TopBar } from '@/components/chat/TopBar'
+import { BlogPage } from '@/components/blog/BlogPage'
 import { profile } from '@/data/profile'
 import { getStoredLang, setStoredLang, type Lang } from '@/lib/i18n'
 import { getStoredTheme, setStoredTheme, type Theme } from '@/lib/theme'
 
+function getInitialRouteLang(pathname: string): Lang | null {
+  if (pathname === '/blog/ru' || pathname.startsWith('/blog/ru/')) return 'ru'
+  if (pathname === '/blog' || pathname.startsWith('/blog/')) return 'en'
+  return null
+}
+
 function getInitialLang(): Lang {
   if (typeof window === 'undefined') return getStoredLang()
+  const routeLang = getInitialRouteLang(window.location.pathname)
+  if (routeLang) return routeLang
   const param = new URLSearchParams(window.location.search).get('lang')
   return param === 'ru' || param === 'en' ? param : getStoredLang()
+}
+
+function isBlogRoute(pathname: string) {
+  return pathname === '/blog' || pathname.startsWith('/blog/')
 }
 
 function updateConversationUrl(params: { lang: Lang; topicId?: string; projectId?: string }) {
@@ -37,11 +50,30 @@ function pickRandomPositioningIndex() {
 }
 
 export default function App() {
+  const [pathname, setPathname] = useState(() => (typeof window === 'undefined' ? '/' : window.location.pathname))
   const [lang, setLang] = useState<Lang>(() => getInitialLang())
   const [theme, setTheme] = useState<Theme>(() => getStoredTheme())
-  const { messages, isAnswering, sendTopic, sendFreeText, sendProject, reset } = useChat(lang)
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [positioningIndex, setPositioningIndex] = useState(() => pickRandomPositioningIndex())
+
+  useEffect(() => {
+    const syncLocation = () => setPathname(window.location.pathname)
+    window.addEventListener('popstate', syncLocation)
+    return () => window.removeEventListener('popstate', syncLocation)
+  }, [])
+
+  useEffect(() => {
+    const routeLang = getInitialRouteLang(pathname)
+    if (routeLang && routeLang !== lang) {
+      setLang(routeLang)
+      return
+    }
+
+    if (!routeLang) {
+      const param = new URLSearchParams(window.location.search).get('lang')
+      const nextLang = param === 'ru' || param === 'en' ? param : getStoredLang()
+      if (nextLang !== lang) setLang(nextLang)
+    }
+  }, [lang, pathname])
 
   useEffect(() => {
     setStoredLang(lang)
@@ -52,6 +84,72 @@ export default function App() {
     setStoredTheme(theme)
     document.documentElement.dataset.theme = theme
   }, [theme])
+
+  const handleLangToggle = useCallback(() => {
+    setLang(prev => {
+      const next = prev === 'en' ? 'ru' : 'en'
+
+      if (typeof window !== 'undefined') {
+        if (isBlogRoute(window.location.pathname)) {
+          const nextPath = next === 'ru' ? '/blog/ru/' : '/blog/'
+          window.history.pushState(null, '', nextPath)
+          setPathname(nextPath)
+        } else {
+          const params = new URLSearchParams(window.location.search)
+          params.set('lang', next)
+          window.history.replaceState(null, '', `${window.location.pathname}?${params.toString()}`)
+        }
+      }
+
+      return next
+    })
+  }, [])
+
+  if (isBlogRoute(pathname)) {
+    return (
+      <BlogPage
+        lang={lang}
+        theme={theme}
+        onToggleLang={handleLangToggle}
+        onToggleTheme={() => setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))}
+        onGoChat={() => {
+          const nextPath = `/?lang=${lang}`
+          window.history.pushState(null, '', nextPath)
+          setPathname('/')
+        }}
+      />
+    )
+  }
+
+  return (
+    <ChatShell
+      lang={lang}
+      theme={theme}
+      onToggleLang={handleLangToggle}
+      onToggleTheme={() => setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))}
+      positioningIndex={positioningIndex}
+      setPositioningIndex={setPositioningIndex}
+    />
+  )
+}
+
+function ChatShell({
+  lang,
+  theme,
+  onToggleLang,
+  onToggleTheme,
+  positioningIndex,
+  setPositioningIndex,
+}: {
+  lang: Lang
+  theme: Theme
+  onToggleLang: () => void
+  onToggleTheme: () => void
+  positioningIndex: number
+  setPositioningIndex: Dispatch<SetStateAction<number>>
+}) {
+  const { messages, isAnswering, sendTopic, sendFreeText, sendProject, reset } = useChat(lang)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
@@ -92,22 +190,8 @@ export default function App() {
       clearConversationUrl(lang)
       reset()
     },
-    [lang, reset]
+    [lang, reset, setPositioningIndex]
   )
-
-  const handleLangToggle = useCallback(() => {
-    setLang(prev => {
-      const next = prev === 'en' ? 'ru' : 'en'
-
-      if (typeof window !== 'undefined') {
-        const params = new URLSearchParams(window.location.search)
-        params.set('lang', next)
-        window.history.replaceState(null, '', `${window.location.pathname}?${params.toString()}`)
-      }
-
-      return next
-    })
-  }, [])
 
   const activeTopicId =
     [...messages].reverse().find(m => m.role === 'system' && m.topicId)?.topicId ?? null
@@ -119,8 +203,8 @@ export default function App() {
       <Sidebar
         lang={lang}
         theme={theme}
-        onToggleLang={handleLangToggle}
-        onToggleTheme={() => setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))}
+        onToggleLang={onToggleLang}
+        onToggleTheme={onToggleTheme}
         activeTopicId={activeTopicId}
         onTopicSelect={handleTopicSelect}
         onReset={handleReset}
@@ -132,8 +216,8 @@ export default function App() {
         <TopBar
           lang={lang}
           theme={theme}
-          onToggleLang={handleLangToggle}
-          onToggleTheme={() => setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))}
+          onToggleLang={onToggleLang}
+          onToggleTheme={onToggleTheme}
           onOpenSidebar={() => setIsSidebarOpen(true)}
           onReset={handleReset}
           canReset={hasMessages}
