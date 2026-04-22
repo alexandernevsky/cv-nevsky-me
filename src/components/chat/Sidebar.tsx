@@ -5,6 +5,7 @@ import { getProfileText } from '@/data/profile'
 import { getTopicLabel, sidebarCategories, topics } from '@/data/topics'
 import { type Lang } from '@/lib/i18n'
 import { type Theme } from '@/lib/theme'
+import { SocialLinks } from './SocialLinks'
 
 interface SidebarProps {
   lang: Lang
@@ -165,9 +166,12 @@ export function Sidebar({
         </nav>
 
         {/* Footer meta */}
-        <div className="border-t border-border px-4 py-3 font-mono text-[11px] text-muted-foreground">
-          <div>{getProfileText('location', lang)}</div>
-          <div className="mt-0.5">{getProfileText('availability', lang)}</div>
+        <div className="border-t border-border px-4 py-3">
+          <SocialLinks lang={lang} />
+          <div className="mt-3 font-mono text-[11px] text-muted-foreground">
+            <div>{getProfileText('location', lang)}</div>
+            <div className="mt-0.5">{getProfileText('availability', lang)}</div>
+          </div>
         </div>
       </aside>
     </>
