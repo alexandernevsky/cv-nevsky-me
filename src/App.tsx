@@ -29,6 +29,10 @@ function isBlogRoute(pathname: string) {
   return pathname === '/blog' || pathname.startsWith('/blog/')
 }
 
+function isBlogHomeRoute(pathname: string) {
+  return pathname === '/blog' || pathname === '/blog/'
+}
+
 function updateConversationUrl(params: { lang: Lang; topicId?: string; projectId?: string }) {
   if (typeof window === 'undefined') return
 
@@ -108,9 +112,15 @@ export default function App() {
 
       if (typeof window !== 'undefined') {
         if (isBlogRoute(window.location.pathname)) {
-          const nextPath = next === 'ru' ? '/blog/ru/' : '/blog/'
-          window.history.pushState(null, '', nextPath)
-          setPathname(nextPath)
+          if (isBlogHomeRoute(window.location.pathname)) {
+            const nextPath = next === 'ru' ? '/blog/ru/' : '/blog/'
+            window.history.pushState(null, '', nextPath)
+            setPathname(nextPath)
+          } else {
+            const params = new URLSearchParams(window.location.search)
+            params.set('lang', next)
+            window.history.pushState(null, '', `${window.location.pathname}?${params.toString()}`)
+          }
         } else {
           const params = new URLSearchParams(window.location.search)
           params.set('lang', next)
@@ -130,6 +140,7 @@ export default function App() {
         <BlogPage
           lang={lang}
           onToggleLang={handleLangToggle}
+          pathname={pathname}
         />
       </Suspense>
     )

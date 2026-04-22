@@ -14,6 +14,7 @@ export type BlogFeedPost = {
   publishedAt: string
   featured: boolean
   tags: string[]
+  slug: LocalizedText
   primaryTag: LocalizedText
   title: LocalizedText
   excerpt: LocalizedText
@@ -25,7 +26,57 @@ export type BlogFeedPost = {
     en: string
     ru: string
   }
+  author: {
+    id: string
+    slug: string
+    name: string
+    bio: string
+    profileImage: string
+    website: string
+    location: string
+  }
   isVladimir: boolean
+}
+
+export type BlogAuthor = {
+  id: string
+  slug: string
+  name: string
+  bio: string
+  profileImage: string
+  website: string
+  location: string
+  socials: {
+    facebook: string
+    twitter: string
+    threads: string
+    bluesky: string
+    mastodon: string
+    tiktok: string
+    youtube: string
+    instagram: string
+    linkedin: string
+  }
+}
+
+export type BlogTag = {
+  id: string
+  source: {
+    ru: string
+    en: string
+  }
+  ru: {
+    slug: string
+    name: string
+    description: string
+    featureImage: string
+  }
+  en: {
+    slug: string
+    name: string
+    description: string
+    featureImage: string
+  }
 }
 
 export const posts: BlogFeedPost[] = [
@@ -40,6 +91,10 @@ export const posts: BlogFeedPost[] = [
       "threshold-signals",
       "vibe-coding"
     ],
+    "slug": {
+      "en": "the-dispatcher",
+      "ru": "dispietchier"
+    },
     "primaryTag": {
       "en": "Threshold",
       "ru": "Threshold"
@@ -63,6 +118,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69e2b48cc639de203813149d",
       "ru": "69e2b15ac639de2038131476"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -76,6 +140,10 @@ export const posts: BlogFeedPost[] = [
       "threshold-signals",
       "vibe-coding"
     ],
+    "slug": {
+      "en": "three-products-three-months-en",
+      "ru": "three-products-three-months"
+    },
     "primaryTag": {
       "en": "Threshold",
       "ru": "Threshold"
@@ -99,6 +167,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69e2d27f9e829e8410d57753",
       "ru": "69e2d27e9e829e8410d5774c"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -112,6 +189,10 @@ export const posts: BlogFeedPost[] = [
       "threshold-signals",
       "vibe-coding"
     ],
+    "slug": {
+      "en": "whatsapp-outreach-tool-en",
+      "ru": "whatsapp-outreach-tool"
+    },
     "primaryTag": {
       "en": "Threshold",
       "ru": "Threshold"
@@ -135,6 +216,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69e2d28f9e829e8410d57762",
       "ru": "69e2d27f9e829e8410d5775b"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -147,6 +237,10 @@ export const posts: BlogFeedPost[] = [
       "alexander-live",
       "dubai"
     ],
+    "slug": {
+      "en": "fulcrum",
+      "ru": "tochka-opory"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -170,6 +264,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6eec75185f7b2320365d",
       "ru": "69ce758dd48c8e50d32bc6e8"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -184,6 +287,10 @@ export const posts: BlogFeedPost[] = [
       "dubai",
       "konstantin-stories"
     ],
+    "slug": {
+      "en": "first-time-on-the-mat-i-finally-tried-brazilian-jiu-jitsu",
+      "ru": "piervyi-raz-na-tatami-ia-nakoniets-poproboval-brazilskoie-dzhiu-dzhitsu"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -207,6 +314,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6eed75185f7b23203665",
       "ru": "69cac0f9f8f0882f782cce0d"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -219,6 +335,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "juriy-prose"
     ],
+    "slug": {
+      "en": "time-to-buy-black-rings",
+      "ru": "vremya-pokupat-chernye-perstni"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -242,6 +362,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6eee75185f7b2320366f",
       "ru": "69c4f4f7cb1ffb9abea24f44"
     },
+    "author": {
+      "id": "59b6229ab4ffe22686d2a880",
+      "slug": "juriy-nevsky",
+      "name": "Юрий Невский",
+      "bio": "Автор семейной литературной линии. Здесь будет собираться проза, архивные публикации и рассказы Юрия Невского",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/yurii_nevskii-3.webp",
+      "website": "",
+      "location": "Дзерджинск, Россия"
+    },
     "isVladimir": false
   },
   {
@@ -255,6 +384,10 @@ export const posts: BlogFeedPost[] = [
       "alexander-live",
       "threshold-signals"
     ],
+    "slug": {
+      "en": "man-as-a-knot",
+      "ru": "human-as-a-node"
+    },
     "primaryTag": {
       "en": "Threshold",
       "ru": "Threshold"
@@ -278,6 +411,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6eee75185f7b23203676",
       "ru": "69c4e86be26a5d8e92c24123"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -293,6 +435,10 @@ export const posts: BlogFeedPost[] = [
       "family-live",
       "irina-articles"
     ],
+    "slug": {
+      "en": "between-zoom-and-siren-how-dubai-is-getting-used-to-life-under-the-gun",
+      "ru": "miezhdu-zumom-i-sirienoi-kak-dubai-privykaiet-k-zhizni-pod-pritsielom"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -316,6 +462,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6eef75185f7b2320367e",
       "ru": "69c5346b568ef9f766fa28cb"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -329,6 +484,10 @@ export const posts: BlogFeedPost[] = [
       "threshold-signals",
       "vibe-coding"
     ],
+    "slug": {
+      "en": "callcoach-ios-app-en",
+      "ru": "callcoach-ios-app"
+    },
     "primaryTag": {
       "en": "Threshold",
       "ru": "Threshold"
@@ -352,6 +511,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69e2d27e9e829e8410d57744",
       "ru": "69e2d27e9e829e8410d5773d"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -365,6 +533,10 @@ export const posts: BlogFeedPost[] = [
       "dubai",
       "estate"
     ],
+    "slug": {
+      "en": "smiling-story-from-spi-dubai",
+      "ru": "storiz-ulybchivyi-iz-spi-dubai"
+    },
     "primaryTag": {
       "en": "Estate",
       "ru": "Эстейт"
@@ -388,6 +560,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6eef75185f7b23203689",
       "ru": "69b2b3ae6e5564436d20e225"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -400,6 +581,10 @@ export const posts: BlogFeedPost[] = [
       "dubai",
       "estate"
     ],
+    "slug": {
+      "en": "there-was-a-war-going-on-but-they-worked-in-the-office",
+      "ru": "shla-voina-no-oni-rabotali-v-ofisie"
+    },
     "primaryTag": {
       "en": "Estate",
       "ru": "Эстейт"
@@ -423,6 +608,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6ef175185f7b23203692",
       "ru": "69b2ae396e5564436d20e208"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -435,6 +629,10 @@ export const posts: BlogFeedPost[] = [
       "dubai",
       "estate"
     ],
+    "slug": {
+      "en": "happy-march-8th-with-beauty-inspiration-and-new-opportunities",
+      "ru": "8-march-2026"
+    },
     "primaryTag": {
       "en": "Estate",
       "ru": "Эстейт"
@@ -458,6 +656,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6ef275185f7b2320369a",
       "ru": "69b27ac56e5564436d20e1aa"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -472,6 +679,10 @@ export const posts: BlogFeedPost[] = [
       "family-live",
       "irina-articles"
     ],
+    "slug": {
+      "en": "we-went-to-birch-to-see-nastya-for-her-birthday",
+      "ru": "khodili-v-birch-k-nastie-na-dien-rozhdieniia"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -495,6 +706,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6ef375185f7b232036a2",
       "ru": "69b2a6a16e5564436d20e1e3"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -507,6 +727,10 @@ export const posts: BlogFeedPost[] = [
       "dubai",
       "estate"
     ],
+    "slug": {
+      "en": "falling-in-love-with-dubai-happy-valentine-s-day",
+      "ru": "st-valentin-2026"
+    },
     "primaryTag": {
       "en": "Estate",
       "ru": "Эстейт"
@@ -530,6 +754,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6ef375185f7b232036ac",
       "ru": "69b171296e5564436d20df37"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -543,6 +776,10 @@ export const posts: BlogFeedPost[] = [
       "dubai",
       "family-live"
     ],
+    "slug": {
+      "en": "international-day-at-school",
+      "ru": "sht"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -566,6 +803,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6ef475185f7b232036b4",
       "ru": "69b171296e5564436d20df32"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -579,6 +825,10 @@ export const posts: BlogFeedPost[] = [
       "dubai",
       "estate"
     ],
+    "slug": {
+      "en": "same-ux-different-scale-why-am-i-now-designing-life-in-dubai-and-not-interfaces",
+      "ru": "tot-zhie-ux-drughoi-masshtab-pochiemu-ia-tiepier-proiektiruiu-zhizn-v-dubaie-a-nie-intierfieisy"
+    },
     "primaryTag": {
       "en": "Estate",
       "ru": "Эстейт"
@@ -602,6 +852,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6ef575185f7b232036bd",
       "ru": "69b171296e5564436d20df30"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -615,6 +874,10 @@ export const posts: BlogFeedPost[] = [
       "family-live",
       "irina-articles"
     ],
+    "slug": {
+      "en": "from-dubai-with-a-british-seal-of-approval-a-new-stage-in-your-legal-career",
+      "ru": "iz-dubaia-s-britanskim-znakom-kachiestva-novyi-etap-v-karierie-iurista"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -638,6 +901,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6ef575185f7b232036c6",
       "ru": "69b171296e5564436d20df31"
     },
+    "author": {
+      "id": "dd03f20c7728a86cccc625df",
+      "slug": "irina-nevskaya",
+      "name": "Ирина Невская",
+      "bio": "Юрист и автор экспертной линии сайта. На этой странице и в потоке материалов будут собираться её статьи, профессиональные заметки и семейные вехи",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/Irina_Nevskaya_Lawyer-1.webp",
+      "website": "",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -653,6 +925,10 @@ export const posts: BlogFeedPost[] = [
       "family-live",
       "konstantin-stories"
     ],
+    "slug": {
+      "en": "children-suddenly-lit-a-fire-on-the-ground-without-any-warning",
+      "ru": "dieti-vniezapno-zhghli-kostier-priamo-na-ziemlie-biez-vsiakogho-priedupriezhdieniia"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -676,6 +952,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6ef675185f7b232036cf",
       "ru": "69b171296e5564436d20df33"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -689,6 +974,10 @@ export const posts: BlogFeedPost[] = [
       "design",
       "dubai"
     ],
+    "slug": {
+      "en": "bringing-ryazan-innovations-to-the-dubai-market-inko-energy-case",
+      "ru": "vyvodim-riazanskiie-innovatsii-na-rynok-dubaia-kieis-inko-energy"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -712,6 +1001,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6ef775185f7b232036d9",
       "ru": "69b171296e5564436d20deee"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -725,6 +1023,10 @@ export const posts: BlogFeedPost[] = [
       "design",
       "dubai"
     ],
+    "slug": {
+      "en": "alistera-creating-a-visual-code-for-a-new-space-in-the-heart-of-dubai",
+      "ru": "alistera-sozdaiu-vizualnyi-kod-dlia-novogho-prostranstva-v-sierdtsie-dubaia"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -748,6 +1050,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6ef775185f7b232036e2",
       "ru": "69b171296e5564436d20df35"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -763,6 +1074,10 @@ export const posts: BlogFeedPost[] = [
       "dubai",
       "framer"
     ],
+    "slug": {
+      "en": "framer-final-report-the-year-that-made-me-top",
+      "ru": "finalnyi-otchiet-framer-god-kotoryi-sdielal-mienia-topom"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -786,6 +1101,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6ef875185f7b232036eb",
       "ru": "69c63d7d5ad6d7c432b0ddb8"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -799,6 +1123,10 @@ export const posts: BlogFeedPost[] = [
       "design",
       "dubai"
     ],
+    "slug": {
+      "en": "visual-designer-for-zulya-beauty",
+      "ru": "vizualnyi-konstruktor-dlia-zulya-beauty"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -822,6 +1150,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6ef975185f7b232036f6",
       "ru": "69b171296e5564436d20df36"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -834,6 +1171,10 @@ export const posts: BlogFeedPost[] = [
       "cv",
       "design"
     ],
+    "slug": {
+      "en": "web-application-with-ai-for-startup-fundmates",
+      "ru": "fundmates-ai-app-cv"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -857,6 +1198,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6efa75185f7b232036fe",
       "ru": "69ca3db05a40a2cc911bdf70"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -870,6 +1220,10 @@ export const posts: BlogFeedPost[] = [
       "design",
       "moscow"
     ],
+    "slug": {
+      "en": "designs-for-letoile-beauty-weekend-and-more",
+      "ru": "dizainy-dlia-letoile-beauty-weekend-i-nie-tolko"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -893,6 +1247,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6efa75185f7b23203706",
       "ru": "69b171296e5564436d20df34"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -905,6 +1268,10 @@ export const posts: BlogFeedPost[] = [
       "cv",
       "design"
     ],
+    "slug": {
+      "en": "sell-one-video-turning-future-video-income-into-money-today",
+      "ru": "fundmates-video-app"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -928,6 +1295,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6efb75185f7b2320370f",
       "ru": "69ca2451c776c79d43383fc0"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -940,6 +1316,10 @@ export const posts: BlogFeedPost[] = [
       "cv",
       "design"
     ],
+    "slug": {
+      "en": "branding-for-the-driven-podcast",
+      "ru": "the-driven-branding"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -963,6 +1343,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6efc75185f7b23203717",
       "ru": "69ca245cc776c79d43383fc6"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -975,6 +1364,10 @@ export const posts: BlogFeedPost[] = [
       "cv",
       "design"
     ],
+    "slug": {
+      "en": "website-design-for-the-driven-podcast",
+      "ru": "the-driven-web-site"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -998,6 +1391,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6efc75185f7b2320371f",
       "ru": "69ca245fc776c79d43383fcc"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1016,6 +1418,10 @@ export const posts: BlogFeedPost[] = [
       "irina-articles",
       "konstantin-stories"
     ],
+    "slug": {
+      "en": "interface-of-my-life",
+      "ru": "intierfieis-moiei-zhizni"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1039,6 +1445,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6efd75185f7b23203727",
       "ru": "69b171296e5564436d20df2c"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1052,6 +1467,10 @@ export const posts: BlogFeedPost[] = [
       "dubai",
       "family-live"
     ],
+    "slug": {
+      "en": "dasha-in-antonia-pizza-pasta-and-a-little-art",
+      "ru": "dasha-v-antonii-pitstsa-pasta-i-niemnogho-iskusstva"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1075,6 +1494,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6efe75185f7b2320373b",
       "ru": "69c63149d544fa91f328ba1d"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1087,6 +1515,10 @@ export const posts: BlogFeedPost[] = [
       "dubai",
       "family-live"
     ],
+    "slug": {
+      "en": "we-visited-teamlab-phenomena-in-abu-dhabi",
+      "ru": "byli-v-teamlab-phenomena-v-abu-dhabi"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1110,6 +1542,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6eff75185f7b23203744",
       "ru": "69b171296e5564436d20df2b"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1123,6 +1564,10 @@ export const posts: BlogFeedPost[] = [
       "d2q-studio",
       "design"
     ],
+    "slug": {
+      "en": "my-site-looks-very-nice-on-ios26",
+      "ru": "ochien-krasivo-smotritsia-moi-sait-na-ios26"
+    },
     "primaryTag": {
       "en": "Alexander Nevsky",
       "ru": "Александр Невский"
@@ -1146,6 +1591,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6eff75185f7b2320374c",
       "ru": "69b171296e5564436d20df2a"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1159,6 +1613,10 @@ export const posts: BlogFeedPost[] = [
       "d2q-studio",
       "design"
     ],
+    "slug": {
+      "en": "testing-higgsfield",
+      "ru": "tiestiruia-higgsfield"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -1182,6 +1640,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0075185f7b23203755",
       "ru": "69b171296e5564436d20df20"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1197,6 +1664,10 @@ export const posts: BlogFeedPost[] = [
       "irina-articles",
       "konstantin-stories"
     ],
+    "slug": {
+      "en": "we-went-to-the-classical",
+      "ru": "khodili-na-klassichieskoie"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1220,6 +1691,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0175185f7b2320375d",
       "ru": "69b171296e5564436d20df1f"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1233,6 +1713,10 @@ export const posts: BlogFeedPost[] = [
       "design",
       "dubai"
     ],
+    "slug": {
+      "en": "concept-for-budovsky",
+      "ru": "kontsieptsiia-dlia-budovskogho"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1256,6 +1740,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0175185f7b23203768",
       "ru": "69b171296e5564436d20df1e"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1270,6 +1763,10 @@ export const posts: BlogFeedPost[] = [
       "family-live",
       "konstantin-stories"
     ],
+    "slug": {
+      "en": "sanya-and-kostya-created-various-crafts",
+      "ru": "sania-i-kostia-sotvorili-razlichnyie-podielki"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1293,6 +1790,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0275185f7b23203771",
       "ru": "69b171296e5564436d20df1d"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1306,6 +1812,10 @@ export const posts: BlogFeedPost[] = [
       "d2q-studio",
       "design"
     ],
+    "slug": {
+      "en": "d2q-studio-2",
+      "ru": "d2q-studio"
+    },
     "primaryTag": {
       "en": "Alexander Nevsky",
       "ru": "Александр Невский"
@@ -1329,6 +1839,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0275185f7b2320377b",
       "ru": "69b171296e5564436d20df1b"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1342,6 +1861,10 @@ export const posts: BlogFeedPost[] = [
       "family-live",
       "konstantin-stories"
     ],
+    "slug": {
+      "en": "konstantin-is-a-football-player",
+      "ru": "konstantin-iavliaietsia-futbolist"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1365,6 +1888,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0375185f7b23203784",
       "ru": "69b171296e5564436d20df1c"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1377,6 +1909,10 @@ export const posts: BlogFeedPost[] = [
       "alexander-live",
       "dubai"
     ],
+    "slug": {
+      "en": "in-front-of-the-barbershop",
+      "ru": "pieried-barbiershopom"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1400,6 +1936,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0475185f7b2320378d",
       "ru": "69b171296e5564436d20df1a"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1412,6 +1957,10 @@ export const posts: BlogFeedPost[] = [
       "alexander-live",
       "dubai"
     ],
+    "slug": {
+      "en": "parking-lot-incident-spinneys",
+      "ru": "sluchai-na-parkovkie-spinneys"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1435,6 +1984,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0475185f7b23203795",
       "ru": "69b171296e5564436d20df19"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1448,6 +2006,10 @@ export const posts: BlogFeedPost[] = [
       "design",
       "dubai"
     ],
+    "slug": {
+      "en": "stand-design-for-dr-budovsky-s-clinic",
+      "ru": "dizain-stienda-dlia-kliniki-doktora-budovskogho"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1471,6 +2033,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0575185f7b2320379d",
       "ru": "69b171296e5564436d20df04"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1485,6 +2056,10 @@ export const posts: BlogFeedPost[] = [
       "family-live",
       "konstantin-stories"
     ],
+    "slug": {
+      "en": "konstantin-human-and-becky-corgi-dog",
+      "ru": "konstantin-chieloviek-i-biekki-korghi-pies"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1508,6 +2083,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0575185f7b232037a6",
       "ru": "69b171296e5564436d20df21"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1522,6 +2106,10 @@ export const posts: BlogFeedPost[] = [
       "dubai",
       "framer"
     ],
+    "slug": {
+      "en": "i-made-a-quick-business-card-website-for-my-friends",
+      "ru": "sdielal-dlia-druziei-bystryi-sait-vizitku"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1545,6 +2133,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0675185f7b232037b0",
       "ru": "69b171296e5564436d20df06"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1557,6 +2154,10 @@ export const posts: BlogFeedPost[] = [
       "alexander-live",
       "design"
     ],
+    "slug": {
+      "en": "my-personal-website-nevsky-me",
+      "ru": "nevsky-me"
+    },
     "primaryTag": {
       "en": "Alexander Nevsky",
       "ru": "Александр Невский"
@@ -1580,6 +2181,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0775185f7b232037ba",
       "ru": "69b171296e5564436d20df10"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1594,6 +2204,10 @@ export const posts: BlogFeedPost[] = [
       "family-live",
       "irina-articles"
     ],
+    "slug": {
+      "en": "mini-and-maxi-a-family-car-park-in-which-everyone-has-their-place",
+      "ru": "mini-maxi-siemieinyi-avtopark-v-kotorom-kazhdyi-na-svoiom-miestie"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1617,6 +2231,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0775185f7b232037c2",
       "ru": "69b171296e5564436d20df05"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1629,6 +2252,10 @@ export const posts: BlogFeedPost[] = [
       "alexander-live",
       "dubai"
     ],
+    "slug": {
+      "en": "we-drive-around-jumeirah-at-night-in-a-minivan",
+      "ru": "goniaiem-po-nocham-po-dzhumieirie-na-minikie"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1652,6 +2279,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0875185f7b232037cc",
       "ru": "69b171296e5564436d20df17"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1666,6 +2302,10 @@ export const posts: BlogFeedPost[] = [
       "family-live",
       "irina-articles"
     ],
+    "slug": {
+      "en": "my-beauties",
+      "ru": "moi-krasavitsy"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1689,6 +2329,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0875185f7b232037d4",
       "ru": "69b171296e5564436d20def3"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1703,6 +2352,10 @@ export const posts: BlogFeedPost[] = [
       "family-live",
       "irina-articles"
     ],
+    "slug": {
+      "en": "after-kindergarten-in-heal",
+      "ru": "poslie-sadika-v-heal"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1726,6 +2379,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0975185f7b232037de",
       "ru": "69b171296e5564436d20defa"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1738,6 +2400,10 @@ export const posts: BlogFeedPost[] = [
       "alexander-live",
       "dubai"
     ],
+    "slug": {
+      "en": "rain-in-dubai",
+      "ru": "dozhd-v-dubaie"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1761,6 +2427,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0a75185f7b232037e8",
       "ru": "69b171296e5564436d20def5"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1773,6 +2448,10 @@ export const posts: BlogFeedPost[] = [
       "alexander-live",
       "dubai"
     ],
+    "slug": {
+      "en": "keys-to-identity",
+      "ru": "kliuchi-ot-lichnosti"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1796,6 +2475,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0a75185f7b232037f0",
       "ru": "69b171296e5564436d20def6"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1812,6 +2500,10 @@ export const posts: BlogFeedPost[] = [
       "irina-articles",
       "konstantin-stories"
     ],
+    "slug": {
+      "en": "we-went-to-la-bayadere",
+      "ru": "my-khodili-na-baiadierku"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1835,6 +2527,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0b75185f7b232037f8",
       "ru": "69b171296e5564436d20def7"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1847,6 +2548,10 @@ export const posts: BlogFeedPost[] = [
       "alexander-live",
       "dubai"
     ],
+    "slug": {
+      "en": "this-was-the-sea-bay-on-february-15-two-thousand-and-twenty-five",
+      "ru": "eto-iavlialos-moriem-zaliv-15-fievralia-dvie-tysiachi-dvadtsat-piatogho-ghoda"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1870,6 +2575,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0c75185f7b23203804",
       "ru": "69b171296e5564436d20def8"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1883,6 +2597,10 @@ export const posts: BlogFeedPost[] = [
       "design",
       "dubai"
     ],
+    "slug": {
+      "en": "organized-a-beautiful-photo-shoot-for-the-site",
+      "ru": "orghanizoval-krasivuiu-fotosiessiiu-dlia-saita"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1906,6 +2624,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0d75185f7b2320380b",
       "ru": "69b171296e5564436d20def4"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1920,6 +2647,10 @@ export const posts: BlogFeedPost[] = [
       "dubai",
       "family-live"
     ],
+    "slug": {
+      "en": "we-went-to-sanka-s-school",
+      "ru": "khodili-k-sanku-v-shkolu"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1943,6 +2674,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0d75185f7b23203814",
       "ru": "69b171296e5564436d20def9"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1956,6 +2696,10 @@ export const posts: BlogFeedPost[] = [
       "design",
       "dubai"
     ],
+    "slug": {
+      "en": "wio-said-yes-my-account-is-approved",
+      "ru": "wio-skazal-da-moi-schiot-approved"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -1979,6 +2723,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0e75185f7b2320381e",
       "ru": "69b171296e5564436d20df03"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -1993,6 +2746,10 @@ export const posts: BlogFeedPost[] = [
       "dubai",
       "family-live"
     ],
+    "slug": {
+      "en": "fooling-around-with-dasha",
+      "ru": "durachimsia-s-dashiei"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -2016,6 +2773,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0f75185f7b23203827",
       "ru": "69b171296e5564436d20df18"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2028,6 +2794,10 @@ export const posts: BlogFeedPost[] = [
       "alexander-live",
       "design"
     ],
+    "slug": {
+      "en": "my-new-branding",
+      "ru": "my-new-own-branding"
+    },
     "primaryTag": {
       "en": "Alexander Nevsky",
       "ru": "Александр Невский"
@@ -2051,6 +2821,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f0f75185f7b23203831",
       "ru": "69b171296e5564436d20defd"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2067,6 +2846,10 @@ export const posts: BlogFeedPost[] = [
       "family-live",
       "konstantin-stories"
     ],
+    "slug": {
+      "en": "hidden-cafe-in-december",
+      "ru": "hidden-cafe-v-diekabrie"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -2090,6 +2873,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1075185f7b23203838",
       "ru": "69b171296e5564436d20def1"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2102,6 +2894,10 @@ export const posts: BlogFeedPost[] = [
       "cv",
       "design"
     ],
+    "slug": {
+      "en": "worked-as-a-designer-at-dubai-s-yango-pay",
+      "ru": "working-with-yango-pay"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -2125,6 +2921,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1075185f7b23203844",
       "ru": "69ca3d235a40a2cc911bdf38"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2138,6 +2943,10 @@ export const posts: BlogFeedPost[] = [
       "design",
       "dubai"
     ],
+    "slug": {
+      "en": "licensed-web-developer-legally-clicking-pixels-in-dubai",
+      "ru": "licence"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -2161,6 +2970,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1175185f7b2320384c",
       "ru": "69b171296e5564436d20df02"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2173,6 +2991,10 @@ export const posts: BlogFeedPost[] = [
       "cv",
       "design"
     ],
+    "slug": {
+      "en": "created-interfaces-for-a-dubai-neobank",
+      "ru": "keytom-app-cv"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -2196,6 +3018,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1275185f7b23203855",
       "ru": "69ca3d305a40a2cc911bdf40"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2208,6 +3039,10 @@ export const posts: BlogFeedPost[] = [
       "cv",
       "design"
     ],
+    "slug": {
+      "en": "managed-a-group-of-designers-at-square-meter",
+      "ru": "m2-realty-platform"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -2231,6 +3066,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1375185f7b2320385c",
       "ru": "69ca3d3d5a40a2cc911bdf48"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2242,6 +3086,10 @@ export const posts: BlogFeedPost[] = [
     "tags": [
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "vladimir-nevsky-the-man-who-measured-the-expanse-with-a-tourist-s-step",
+      "ru": "vladimir-nievskii-chieloviek-izmierivshii-shir-turistskim-shaghom"
+    },
     "primaryTag": {
       "en": "Vladimir Nevsky",
       "ru": "Владимир Невский"
@@ -2265,6 +3113,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1375185f7b23203863",
       "ru": "69c4f4f8cb1ffb9abea24f49"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": true
   },
   {
@@ -2277,6 +3134,10 @@ export const posts: BlogFeedPost[] = [
       "cv",
       "design"
     ],
+    "slug": {
+      "en": "managed-his-own-art-cafe-in-the-forest-remotely-from-dubai",
+      "ru": "vlesu-cv"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -2300,6 +3161,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1475185f7b2320386a",
       "ru": "69ca2495c776c79d43383fd5"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2312,6 +3182,10 @@ export const posts: BlogFeedPost[] = [
       "cv",
       "design"
     ],
+    "slug": {
+      "en": "made-beautiful-branding-for-the-project-of-my-wife-and-her-friend-two-elements",
+      "ru": "two-elements"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -2335,6 +3209,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1575185f7b23203872",
       "ru": "69ca24aac776c79d43383fdb"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2347,6 +3230,10 @@ export const posts: BlogFeedPost[] = [
       "cv",
       "design"
     ],
+    "slug": {
+      "en": "made-a-landing-page-for-pacjourneys-on-framer",
+      "ru": "pac-journeys"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -2370,6 +3257,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1575185f7b23203879",
       "ru": "69ca24b9c776c79d43383fe1"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2382,6 +3278,10 @@ export const posts: BlogFeedPost[] = [
       "cv",
       "design"
     ],
+    "slug": {
+      "en": "designed-and-created-a-website-for-fellow-lawyers-connection-middle-east",
+      "ru": "connection-middle-east-cv"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -2405,6 +3305,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1675185f7b23203880",
       "ru": "69ca3d415a40a2cc911bdf50"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2417,6 +3326,10 @@ export const posts: BlogFeedPost[] = [
       "cv",
       "design"
     ],
+    "slug": {
+      "en": "branding-for-the-wellara-medical-brand",
+      "ru": "wellara-branding-cv"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -2440,6 +3353,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1675185f7b23203887",
       "ru": "69ca3d545a40a2cc911bdf58"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2452,6 +3374,10 @@ export const posts: BlogFeedPost[] = [
       "alexander-live",
       "dubai"
     ],
+    "slug": {
+      "en": "les-benjamins-addicted-2",
+      "ru": "les-benjamins-addicted"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -2475,6 +3401,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1775185f7b2320388e",
       "ru": "69b171296e5564436d20df07"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2488,6 +3423,10 @@ export const posts: BlogFeedPost[] = [
       "design",
       "webflow"
     ],
+    "slug": {
+      "en": "designed-a-website-for-epicweb3-on-webflow",
+      "ru": "svierstal-sait-dlia-epicweb3-na-webflow"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -2511,6 +3450,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1875185f7b23203896",
       "ru": "69ca3d6a5a40a2cc911bdf60"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2523,6 +3471,10 @@ export const posts: BlogFeedPost[] = [
       "alexander-live",
       "threshold-signals"
     ],
+    "slug": {
+      "en": "the-concept-of-a-metaverse-that-will-help-humanity-move-to-a-new-level-of-development",
+      "ru": "kontsieptsiia-mietavsieliennoi-kotoraia-pomozhiet-chieloviechiestvu-pierieiti-na-novyi-urovien-razvitiia"
+    },
     "primaryTag": {
       "en": "Threshold",
       "ru": "Threshold"
@@ -2546,6 +3498,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1975185f7b2320389d",
       "ru": "69b171296e5564436d20df0d"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2559,6 +3520,10 @@ export const posts: BlogFeedPost[] = [
       "design",
       "moscow"
     ],
+    "slug": {
+      "en": "website-cognitive-strategies-first-design-draft",
+      "ru": "sait-koghnitivnyie-stratieghii-piervyi-draft-dizaina"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -2582,6 +3547,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1975185f7b232038a4",
       "ru": "69b171296e5564436d20df08"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2594,6 +3568,10 @@ export const posts: BlogFeedPost[] = [
       "alexander-live",
       "dubai"
     ],
+    "slug": {
+      "en": "a-little-more-than-one-year-in-dubai",
+      "ru": "niemnogho-bolshie-chiem-odin-ghod-v-dubaie"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -2617,6 +3595,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1a75185f7b232038ad",
       "ru": "69b171296e5564436d20df11"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2630,6 +3617,10 @@ export const posts: BlogFeedPost[] = [
       "daria-stories",
       "dubai"
     ],
+    "slug": {
+      "en": "me-and-tesla",
+      "ru": "ia-i-tiesla"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -2653,6 +3644,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1a75185f7b232038b5",
       "ru": "69b171296e5564436d20df13"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2666,6 +3666,10 @@ export const posts: BlogFeedPost[] = [
       "dubai",
       "vlesu-stories"
     ],
+    "slug": {
+      "en": "update-for-june-6-2023",
+      "ru": "apdieit-na-6-iiunia-2023-ghoda"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -2689,6 +3693,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1b75185f7b232038be",
       "ru": "69b171296e5564436d20df16"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2702,6 +3715,10 @@ export const posts: BlogFeedPost[] = [
       "moscow",
       "vlesu-stories"
     ],
+    "slug": {
+      "en": "the-menu-has-been-updated-for-the-summer-season-at-the-con-gelato-2-0-cafe",
+      "ru": "obnovili-mieniu-k-lietniemu-siezonu-v-kafie-con-gelato-2-0"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -2725,6 +3742,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1c75185f7b232038c7",
       "ru": "69b171296e5564436d20df14"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2739,6 +3765,10 @@ export const posts: BlogFeedPost[] = [
       "family-live",
       "konstantin-stories"
     ],
+    "slug": {
+      "en": "the-eldest-child-took-the-gold",
+      "ru": "starshii-riebienok-vzial-zoloto"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -2762,6 +3792,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1d75185f7b232038d0",
       "ru": "69b171296e5564436d20df15"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2775,6 +3814,10 @@ export const posts: BlogFeedPost[] = [
       "moscow",
       "vlesu-stories"
     ],
+    "slug": {
+      "en": "i-made-a-website-for-my-cafe-con-gelato-2-0-on-flexbe",
+      "ru": "sdielal-sait-svoiegho-kafie-con-gelato-2-0-na-flexbe"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -2798,6 +3841,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1d75185f7b232038da",
       "ru": "69b171296e5564436d20df0c"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2811,6 +3863,10 @@ export const posts: BlogFeedPost[] = [
       "family-live",
       "konstantin-stories"
     ],
+    "slug": {
+      "en": "children-earned-awards",
+      "ru": "dieti-zarabotali-naghrady"
+    },
     "primaryTag": {
       "en": "Family",
       "ru": "Семья"
@@ -2834,6 +3890,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1e75185f7b232038e3",
       "ru": "69b171296e5564436d20df12"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2851,6 +3916,10 @@ export const posts: BlogFeedPost[] = [
       "irina-articles",
       "konstantin-stories"
     ],
+    "slug": {
+      "en": "already-nine-9-months-in-dubai",
+      "ru": "uzhie-dieviat-9-miesiatsiev-v-dubaie"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -2874,6 +3943,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1e75185f7b232038ec",
       "ru": "69b171296e5564436d20df0a"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2889,6 +3967,10 @@ export const posts: BlogFeedPost[] = [
       "family-live",
       "konstantin-stories"
     ],
+    "slug": {
+      "en": "children-fought-and-won",
+      "ru": "dieti-borolis-i-pobiedili"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -2912,6 +3994,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1f75185f7b232038f9",
       "ru": "69b171296e5564436d20df01"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2923,6 +4014,10 @@ export const posts: BlogFeedPost[] = [
     "tags": [
       "design"
     ],
+    "slug": {
+      "en": "managed-a-group-of-designers-at-square-meter-2",
+      "ru": "rukovodil-ghruppoi-dizainierov-v-mietrie-kvadratnom"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -2946,6 +4041,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f1f75185f7b23203904",
       "ru": "69b171296e5564436d20defe"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2960,6 +4064,10 @@ export const posts: BlogFeedPost[] = [
       "dubai",
       "framer"
     ],
+    "slug": {
+      "en": "mobile-application-prototype-for-keytom",
+      "ru": "prototip-mobilnogho-prilozhieniia-dlia-keytom"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -2983,6 +4091,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2075185f7b2320390b",
       "ru": "69b171296e5564436d20df0f"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -2999,6 +4116,10 @@ export const posts: BlogFeedPost[] = [
       "irina-articles",
       "konstantin-stories"
     ],
+    "slug": {
+      "en": "september-1-in-dubai",
+      "ru": "1-sientiabria-v-dubaie"
+    },
     "primaryTag": {
       "en": "Dubai",
       "ru": "Дубай"
@@ -3022,6 +4143,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2175185f7b23203915",
       "ru": "69b171296e5564436d20df22"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -3034,6 +4164,10 @@ export const posts: BlogFeedPost[] = [
       "design",
       "moscow"
     ],
+    "slug": {
+      "en": "easy-and-no-problem",
+      "ru": "lieghko-i-biez-probliem"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -3057,6 +4191,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2175185f7b23203921",
       "ru": "69b171296e5564436d20df09"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -3070,6 +4213,10 @@ export const posts: BlogFeedPost[] = [
       "family-live",
       "moscow"
     ],
+    "slug": {
+      "en": "me-and-dasha",
+      "ru": "ia-i-dashka"
+    },
     "primaryTag": {
       "en": "Family",
       "ru": "Семья"
@@ -3093,6 +4240,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2275185f7b23203929",
       "ru": "69b171296e5564436d20def2"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -3106,6 +4262,10 @@ export const posts: BlogFeedPost[] = [
       "framer",
       "moscow"
     ],
+    "slug": {
+      "en": "me-and-framer-2",
+      "ru": "me-and-framer"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -3129,6 +4289,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2275185f7b23203932",
       "ru": "69b171296e5564436d20df0b"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -3142,6 +4311,10 @@ export const posts: BlogFeedPost[] = [
       "moscow",
       "vlesu-stories"
     ],
+    "slug": {
+      "en": "in-the-forest",
+      "ru": "na-raienie-v-liesu"
+    },
     "primaryTag": {
       "en": "Alexander Nevsky",
       "ru": "Александр Невский"
@@ -3165,6 +4338,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2375185f7b2320393b",
       "ru": "69b171296e5564436d20df2e"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -3178,6 +4360,10 @@ export const posts: BlogFeedPost[] = [
       "design",
       "moscow"
     ],
+    "slug": {
+      "en": "this-is-the-very-first-post-on-this-blog",
+      "ru": "eto-samyi-piervyi-post-v-etom-bloghie"
+    },
     "primaryTag": {
       "en": "Alexander Nevsky",
       "ru": "Александр Невский"
@@ -3201,6 +4387,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2375185f7b23203944",
       "ru": "69b171296e5564436d20df0e"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -3213,6 +4408,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "preface",
+      "ru": "priedisloviie-k-knighie-izmierim-shir-turistskim-shaghom"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -3236,6 +4435,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2475185f7b2320394d",
       "ru": "69c6b1cd4928b69a64765f46"
     },
+    "author": {
+      "id": "59b6229ab4ffe22686d2a880",
+      "slug": "juriy-nevsky",
+      "name": "Юрий Невский",
+      "bio": "Автор семейной литературной линии. Здесь будет собираться проза, архивные публикации и рассказы Юрия Невского",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/yurii_nevskii-3.webp",
+      "website": "",
+      "location": "Дзерджинск, Россия"
+    },
     "isVladimir": true
   },
   {
@@ -3248,6 +4456,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "about-the-tourist-code",
+      "ru": "o-kodekse-turista"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -3271,6 +4483,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2575185f7b23203954",
       "ru": "69c6b1cd4928b69a64765f4c"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -3283,6 +4504,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "is-it-really-that-easy-to-light-a-fire",
+      "ru": "tak-li-uzh-prosto-razzhech-koster"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -3306,6 +4531,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2575185f7b2320395b",
       "ru": "69c6b1ce4928b69a64765f51"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -3318,6 +4552,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "lost-in-the-taiga",
+      "ru": "zabludilsya-v-tayge"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -3341,6 +4579,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2675185f7b23203962",
       "ru": "69c6b1ce4928b69a64765f56"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -3353,6 +4600,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "meeting-with-a-bear",
+      "ru": "vstrecha-s-medvedem"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -3376,6 +4627,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2775185f7b23203968",
       "ru": "69c6b1ce4928b69a64765f5b"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -3388,6 +4648,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "re-educated-by-nature",
+      "ru": "perevospitala-priroda"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -3411,6 +4675,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2775185f7b2320396e",
       "ru": "69c6b1ce4928b69a64765f60"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -3423,6 +4696,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "the-only-things-more-dangerous-than-mountains-are-mountains",
+      "ru": "opasney-gor-mogut-byt-tolko-gory"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -3446,6 +4723,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2875185f7b23203974",
       "ru": "69c6b1ce4928b69a64765f65"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -3458,6 +4744,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "this-is-the-job-saving-people",
+      "ru": "takaya-rabota-spasat-lyudey"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -3481,6 +4771,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2875185f7b2320397a",
       "ru": "69c6b1ce4928b69a64765f6a"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -3493,6 +4792,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "untrodden-paths-of-khamar-daban",
+      "ru": "nehozhenymi-tropami-hamar-dabana"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -3516,6 +4819,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2975185f7b23203980",
       "ru": "69c6b1ce4928b69a64765f6f"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -3528,6 +4840,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "the-attraction-of-khan-uly",
+      "ru": "prityazhenie-han-uly"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -3551,6 +4867,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2a75185f7b23203986",
       "ru": "69c6b1ce4928b69a64765f74"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -3563,6 +4888,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "for-health-with-a-backpack",
+      "ru": "za-zdorovem-s-ryukzakom"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -3586,6 +4915,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2a75185f7b2320398c",
       "ru": "69c6b1ce4928b69a64765f79"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -3598,6 +4936,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "to-meet-with-waterfalls",
+      "ru": "na-vstrechu-s-vodopadami"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -3621,6 +4963,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2b75185f7b23203992",
       "ru": "69c6b1ce4928b69a64765f7e"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -3633,6 +4984,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "where-the-rhododendron-blooms",
+      "ru": "tam-gde-tsvetet-rododendron"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -3656,6 +5011,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2c75185f7b23203998",
       "ru": "69c6b1ce4928b69a64765f83"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -3668,6 +5032,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "we-are-ready-for-the-assault-on-the-barguzinsky-ridge",
+      "ru": "k-shturmu-barguzinskogo-hrebta-gotovy"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -3691,6 +5059,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2c75185f7b2320399e",
       "ru": "69c6b1ce4928b69a64765f88"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -3703,6 +5080,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "the-pass-was-called-dream",
+      "ru": "pereval-nazvali-mechta"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -3726,6 +5107,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2d75185f7b232039a4",
       "ru": "69c6b1ce4928b69a64765f8d"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -3738,6 +5128,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "all-about-the-hedgehog",
+      "ru": "vse-pro-yozhika"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -3761,6 +5155,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2d75185f7b232039aa",
       "ru": "69c6b1ce4928b69a64765f92"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -3773,6 +5176,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "to-the-ugryum-river",
+      "ru": "na-ugryum-reku"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -3796,6 +5203,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2e75185f7b232039b0",
       "ru": "69c6b1cf4928b69a64765f97"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -3808,6 +5224,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "crossing",
+      "ru": "pereprava"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -3831,6 +5251,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2f75185f7b232039b6",
       "ru": "69c6b1cf4928b69a64765f9c"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -3843,6 +5272,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "last-pass",
+      "ru": "posledniy-pereval"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -3866,6 +5299,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f2f75185f7b232039bc",
       "ru": "69c6b1cf4928b69a64765fa1"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -3878,6 +5320,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "listen-the-river-beats-into-the-rocks",
+      "ru": "slushay-rechka-betsya-v-skaly"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -3901,6 +5347,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3075185f7b232039c2",
       "ru": "69c6b1cf4928b69a64765fa6"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -3913,6 +5368,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "there-is-such-a-river-sagan-sair",
+      "ru": "est-takaya-rechka-sagan-sayr"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -3936,6 +5395,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3075185f7b232039c8",
       "ru": "69c6b1cf4928b69a64765fab"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -3948,6 +5416,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "vertex",
+      "ru": "vershina"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -3971,6 +5443,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3175185f7b232039ce",
       "ru": "69c6b1cf4928b69a64765fb0"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -3983,6 +5464,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "breath-of-volcanoes",
+      "ru": "dyhanie-vulkanov"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4006,6 +5491,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3275185f7b232039d4",
       "ru": "69c6b1cf4928b69a64765fb5"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4018,6 +5512,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "in-the-land-of-mountain-peaks-and-amazing-people",
+      "ru": "v-krayu-gornyh-vershin-i-udivitelnyh-lyudey"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4041,6 +5539,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3275185f7b232039da",
       "ru": "69c6b1cf4928b69a64765fba"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4053,6 +5560,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "vertical-is-assembling-again",
+      "ru": "vertikal-sobiraetsya-vnov"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4076,6 +5587,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3375185f7b232039e0",
       "ru": "69c6b1cf4928b69a64765fbf"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4088,6 +5608,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "meeting-on-the-route",
+      "ru": "vstrecha-na-marshrute"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4111,6 +5635,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3475185f7b232039e6",
       "ru": "69c6b1cf4928b69a64765fc4"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4123,6 +5656,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "in-the-land-of-mountain-peaks",
+      "ru": "v-krayu-gornyh-vershin"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4146,6 +5683,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3475185f7b232039ec",
       "ru": "69c6b1cf4928b69a64765fc9"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4158,6 +5704,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "on-energy-day",
+      "ru": "v-den-energetiki"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4181,6 +5731,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3575185f7b232039f2",
       "ru": "69c6b1cf4928b69a64765fce"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4193,6 +5752,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "hurry-up-to-see-the-land",
+      "ru": "toropites-videt-zemlyu"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4216,6 +5779,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3575185f7b232039f8",
       "ru": "69c6b1cf4928b69a64765fd3"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4228,6 +5800,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "in-the-footsteps-of-the-pioneers",
+      "ru": "po-sledam-pervoprohodtsev"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4251,6 +5827,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3675185f7b232039fe",
       "ru": "69c6b1cf4928b69a64765fd8"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4263,6 +5848,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "the-charm-of-the-eyes",
+      "ru": "ochey-ocharovane"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4286,6 +5875,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3775185f7b23203a04",
       "ru": "69c6b1d04928b69a64765fdd"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4298,6 +5896,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "across-the-seas-across-the-waves",
+      "ru": "po-moryam-po-volnam"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4321,6 +5923,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3775185f7b23203a0a",
       "ru": "69c6b1d04928b69a64765fe2"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4333,6 +5944,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "new-impressions",
+      "ru": "novye-vpechatleniya"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4356,6 +5971,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3875185f7b23203a10",
       "ru": "69c6b1d04928b69a64765fe7"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4368,6 +5992,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "bouquet-on-the-table",
+      "ru": "buket-na-stole"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4391,6 +6019,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3875185f7b23203a16",
       "ru": "69c6b1d04928b69a64765fec"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4403,6 +6040,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "for-the-goldfish",
+      "ru": "za-zolotoy-rybkoy"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4426,6 +6067,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3975185f7b23203a1c",
       "ru": "69c6b1d04928b69a64765ff1"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4438,6 +6088,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "brigantine-raises-sails",
+      "ru": "brigantina-podnimaet-parusa"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4461,6 +6115,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3a75185f7b23203a22",
       "ru": "69c6b1d04928b69a64765ff6"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4473,6 +6136,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "ode-on-matches",
+      "ru": "oda-o-spichkah"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4496,6 +6163,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3a75185f7b23203a28",
       "ru": "69c6b1d04928b69a64765ffb"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4508,6 +6184,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "what-is-happiness",
+      "ru": "chto-takoe-schaste"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4531,6 +6211,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3b75185f7b23203a2e",
       "ru": "69c6b1d04928b69a64766000"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4543,6 +6232,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "by-the-bluest-sea",
+      "ru": "u-samogo-sinego-morya"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4566,6 +6259,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3c75185f7b23203a34",
       "ru": "69c6b1d04928b69a64766005"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4578,6 +6280,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "oh-bathhouse",
+      "ru": "ah-banka"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4601,6 +6307,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3c75185f7b23203a3a",
       "ru": "69c6b1d04928b69a6476600a"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4613,6 +6328,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "energy-of-friendship",
+      "ru": "energiya-druzhby"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4636,6 +6355,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3d75185f7b23203a40",
       "ru": "69c6b1d04928b69a6476600f"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4648,6 +6376,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "before-you-is-khamar-daban",
+      "ru": "pered-vami-hamar-daban"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4671,6 +6403,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3d75185f7b23203a46",
       "ru": "69c6b1d04928b69a64766014"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4683,6 +6424,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "echoes-of-the-great-transition",
+      "ru": "eho-velikogo-perehoda"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4706,6 +6451,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3e75185f7b23203a4c",
       "ru": "69c6b1d04928b69a64766019"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4718,6 +6472,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "it-was-recently-it-was-a-long-time-ago",
+      "ru": "eto-bylo-nedavno-eto-bylo-davno"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4741,6 +6499,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3f75185f7b23203a52",
       "ru": "69c6b1d04928b69a6476601e"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4753,6 +6520,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "good-in-the-winter-forest",
+      "ru": "horosho-v-zimnem-lesu"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4776,6 +6547,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f3f75185f7b23203a58",
       "ru": "69c6b1d04928b69a64766023"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4788,6 +6568,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "for-those-who-are-on-the-way",
+      "ru": "za-teh-kto-v-puti"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4811,6 +6595,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f4075185f7b23203a5e",
       "ru": "69c6b1d14928b69a64766028"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4823,6 +6616,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "alone-with-nature",
+      "ru": "naedine-s-prirodoy"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4846,6 +6643,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f4075185f7b23203a64",
       "ru": "69c6b1d14928b69a6476602d"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4858,6 +6664,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "time-to-collect-stones",
+      "ru": "vremya-sobirat-kamni"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4881,6 +6691,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f4175185f7b23203a6a",
       "ru": "69c6b1d14928b69a64766032"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4893,6 +6712,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "the-more-difficult-the-path-the-stronger-the-feeling-of-life",
+      "ru": "chem-trudnee-put-tem-silnee-oschuschenie-zhizni"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4916,6 +6739,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f4275185f7b23203a70",
       "ru": "69c6b1d14928b69a64766037"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4928,6 +6760,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "stone-labyrinth",
+      "ru": "kamennyy-labirint"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4951,6 +6787,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f4275185f7b23203a76",
       "ru": "69c6b1d14928b69a6476603c"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4963,6 +6808,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "clocks-and-fates",
+      "ru": "chasy-i-sudby"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -4986,6 +6835,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f4375185f7b23203a7c",
       "ru": "69c6b1d14928b69a64766041"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -4998,6 +6856,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "letter-from-neptune",
+      "ru": "pismo-ot-neptuna"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -5021,6 +6883,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f4375185f7b23203a82",
       "ru": "69c6b1d14928b69a64766046"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -5033,6 +6904,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "about-childhood",
+      "ru": "o-detstve"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -5056,6 +6931,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f4475185f7b23203a88",
       "ru": "69c6b1d14928b69a6476604b"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -5068,6 +6952,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "be-healthy-summer-resident",
+      "ru": "bud-zdorov-dachnik"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -5091,6 +6979,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f4575185f7b23203a8e",
       "ru": "69c6b1d14928b69a64766050"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -5103,6 +7000,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "and-the-forest-was-noisy",
+      "ru": "a-les-shumel"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -5126,6 +7027,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f4575185f7b23203a94",
       "ru": "69c6b1d14928b69a64766055"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -5138,6 +7048,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "hardworking-woodpecker-bird",
+      "ru": "trudolyubivaya-ptitsa-dyatel"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -5161,6 +7075,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f4675185f7b23203a9a",
       "ru": "69c6b1d14928b69a6476605a"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -5173,6 +7096,10 @@ export const posts: BlogFeedPost[] = [
       "heritage",
       "vladimir-trails"
     ],
+    "slug": {
+      "en": "tomorrow-we-ll-be-on-the-road-again",
+      "ru": "zavtra-snova-v-dorogu"
+    },
     "primaryTag": {
       "en": "Heritage",
       "ru": "Наследие"
@@ -5196,6 +7123,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f4675185f7b23203aa0",
       "ru": "69c6b1d14928b69a6476605f"
     },
+    "author": {
+      "id": "1e9e760ed9c0e402609618e6",
+      "slug": "vladimir-nevsky",
+      "name": "Владимир Невский",
+      "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+      "website": "",
+      "location": "Улан-Удэ"
+    },
     "isVladimir": true
   },
   {
@@ -5208,6 +7144,10 @@ export const posts: BlogFeedPost[] = [
       "cv",
       "design"
     ],
+    "slug": {
+      "en": "updated-wallarm-cybersecurity-app",
+      "ru": "wallarm-cybersecurity-app-cv"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -5231,6 +7171,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f4775185f7b23203aa6",
       "ru": "69ca3d745a40a2cc911bdf68"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -5243,6 +7192,10 @@ export const posts: BlogFeedPost[] = [
       "cv",
       "design"
     ],
+    "slug": {
+      "en": "worked-as-a-designer-at-vtb-from-luxoft-they-created-the-pkb-portal",
+      "ru": "vtb-luxoft"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -5266,6 +7219,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f4875185f7b23203aad",
       "ru": "69ca24bfc776c79d43383feb"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -5278,6 +7240,10 @@ export const posts: BlogFeedPost[] = [
       "cv",
       "design"
     ],
+    "slug": {
+      "en": "he-led-a-group-of-designers-and-was-himself-the-design-director-of-emias",
+      "ru": "emias-info"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -5301,6 +7267,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f4975185f7b23203ab5",
       "ru": "69ca24c7c776c79d43383ff1"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -5313,6 +7288,10 @@ export const posts: BlogFeedPost[] = [
       "cv",
       "design"
     ],
+    "slug": {
+      "en": "worked-as-a-graphic-designer-at-ria-novosti",
+      "ru": "ria-novosti"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -5336,6 +7315,15 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f4975185f7b23203abd",
       "ru": "69ca24cec776c79d43383ff7"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   },
   {
@@ -5348,6 +7336,10 @@ export const posts: BlogFeedPost[] = [
       "cv",
       "design"
     ],
+    "slug": {
+      "en": "created-the-very-first-web-version-of-the-izvestia-newspaper",
+      "ru": "izvestia"
+    },
     "primaryTag": {
       "en": "Design",
       "ru": "Дизайн"
@@ -5371,273 +7363,539 @@ export const posts: BlogFeedPost[] = [
       "en": "69df6f4a75185f7b23203ac5",
       "ru": "69ca24d3c776c79d43383ffd"
     },
+    "author": {
+      "id": "69b16d756e5564436d20dbd9",
+      "slug": "alexander-nevsky",
+      "name": "Александр Невский",
+      "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+      "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+      "website": "https://nevsky.me",
+      "location": "Дубай, ОАЭ"
+    },
     "isVladimir": false
   }
 ]
 
-export const tags = {
-  "ai-stream": {
+export const authors: BlogAuthor[] = [
+  {
+    "id": "69b171296e5564436d20dec5",
+    "slug": "aleksandr-nevskii",
+    "name": "Александр Невский",
+    "bio": "Продуктовый дизайнер в Дубае. Соединяю UX, digital-маркетинг и нейросети для запуска и роста проектов. Сейчас учусь на брокера по недвижимости, балансируя между новым вектором развития и осознанной жизнью отца трех замечательных детей и одной корги",
+    "profileImage": "https://cdn.nevsky.me/content/images/size/w600/format/webp/2026/01/aleksandr_nevskii_avatar_2026.webp",
+    "website": "https://nevskii.me",
+    "location": "Дубай, ОАЭ",
+    "socials": {
+      "facebook": "nevskiy.alexander",
+      "twitter": "@_nevskii_",
+      "threads": "@nevsky_alexander",
+      "bluesky": "nevskii.bsky.social",
+      "mastodon": "mastodon.social/@d2q",
+      "tiktok": "@nevsky.me",
+      "youtube": "@alexander-nevsky",
+      "instagram": "nevsky_alexander",
+      "linkedin": ""
+    }
+  },
+  {
+    "id": "69b16d756e5564436d20dbd9",
+    "slug": "alexander-nevsky",
+    "name": "Александр Невский",
+    "bio": "Проектирую вашу жизнь в Дубае. Real Estate Broker с бэкграундом дизайнера Yango. UX-аудит жилья, районов и школ. Честно, системно, от резидента Джумейры",
+    "profileImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar.jpeg",
+    "website": "https://nevsky.me",
+    "location": "Дубай, ОАЭ",
+    "socials": {
+      "facebook": "nevskiy.alexander",
+      "twitter": "@_nevskii_",
+      "threads": "@nevsky_alexander",
+      "bluesky": "nevskii.bsky.social",
+      "mastodon": "mastodon.social/@d2q",
+      "tiktok": "@nevsky.me",
+      "youtube": "@alexander-nevsky",
+      "instagram": "nevsky_alexander",
+      "linkedin": ""
+    }
+  },
+  {
+    "id": "dd03f20c7728a86cccc625df",
+    "slug": "irina-nevskaya",
+    "name": "Ирина Невская",
+    "bio": "Юрист и автор экспертной линии сайта. На этой странице и в потоке материалов будут собираться её статьи, профессиональные заметки и семейные вехи",
+    "profileImage": "https://cdn.nevsky.me/content/images/2026/03/Irina_Nevskaya_Lawyer-1.webp",
+    "website": "",
+    "location": "Дубай, ОАЭ",
+    "socials": {
+      "facebook": "",
+      "twitter": "",
+      "threads": "",
+      "bluesky": "",
+      "mastodon": "",
+      "tiktok": "",
+      "youtube": "",
+      "instagram": "",
+      "linkedin": ""
+    }
+  },
+  {
+    "id": "59b6229ab4ffe22686d2a880",
+    "slug": "juriy-nevsky",
+    "name": "Юрий Невский",
+    "bio": "Автор семейной литературной линии. Здесь будет собираться проза, архивные публикации и рассказы Юрия Невского",
+    "profileImage": "https://cdn.nevsky.me/content/images/2026/03/yurii_nevskii-3.webp",
+    "website": "",
+    "location": "Дзерджинск, Россия",
+    "socials": {
+      "facebook": "",
+      "twitter": "",
+      "threads": "",
+      "bluesky": "",
+      "mastodon": "",
+      "tiktok": "",
+      "youtube": "",
+      "instagram": "",
+      "linkedin": ""
+    }
+  },
+  {
+    "id": "1e9e760ed9c0e402609618e6",
+    "slug": "vladimir-nevsky",
+    "name": "Владимир Невский",
+    "bio": "Дед и патриарх семьи, инженер-энергетик и человек длинного маршрута. Здесь будут собираться тексты о памяти, походах и биографии движения.",
+    "profileImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy_avatar.webp",
+    "website": "",
+    "location": "Улан-Удэ",
+    "socials": {
+      "facebook": "",
+      "twitter": "",
+      "threads": "",
+      "bluesky": "",
+      "mastodon": "",
+      "tiktok": "",
+      "youtube": "",
+      "instagram": "",
+      "linkedin": ""
+    }
+  }
+]
+
+export const tags: BlogTag[] = [
+  {
+    "id": "ai-stream",
+    "source": {
+      "ru": "ai-stream",
+      "en": "ai-stream-en"
+    },
     "en": {
       "name": "AI & Vibe Coding",
       "slug": "ai-stream-en",
+      "description": "AI stream: neural nets and vibe coding in work and life.",
       "featureImage": ""
     },
     "ru": {
       "name": "Нейросети и Вайбкодинг",
       "slug": "ai-stream",
+      "description": "AI-поток: нейросети и вайбкодинг в работе и жизни.",
       "featureImage": ""
     }
   },
-  "alexander-jr-stories": {
+  {
+    "id": "alexander-jr-stories",
+    "source": {
+      "ru": "alexander-jr-stories",
+      "en": "alexander-jr-stories-en"
+    },
     "en": {
       "name": "Alexander Jr.",
       "slug": "alexander-jr-stories-en",
+      "description": "Family stories and archival notes about Alexander Jr.",
       "featureImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky_jr.webp"
     },
     "ru": {
       "name": "Александр Младший",
       "slug": "alexander-jr-stories",
+      "description": "Семейные истории и архивные заметки об Александре-младшем",
       "featureImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky_jr.webp"
     }
   },
-  "alexander-live": {
+  {
+    "id": "alexander-live",
+    "source": {
+      "ru": "alexander-live",
+      "en": "alexander-live-en"
+    },
     "en": {
       "name": "Alexander Nevsky",
       "slug": "alexander-live-en",
+      "description": "Life, work, fatherhood, observations, and moving between roles.",
       "featureImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar-1.jpeg"
     },
     "ru": {
       "name": "Александр Невский",
       "slug": "alexander-live",
+      "description": "Жизнь, работа, отцовство, наблюдения и переход между ролями",
       "featureImage": "https://cdn.nevsky.me/content/images/2026/03/alexander-nevsky-2026-avatar-1.jpeg"
     }
   },
-  "bekky-tails": {
+  {
+    "id": "bekky-tails",
+    "source": {
+      "ru": "bekky-tails",
+      "en": "bekky-tails-en"
+    },
     "en": {
       "name": "Becky the Pembroke Welsh Corgi",
       "slug": "bekky-tails-en",
+      "description": "Stories, photos, and short notes about our Pembroke Welsh Corgi Becky — who is, after all, a dog.",
       "featureImage": "https://cdn.nevsky.me/content/images/2026/03/bekki_korgi_pes.webp"
     },
     "ru": {
       "name": "Вельш-корги пебмрок Бекки",
       "slug": "bekky-tails",
+      "description": "Истории, фотографии и короткие заметки о нашей вельш-корги пемброк Бекки, которая, впрочем, является собака",
       "featureImage": "https://cdn.nevsky.me/content/images/2026/03/bekki_korgi_pes.webp"
     }
   },
-  "cv": {
+  {
+    "id": "cv",
+    "source": {
+      "ru": "cv",
+      "en": "cv-en"
+    },
     "en": {
       "name": "CV",
       "slug": "cv-en",
+      "description": "Cases and projects: product, branding, interfaces",
       "featureImage": ""
     },
     "ru": {
       "name": "CV",
       "slug": "cv",
+      "description": "Кейсы и проекты: продукт, брендинг, интерфейсы",
       "featureImage": ""
     }
   },
-  "d2q-studio": {
+  {
+    "id": "d2q-studio",
+    "source": {
+      "ru": "d2q-studio",
+      "en": "d2q-studio-en"
+    },
     "en": {
       "name": "D2Q Studio",
       "slug": "d2q-studio-en",
+      "description": "design to quantum • studio • a lab for digital meaning and visual calm.",
       "featureImage": "https://cdn.nevsky.me/content/images/2025/05/d2q-studio@2x.webp"
     },
     "ru": {
       "name": "Студия D2Q",
       "slug": "d2q-studio",
+      "description": "design to quantum • studio • лаборатория цифрового смысла и визуальной тишины",
       "featureImage": "https://cdn.nevsky.me/content/images/2025/05/d2q-studio@2x.webp"
     }
   },
-  "daria-stories": {
+  {
+    "id": "daria-stories",
+    "source": {
+      "ru": "daria-stories",
+      "en": "daria-stories-en"
+    },
     "en": {
       "name": "Dasha",
       "slug": "daria-stories-en",
+      "description": "Family stories and notes about Dasha — our youngest daughter.",
       "featureImage": "https://cdn.nevsky.me/content/images/2026/03/daria_dochenka.webp"
     },
     "ru": {
       "name": "Даша Дочка",
       "slug": "daria-stories",
+      "description": "Семейные истории и архивные заметки о Дарье-дочьке, она самая маленькая у нас девочка",
       "featureImage": "https://cdn.nevsky.me/content/images/2026/03/daria_dochenka.webp"
     }
   },
-  "design": {
+  {
+    "id": "design",
+    "source": {
+      "ru": "design",
+      "en": "design-en"
+    },
     "en": {
       "name": "Design",
       "slug": "design-en",
+      "description": "Cases, interfaces, branding, Framer, visual systems. Design as a profession and as a way of thinking.",
       "featureImage": ""
     },
     "ru": {
       "name": "Дизайн",
       "slug": "design",
+      "description": "Кейсы, интерфейсы, брендинг, Framer, визуальные системы. Дизайн как профессия и как способ думать",
       "featureImage": ""
     }
   },
-  "dubai": {
+  {
+    "id": "dubai",
+    "source": {
+      "ru": "dubai",
+      "en": "dubai-en"
+    },
     "en": {
       "name": "Dubai",
       "slug": "dubai-en",
+      "description": "Four years in a city that keeps building itself. About life, districts, schools, cars, coffee, and what it means to make the UAE home.",
       "featureImage": "https://images.unsplash.com/flagged/photo-1559717865-a99cac1c95d8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTc3M3wwfDF8c2VhcmNofDN8fER1YmFpfGVufDB8fHx8MTc3NDU5NTA2MXww&ixlib=rb-4.1.0&q=80&w=2000"
     },
     "ru": {
       "name": "Дубай",
       "slug": "dubai",
+      "description": "Четыре года в городе, который всё время строится. Про жизнь, районы, школы, машины, кофе и то, каково это — сделать ОАЭ домом",
       "featureImage": "https://images.unsplash.com/flagged/photo-1559717865-a99cac1c95d8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTc3M3wwfDF8c2VhcmNofDN8fER1YmFpfGVufDB8fHx8MTc3NDU5NTA2MXww&ixlib=rb-4.1.0&q=80&w=2000"
     }
   },
-  "estate": {
+  {
+    "id": "estate",
+    "source": {
+      "ru": "estate",
+      "en": "estate-en"
+    },
     "en": {
       "name": "Estate",
       "slug": "estate-en",
+      "description": "Dubai real estate through the eyes of a product designer who became a broker. Market, districts, deals — without the gloss.",
       "featureImage": ""
     },
     "ru": {
       "name": "Эстейт",
       "slug": "estate",
+      "description": "Недвижимость Дубая глазами продуктового дизайнера, который стал брокером. Рынок, районы, сделки — без глянца",
       "featureImage": ""
     }
   },
-  "family-live": {
+  {
+    "id": "family-live",
+    "source": {
+      "ru": "family-live",
+      "en": "family-live-en"
+    },
     "en": {
       "name": "Family",
       "slug": "family-live-en",
+      "description": "The Nevskys’ family chronicle: home, kids, trips, memories, and everyday life.",
       "featureImage": ""
     },
     "ru": {
       "name": "Семья",
       "slug": "family-live",
+      "description": "Семейная хроника Невских: дом, дети, поездки, воспоминания и повседневность.",
       "featureImage": ""
     }
   },
-  "framer": {
+  {
+    "id": "framer",
+    "source": {
+      "ru": "framer",
+      "en": "framer-en"
+    },
     "en": {
       "name": "Framer",
       "slug": "framer-en",
+      "description": "The tool I use to build sites and prototypes.",
       "featureImage": "https://cdn.nevsky.me/content/images/size/w600/format/webp/2026/01/framer.webp"
     },
     "ru": {
       "name": "Framer",
       "slug": "framer",
+      "description": "Инструмент, в котором я создаю сайты и прототипы",
       "featureImage": "https://cdn.nevsky.me/content/images/size/w600/format/webp/2026/01/framer.webp"
     }
   },
-  "heritage": {
+  {
+    "id": "heritage",
+    "source": {
+      "ru": "heritage",
+      "en": "heritage-en"
+    },
     "en": {
       "name": "Heritage",
       "slug": "heritage-en",
+      "description": "Everything that came before. Moscow, the coffee shop, first projects, another life. The archive this blog grew from.",
       "featureImage": ""
     },
     "ru": {
       "name": "Наследие",
       "slug": "heritage",
+      "description": "Всё, что было до. Москва, кофейня, первые проекты, другая жизнь. Архив, из которого вырос этот блог",
       "featureImage": ""
     }
   },
-  "irina-articles": {
+  {
+    "id": "irina-articles",
+    "source": {
+      "ru": "irina-articles",
+      "en": "irina-articles-en"
+    },
     "en": {
       "name": "Irina Nevskaya",
       "slug": "irina-articles-en",
+      "description": "Legal and expert writing by Irina.",
       "featureImage": ""
     },
     "ru": {
       "name": "Ирина Невская",
       "slug": "irina-articles",
+      "description": "Юридические и экспертные материалы Ирины",
       "featureImage": ""
     }
   },
-  "juriy-prose": {
+  {
+    "id": "juriy-prose",
+    "source": {
+      "ru": "juriy-prose",
+      "en": "juriy-prose-en"
+    },
     "en": {
       "name": "Yury Nevsky",
       "slug": "juriy-prose-en",
+      "description": "Prose by my father Yury Nevsky: stories and short literary forms.",
       "featureImage": "https://cdn.nevsky.me/content/images/2026/03/yurii_nevskii.webp"
     },
     "ru": {
       "name": "Юрий Невский",
       "slug": "juriy-prose",
+      "description": "Проза моего отца Юрия Невского: рассказы и малая литературная форма",
       "featureImage": "https://cdn.nevsky.me/content/images/2026/03/yurii_nevskii.webp"
     }
   },
-  "konstantin-stories": {
+  {
+    "id": "konstantin-stories",
+    "source": {
+      "ru": "konstantin-stories",
+      "en": "konstantin-stories-en"
+    },
     "en": {
       "name": "Konstantin Nevsky",
       "slug": "konstantin-stories-en",
+      "description": "Family stories and archival notes about Konstantin.",
       "featureImage": ""
     },
     "ru": {
       "name": "Константин Невский",
       "slug": "konstantin-stories",
+      "description": "Семейные истории и архивные заметки о Константине",
       "featureImage": ""
     }
   },
-  "moscow": {
+  {
+    "id": "moscow",
+    "source": {
+      "ru": "moscow",
+      "en": "moscow-en"
+    },
     "en": {
       "name": "Moscow",
       "slug": "moscow-en",
+      "description": "The Moscow chapter: life, work, and family history.",
       "featureImage": ""
     },
     "ru": {
       "name": "Москва",
       "slug": "moscow",
+      "description": "Московский период жизни, работы и семейной истории",
       "featureImage": ""
     }
   },
-  "threshold-signals": {
+  {
+    "id": "threshold-signals",
+    "source": {
+      "ru": "threshold-signals",
+      "en": "threshold-signals-en"
+    },
     "en": {
       "name": "Threshold",
       "slug": "threshold-signals-en",
+      "description": "Signals from the threshold. Short and to the point.",
       "featureImage": "https://cdn.nevsky.me/content/images/2026/03/22eed37baa5783bbebe65f64ce953e9806ed4b86c79860fbcc82165ee3503963.png"
     },
     "ru": {
       "name": "Threshold",
       "slug": "threshold-signals",
+      "description": "Сигналы с порога. Коротко и по делу.",
       "featureImage": "https://cdn.nevsky.me/content/images/2026/03/22eed37baa5783bbebe65f64ce953e9806ed4b86c79860fbcc82165ee3503963.png"
     }
   },
-  "vibe-coding": {
+  {
+    "id": "vibe-coding",
+    "source": {
+      "ru": "vibe-coding",
+      "en": "vibe-coding-en"
+    },
     "en": {
       "name": "Vibe coding",
       "slug": "vibe-coding-en",
+      "description": "Coding by feel — writing with LLMs in the flow.",
       "featureImage": ""
     },
     "ru": {
       "name": "Вайбкодинг",
       "slug": "vibe-coding",
+      "description": "Кодинг по ощущению — как писать с LLM в потоке.",
       "featureImage": ""
     }
   },
-  "vladimir-trails": {
+  {
+    "id": "vladimir-trails",
+    "source": {
+      "ru": "vladimir-trails",
+      "en": "vladimir-trails-en"
+    },
     "en": {
       "name": "Vladimir Nevsky",
       "slug": "vladimir-trails-en",
+      "description": "Hikes, routes, and travel notes by Vladimir Nevsky — my grandfather and the family patriarch.",
       "featureImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy.webp"
     },
     "ru": {
       "name": "Владимир Невский",
       "slug": "vladimir-trails",
+      "description": "Походы, маршруты и путевые заметки Владимира Невского моего деда-патриарха семьи",
       "featureImage": "https://cdn.nevsky.me/content/images/2026/03/vladimir_nevskiy.webp"
     }
   },
-  "vlesu-stories": {
+  {
+    "id": "vlesu-stories",
+    "source": {
+      "ru": "vlesu-stories",
+      "en": "vlesu-stories-en"
+    },
     "en": {
       "name": "Art café «In the Forest»",
       "slug": "vlesu-stories-en",
+      "description": "My former art café «In the Forest», which I sold in the summer of 2024.",
       "featureImage": "https://cdn.nevsky.me/content/images/2026/03/vlesu_logo_round.webp"
     },
     "ru": {
       "name": "Арт-кафе «В Лесу»",
       "slug": "vlesu-stories",
+      "description": "Мое бывшее арт-кафе «В Лесу», которое я продал летом 2024",
       "featureImage": "https://cdn.nevsky.me/content/images/2026/03/vlesu_logo_round.webp"
     }
   },
-  "webflow": {
+  {
+    "id": "webflow",
+    "source": {
+      "ru": "webflow",
+      "en": "webflow-en"
+    },
     "en": {
       "name": "Webflow",
       "slug": "webflow-en",
+      "description": "The tool I use to build sites and web apps.",
       "featureImage": "https://cdn.nevsky.me/content/images/2026/03/webflow_logo_blue.webp"
     },
     "ru": {
       "name": "Webflow",
       "slug": "webflow",
+      "description": "Инструмент, в котором я создаю сайты и веб-приложения",
       "featureImage": "https://cdn.nevsky.me/content/images/2026/03/webflow_logo_blue.webp"
     }
   }
-} as const
+]

@@ -3,6 +3,7 @@ import path from 'node:path'
 import matter from 'gray-matter'
 
 const root = process.cwd()
+const authorsDir = path.join(root, 'content/blog/authors')
 const postsDir = path.join(root, 'content/blog/posts')
 const tagsDir = path.join(root, 'content/blog/tags')
 const outputFile = path.join(root, 'src/data/blog-feed.ts')
@@ -66,16 +67,51 @@ function readTagRecords() {
       en: {
         name: normalizeText(data.en?.name ?? ''),
         slug: String(data.en?.slug ?? ''),
+        description: normalizeText(data.en?.description ?? ''),
         featureImage: normalizeUrl(data.en?.feature_image ?? ''),
       },
       ru: {
         name: normalizeText(data.ru?.name ?? ''),
         slug: String(data.ru?.slug ?? ''),
+        description: normalizeText(data.ru?.description ?? ''),
         featureImage: normalizeUrl(data.ru?.feature_image ?? ''),
       },
     }
   }
   return tags
+}
+
+function readAuthorRecords() {
+  const authors = {}
+  if (!fs.existsSync(authorsDir)) return authors
+
+  for (const file of fs.readdirSync(authorsDir)) {
+    if (!file.endsWith('.md')) continue
+    const data = readFrontmatter(path.join(authorsDir, file))
+    const id = String(data.id ?? file.replace(/\.md$/, ''))
+    authors[id] = {
+      id,
+      slug: String(data.slug ?? ''),
+      name: normalizeText(data.name ?? ''),
+      bio: normalizeText(data.bio ?? ''),
+      profileImage: normalizeUrl(data.profile_image ?? ''),
+      website: normalizeText(data.website ?? ''),
+      location: normalizeText(data.location ?? ''),
+      socials: {
+        facebook: normalizeText(data.socials?.facebook ?? ''),
+        twitter: normalizeText(data.socials?.twitter ?? ''),
+        threads: normalizeText(data.socials?.threads ?? ''),
+        bluesky: normalizeText(data.socials?.bluesky ?? ''),
+        mastodon: normalizeText(data.socials?.mastodon ?? ''),
+        tiktok: normalizeText(data.socials?.tiktok ?? ''),
+        youtube: normalizeText(data.socials?.youtube ?? ''),
+        instagram: normalizeText(data.socials?.instagram ?? ''),
+        linkedin: normalizeText(data.socials?.linkedin ?? ''),
+      },
+    }
+  }
+
+  return authors
 }
 
 function readPostRecords(tagRecords) {
@@ -88,11 +124,13 @@ function readPostRecords(tagRecords) {
     const canonicalTags = tags
       .filter(tag => tag !== 'hash-en')
       .map(tag => (tag.endsWith('-en') ? tag.slice(0, -3) : tag))
+    const slugRu = normalizeText(data.ru?.slug ?? '')
+    const slugEn = normalizeText(data.en?.slug ?? '')
 
     const primaryTagSlug = primaryTagPriority.find(slug => canonicalTags.includes(slug)) ?? canonicalTags[0] ?? ''
     const primaryTagRecord = tagRecords[primaryTagSlug] ?? {
-      en: { name: primaryTagSlug, slug: primaryTagSlug },
-      ru: { name: primaryTagSlug, slug: primaryTagSlug },
+      en: { name: primaryTagSlug, slug: primaryTagSlug, description: '' },
+      ru: { name: primaryTagSlug, slug: primaryTagSlug, description: '' },
     }
 
     const publishedAt = String(data.published_at?.ru ?? data.published_at?.en ?? `${data.date} 00:00:00`)
@@ -116,6 +154,10 @@ function readPostRecords(tagRecords) {
       publishedAt,
       featured: Boolean(data.featured),
       tags: canonicalTags,
+      slug: {
+        en: slugEn || slugRu || String(data.id ?? file.replace(/\.md$/, '')),
+        ru: slugRu || slugEn || String(data.id ?? file.replace(/\.md$/, '')),
+      },
       primaryTag: {
         en: primaryTagRecord.en.name,
         ru: primaryTagRecord.ru.name,
@@ -139,6 +181,15 @@ function readPostRecords(tagRecords) {
         en: String(data.source?.en ?? ''),
         ru: String(data.source?.ru ?? ''),
       },
+      author: {
+        id: String(data.author?.id ?? ''),
+        slug: String(data.author?.slug ?? ''),
+        name: String(data.author?.name ?? ''),
+        bio: String(data.author?.bio ?? ''),
+        profileImage: String(data.author?.profile_image ?? ''),
+        website: String(data.author?.website ?? ''),
+        location: String(data.author?.location ?? ''),
+      },
       isVladimir: canonicalTags.includes('vladimir-trails'),
     })
   }
@@ -148,6 +199,7 @@ function readPostRecords(tagRecords) {
 }
 
 const tagRecords = readTagRecords()
+const authorRecords = readAuthorRecords()
 const posts = readPostRecords(tagRecords)
 
 const output = `// AUTO-GENERATED from content/blog - do not edit manually
@@ -166,6 +218,7 @@ export type BlogFeedPost = {
   publishedAt: string
   featured: boolean
   tags: string[]
+  slug: LocalizedText
   primaryTag: LocalizedText
   title: LocalizedText
   excerpt: LocalizedText
@@ -177,12 +230,75 @@ export type BlogFeedPost = {
     en: string
     ru: string
   }
+  author: {
+    id: string
+    slug: string
+    name: string
+    bio: string
+    profileImage: string
+    website: string
+    location: string
+  }
   isVladimir: boolean
+}
+
+export type BlogAuthor = {
+  id: string
+  slug: string
+  name: string
+  bio: string
+  profileImage: string
+  website: string
+  location: string
+  socials: {
+    facebook: string
+    twitter: string
+    threads: string
+    bluesky: string
+    mastodon: string
+    tiktok: string
+    youtube: string
+    instagram: string
+    linkedin: string
+  }
+}
+
+export type BlogTag = {
+  id: string
+  source: {
+    ru: string
+    en: string
+  }
+  ru: {
+    slug: string
+    name: string
+    description: string
+    featureImage: string
+  }
+  en: {
+    slug: string
+    name: string
+    description: string
+    featureImage: string
+  }
 }
 
 export const posts: BlogFeedPost[] = ${JSON.stringify(posts, null, 2)}
 
-export const tags = ${JSON.stringify(tagRecords, null, 2)} as const
+export const authors: BlogAuthor[] = ${JSON.stringify(Object.values(authorRecords), null, 2)}
+
+export const tags: BlogTag[] = ${JSON.stringify(
+  Object.entries(tagRecords).map(([id, tag]) => ({
+    id,
+    source: {
+      ru: tag.ru.slug,
+      en: tag.en.slug,
+    },
+    ...tag,
+  })),
+  null,
+  2
+)}
 `
 
 fs.writeFileSync(outputFile, output)

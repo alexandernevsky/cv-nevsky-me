@@ -262,6 +262,55 @@ def build_author_index(authors: list[dict[str, Any]]) -> dict[str, dict[str, Any
     return {author["id"]: author for author in authors}
 
 
+def build_post_author_index(
+    rows: list[dict[str, Any]],
+    author_by_id: dict[str, dict[str, Any]],
+) -> dict[str, dict[str, Any]]:
+    result: dict[str, dict[str, Any]] = {}
+    sorted_rows = sorted(
+        rows,
+        key=lambda row: (
+            row.get("post_id", ""),
+            row.get("sort_order", 0),
+            row.get("author_id", ""),
+            row.get("id", ""),
+        ),
+    )
+
+    for rel in sorted_rows:
+        post_id = rel.get("post_id")
+        author_id = rel.get("author_id")
+        if not post_id or not author_id or post_id in result:
+            continue
+
+        author = author_by_id.get(author_id)
+        if not author:
+            continue
+
+        result[post_id] = {
+            "id": author["id"],
+            "slug": author.get("slug", ""),
+            "name": clean_text(author.get("name", "")),
+            "bio": clean_text(author.get("bio", "")),
+            "profile_image": normalize_url(author.get("profile_image")),
+            "website": clean_text(author.get("website", "")),
+            "location": clean_text(author.get("location", "")),
+            "socials": {
+                "facebook": clean_text(author.get("facebook", "")),
+                "twitter": clean_text(author.get("twitter", "")),
+                "threads": clean_text(author.get("threads", "")),
+                "bluesky": clean_text(author.get("bluesky", "")),
+                "mastodon": clean_text(author.get("mastodon", "")),
+                "tiktok": clean_text(author.get("tiktok", "")),
+                "youtube": clean_text(author.get("youtube", "")),
+                "instagram": clean_text(author.get("instagram", "")),
+                "linkedin": clean_text(author.get("linkedin", "")),
+            },
+        }
+
+    return result
+
+
 def build_post_meta_index(rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
     return {row["post_id"]: row for row in rows}
 
@@ -293,6 +342,7 @@ def make_record(
     featured_image_alt: dict[str, str],
     featured_image_caption: dict[str, str],
     segments: list[dict[str, Any]],
+    author: dict[str, Any] | None = None,
     featured: bool = False,
 ) -> dict[str, Any]:
     return {
@@ -308,6 +358,26 @@ def make_record(
         "feature_image": featured_image,
         "feature_image_alt": featured_image_alt,
         "feature_image_caption": featured_image_caption,
+        "author": author or {
+            "id": "",
+            "slug": "",
+            "name": "",
+            "bio": "",
+            "profile_image": "",
+            "website": "",
+            "location": "",
+            "socials": {
+                "facebook": "",
+                "twitter": "",
+                "threads": "",
+                "bluesky": "",
+                "mastodon": "",
+                "tiktok": "",
+                "youtube": "",
+                "instagram": "",
+                "linkedin": "",
+            },
+        },
         "ru": ru or {
             "slug": "",
             "title": "",
@@ -368,20 +438,25 @@ def main() -> int:
 
     tags = data["tags"]
     posts = data["posts"]
+    authors = data["users"]
     meta_rows = data.get("posts_meta", [])
+    post_author_rows = data.get("posts_authors", [])
 
     tag_by_id = {tag["id"]: tag for tag in tags}
+    author_by_id = build_author_index(authors)
     post_meta_by_post_id = build_post_meta_index(meta_rows)
+    post_author_by_post_id = build_post_author_index(post_author_rows, author_by_id)
     post_tag_slugs = build_post_tag_index(data["posts_tags"], tag_by_id)
 
     canonical_tags, _ = build_tag_lookup(tags)
 
     data_dir = root / "content" / "blog"
+    authors_dir = data_dir / "authors"
     tags_dir = data_dir / "tags"
     posts_dir = data_dir / "posts"
     pages_dir = data_dir / "pages"
 
-    for folder in (tags_dir, posts_dir, pages_dir):
+    for folder in (authors_dir, tags_dir, posts_dir, pages_dir):
         if folder.exists():
             for item in folder.glob("*.md"):
                 item.unlink()
@@ -413,6 +488,30 @@ def main() -> int:
         }
         write_record(tags_dir / f"{canonical_slug}.md", record)
 
+    for author in sorted(authors, key=lambda item: item.get("slug", "")):
+        record = {
+            "kind": "author",
+            "id": author["id"],
+            "slug": author.get("slug", ""),
+            "name": clean_text(author.get("name", "")),
+            "bio": clean_text(author.get("bio", "")),
+            "profile_image": normalize_url(author.get("profile_image")),
+            "website": clean_text(author.get("website", "")),
+            "location": clean_text(author.get("location", "")),
+            "socials": {
+                "facebook": clean_text(author.get("facebook", "")),
+                "twitter": clean_text(author.get("twitter", "")),
+                "threads": clean_text(author.get("threads", "")),
+                "bluesky": clean_text(author.get("bluesky", "")),
+                "mastodon": clean_text(author.get("mastodon", "")),
+                "tiktok": clean_text(author.get("tiktok", "")),
+                "youtube": clean_text(author.get("youtube", "")),
+                "instagram": clean_text(author.get("instagram", "")),
+                "linkedin": clean_text(author.get("linkedin", "")),
+            },
+        }
+        write_record(authors_dir / f"{author['slug']}.md", record)
+
     # Posts
     post_records: list[dict[str, Any]] = []
     post_items = [p for p in posts if p.get("type") == "post"]
@@ -443,6 +542,7 @@ def main() -> int:
             ru_meta = post_meta_by_post_id.get(ru_post["id"]) if ru_post else None
             en_meta = post_meta_by_post_id.get(en_post["id"]) if en_post else None
             featured_image, feature_image_alt, feature_image_caption = choose_cover(ru_meta, en_meta, ru_post, en_post)
+            author = post_author_by_post_id.get((ru_post or en_post)["id"]) if (ru_post or en_post) else None
 
             ru_html = clean_html(ru_post["html"]) if ru_post else ""
             en_html = clean_html(en_post["html"]) if en_post else ""
@@ -489,6 +589,7 @@ def main() -> int:
                 featured_image_alt=feature_image_alt,
                 featured_image_caption=feature_image_caption,
                 segments=segments,
+                author=author,
                 featured=bool((ru_post or en_post).get("featured")) if (ru_post or en_post) else False,
             )
 
@@ -519,6 +620,7 @@ def main() -> int:
             ru_meta = post_meta_by_post_id.get(ru_page["id"]) if ru_page else None
             en_meta = post_meta_by_post_id.get(en_page["id"]) if en_page else None
             featured_image, feature_image_alt, feature_image_caption = choose_cover(ru_meta, en_meta, ru_page, en_page)
+            author = post_author_by_post_id.get((ru_page or en_page)["id"]) if (ru_page or en_page) else None
 
             ru_html = clean_html(ru_page["html"]) if ru_page else ""
             en_html = clean_html(en_page["html"]) if en_page else ""
@@ -562,11 +664,14 @@ def main() -> int:
                 featured_image_alt=feature_image_alt,
                 featured_image_caption=feature_image_caption,
                 segments=segments,
+                author=author,
                 featured=bool((ru_page or en_page).get("featured")) if (ru_page or en_page) else False,
             )
             write_record(pages_dir / f"{canonical_id}.md", record)
 
-    print(f"Imported {len(canonical_tags)} tags, {len(post_records)} paired posts, {len(page_groups)} page groups from {input_path}")
+    print(
+        f"Imported {len(authors)} authors, {len(canonical_tags)} tags, {len(post_records)} paired posts, {len(page_groups)} page groups from {input_path}"
+    )
     return 0
 
 
