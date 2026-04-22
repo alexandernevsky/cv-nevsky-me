@@ -68,7 +68,7 @@ export function Sidebar({
           'md:static md:z-0 md:translate-x-0 md:shrink-0',
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
-        aria-label={lang === 'ru' ? 'Библиотека подсказок' : 'Prompt library'}
+        aria-label={lang === 'ru' ? 'Темы' : 'Topics'}
       >
         {/* Brand block */}
         <div className="flex items-start justify-between gap-2 border-b border-border px-4 pt-4 pb-4">
@@ -101,7 +101,7 @@ export function Sidebar({
             className="flex w-full items-center gap-2 rounded-md border border-border bg-transparent px-3 py-2 text-sm text-foreground transition-colors hover:bg-muted focus:outline-none focus-visible:ring-1 focus-visible:ring-foreground/40"
           >
             <Plus size={14} />
-            <span>{lang === 'ru' ? 'Новый чат' : 'New chat'}</span>
+            <span>{lang === 'ru' ? 'Сброс' : 'Reset'}</span>
           </button>
           <div className="mt-2 grid grid-cols-2 gap-2">
             <button

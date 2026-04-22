@@ -21,13 +21,13 @@ export function WelcomeState({ lang, onSelect }: WelcomeStateProps) {
       </h1>
       <p className="mt-4 max-w-[560px] min-w-0 break-words text-[16px] leading-relaxed text-muted-foreground md:text-[17px]">
         {lang === 'ru'
-          ? 'Разговорный интерфейс о моей работе. Открывайте темы из сайдбара или задавайте вопрос внизу. Ответы держатся в рамках моих проектов, опыта, процесса и контактов.'
-          : 'A conversational interface to my work. Browse curated topics from the sidebar, or ask directly below. Answers stay inside the scope of my projects, background, process, and contact.'}
+          ? 'Откройте тему слева или задайте вопрос ниже. Ответы держатся в рамках проектов, опыта, процесса и контактов.'
+          : 'Open a topic from the sidebar or ask below. Answers stay inside projects, background, process, and contact.'}
       </p>
 
       <div className="mt-8">
         <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-muted-foreground">
-          {lang === 'ru' ? 'Попробуйте спросить' : 'Try asking'}
+          {lang === 'ru' ? 'Быстрые темы' : 'Quick topics'}
         </div>
         <div className="mt-3 flex min-w-0 flex-wrap gap-2">
           {WELCOME_CHIPS.map(id => {
